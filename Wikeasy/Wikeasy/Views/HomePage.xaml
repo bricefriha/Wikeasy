@@ -7,13 +7,47 @@
              x:Class="Wikeasy.Views.HomePage"
              Title="{Binding Title}"
              x:Name="homePage">
-
-    
-
-    <StackLayout>
-        <Label VerticalOptions="CenterAndExpand"
-               HorizontalOptions="CenterAndExpand"
-               Text="Home"/>
-    </StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <StackLayout 
+                     VerticalOptions="Start"
+                     HorizontalOptions="CenterAndExpand"
+                     Spacing="5">
+                <!-- Title -->
+                <Label Text="What do you need to know?" 
+                   FontAttributes="Bold" FontSize="Title"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   />
+                <!-- Search bar-->
+                <Frame VerticalOptions="CenterAndExpand"
+                       CornerRadius="100"
+                       HeightRequest="45"
+                       WidthRequest="280"
+                       Padding="0">
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="CenterAndExpand"
+                                 Spacing="10">
+                        <!-- Search Icon-->
+                        <Label Text="&#xf002;"
+                               FontSize="Large"
+                               FontFamily="{StaticResource FA-Solid}"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"/>
+                        <Entry Placeholder="Something, something..."
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Fill"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+        
+        
+    </Grid>
     
 </ContentPage>

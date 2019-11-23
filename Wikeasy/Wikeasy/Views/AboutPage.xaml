@@ -22,7 +22,8 @@
     <StackLayout>
         <Label VerticalOptions="CenterAndExpand"
                HorizontalOptions="CenterAndExpand"
-               Text="About"/>
+               Text="About" TextColor="#2196F3"
+               />
     </StackLayout>
 
 </ContentPage>

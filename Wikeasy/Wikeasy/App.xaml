@@ -9,12 +9,27 @@
     <Application.Resources>
         <ResourceDictionary>
             <!--Global Styles-->
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <Color x:Key="NavigationPrimary">#B68E2B</Color>
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="BarTextColor" Value="White" />
+                <Setter Property="BarTextColor" Value="WhiteSmoke" />
             </Style>
         </ResourceDictionary>
+        <!-- Font Awesome -->
+        <OnPlatform x:TypeArguments="x:String" x:Key="FA-Regular">
+            <On Platform="Android" Value="Font Awesome 5 Free-Regular-400.otf#Font Awesome 5 Free" />
+            <On Platform="UWP" Value="/Assets/Font Awesome 5 Free-Regular-400.otf#Font Awesome 5 Free" />
+            <On Platform="iOS" Value="Font Awesome 5 Free" />
+        </OnPlatform>
+        <OnPlatform x:TypeArguments="x:String" x:Key="FA-Brands">
+            <On Platform="Android" Value="Font Awesome 5 Brands-Regular-400.otf#Font Awesome 5 Brands Regular" />
+            <On Platform="UWP" Value="/Assets/Font Awesome 5 Brands-Regular-400.otf#Font Awesome 5 Brands" />
+        </OnPlatform>
+        <OnPlatform x:TypeArguments="x:String" x:Key="FA-Solid">
+            <On Platform="Android" Value="Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free Solid" />
+            <On Platform="UWP" Value="Assets/Font Awesome 5 Free-Solid-900.otf#Font Awesome 5 Free" />
+            <On Platform="iOS" Value="Font Awesome 5 Free Solid" />
+        </OnPlatform>
     </Application.Resources>
     
 </Application>

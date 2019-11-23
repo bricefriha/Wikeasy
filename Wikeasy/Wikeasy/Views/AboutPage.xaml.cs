@@ -16,7 +16,7 @@ namespace Wikeasy.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new AboutViewModel();
+            BindingContext = this.viewModel = new AboutViewModel();
         }
     }
 }

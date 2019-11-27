@@ -24,16 +24,7 @@ namespace Wikeasy.Views
 
         public PreviewPage()
         {
-            InitializeComponent();
-
-            var item = new Item
-            {
-                Text = "Item 1",
-                Description = "This is an item description."
-            };
-
-            viewModel = new PreviewViewModel(item);
-            BindingContext = viewModel;
+            
         }
     }
 }

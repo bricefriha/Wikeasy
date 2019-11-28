@@ -17,14 +17,15 @@ namespace Wikeasy.Views
 
         public PreviewPage(PreviewViewModel viewModel)
         {
-            InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
         }
 
-        public PreviewPage()
+        public PreviewPage(string searchInput)
         {
-            
+            InitializeComponent();
+
+            BindingContext = this.viewModel = new PreviewViewModel(searchInput);
         }
     }
 }

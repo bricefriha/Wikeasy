@@ -7,8 +7,50 @@
              x:Class="Wikeasy.Views.PreviewPage"
              Title="{Binding Title}">
 
-    <StackLayout Spacing="20" Padding="15">
-        
-    </StackLayout>
-    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <StackLayout 
+                     VerticalOptions="Start"
+                     HorizontalOptions="CenterAndExpand"
+                     Spacing="5">
+                <!-- Title -->
+                <Label Text="What do you need to know?" 
+                   FontAttributes="Bold" FontSize="Title"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   />
+                <!-- Search result-->
+                <!-- Search bar-->
+                <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 Spacing="10">
+                <Frame VerticalOptions="Center"
+                       CornerRadius="100"
+                       HeightRequest="45"
+                       HorizontalOptions="FillAndExpand"
+                       WidthRequest="45"
+                       Padding="0">
+                    
+                        <ActivityIndicator  WidthRequest="40" 
+                                    HeightRequest="40" 
+                                    IsRunning="{Binding IsLoading}" 
+                                    IsVisible="{Binding IsLoading}" 
+                                    Color="Black" 
+                                    HorizontalOptions="Center" 
+                                    VerticalOptions="CenterAndExpand"/>
+                </Frame>
+                </StackLayout>
+
+
+            </StackLayout>
+        </Grid>
+
+
+    </Grid>
+
 </ContentPage>

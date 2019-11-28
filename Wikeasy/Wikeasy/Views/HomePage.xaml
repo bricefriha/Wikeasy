@@ -24,26 +24,34 @@
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand"
                    />
+                <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="CenterAndExpand"
+                                 Spacing="10">
                 <!-- Search bar-->
-                <Frame VerticalOptions="CenterAndExpand"
+                <Frame x:Name="frameSearchBar"
+                       VerticalOptions="CenterAndExpand"
                        CornerRadius="100"
                        HeightRequest="45"
                        WidthRequest="280"
                        Padding="0">
-                    <StackLayout Orientation="Horizontal"
+                        <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"
                                  Spacing="10">
-                        <!-- Search Icon-->
+                            <!-- Search Icon-->
                         <Label Text="&#xf002;"
                                FontSize="Large"
                                FontFamily="{StaticResource FA-Solid}"
                                HorizontalOptions="Start"
                                VerticalOptions="Center"/>
-                        <Entry Placeholder="Something, something..."
+                        <Entry x:Name="txtSearch"
+                               Placeholder="Something Something..."
                                HorizontalOptions="Fill"
-                               VerticalOptions="Fill"/>
-                    </StackLayout>
-                </Frame>
+                               VerticalOptions="Fill"
+                               Completed="txtSearch_Completed"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
             </StackLayout>
         </Grid>
         

@@ -26,5 +26,14 @@ namespace Wikeasy.Views
 
             BindingContext = this.viewModel = new HomeViewModel();
         }
+
+        private void txtSearch_Completed(object sender, EventArgs e)
+        {
+            
+            //var animate = new Animation(d => frameSearchBar.WidthRequest = d, 40);
+            //animate.Commit(frameSearchBar, "BarGraph", 16, 3500);
+            // Navigate the the preview page
+            Navigation.PushAsync(new PreviewPage(((Entry)sender).Text));
+        }
     }
 }

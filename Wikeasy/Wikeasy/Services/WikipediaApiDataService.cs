@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Wikeasy.Models;
 
@@ -21,7 +23,8 @@ namespace Wikeasy.Services
         }
         public async Task<WikiData> GetWikiData(string name)
         {
-            var url = new Uri(this.baseUri, string.Format("/page/mobile-sections/{0}", name));
+            name.Replace(" ", "%20");
+            var url = new Uri(this.baseUri, string.Format("page/mobile-sections/{0}", name));
             var response = await SendRequestAsync<WikiData>(url, HttpMethod.Get, this.headers);
 
             return response;

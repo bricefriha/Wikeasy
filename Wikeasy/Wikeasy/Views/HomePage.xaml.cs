@@ -18,27 +18,40 @@ namespace Wikeasy.Views
     [DesignTimeVisible(false)]
     public partial class HomePage : ContentPage
     {
-        HomeViewModel viewModel;
+        HomeViewModel _vm;
 
         public HomePage()
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = new HomeViewModel();
+            BindingContext = this._vm = new HomeViewModel();
         }
 
         async void txtSearch_Completed(object sender, EventArgs e)
         {
-            await ((Entry)sender).FadeTo(0, 5000, Easing.Linear);
-            await icoSearch.FadeTo(0, 5000, Easing.Linear);
+
+
+            // Animation
+            //
+            // search bar disparition
+            await ((Entry)sender).FadeTo(0, 250, Easing.Linear);
+            await icoSearch.FadeTo(0, 250, Easing.Linear);
+            //
+            // Loading status apparition
+            //searchStatus.IsVisible = true;
+            //searchStatus.IsRunning = true;
+            
             double startingHeight = frameSearchBar.Width;
             double endingHeight = frameSearchBar.Height;
             Action<double> callback = input => { frameSearchBar.WidthRequest = input; }; // update the height of the layout with this callback
             uint rate = 16; // pace at which aniation proceeds
-            uint length = 1000; // one second animation
+            uint length = 700; // one second animation
             Easing easing = Easing.Linear;
-            //var animate = new Animation(d => frameSearchBar.WidthRequest = d, 100);
             frameSearchBar.Animate("invis", callback, startingHeight, endingHeight, rate, length, easing);
+
+            // Seaching process
+            lblSubtitle.Text = "Let me check...";
+            _vm.GenerateSearchResult(((Entry)sender).Text);
 
             //animate.Commit(frameSearchBar, "BarGraph", 40, 25, Easing.SpringIn);
             // Navigate the the preview page

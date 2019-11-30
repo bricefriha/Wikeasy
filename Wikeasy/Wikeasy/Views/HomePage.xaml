@@ -19,11 +19,12 @@
                      HorizontalOptions="CenterAndExpand"
                      Spacing="5">
                 <!-- Title -->
-                <Label Text="What do you need to know?" 
-                   FontAttributes="Bold" FontSize="Title"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand"
-                   />
+                <Label x:Name="lblSubtitle"
+                       Text="What do you need to know?" 
+                       FontAttributes="Bold" FontSize="Title"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       />
                 <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"
                                  Spacing="10">
@@ -37,18 +38,29 @@
                         <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"
                                  Spacing="10">
+                            <!-- Loading -->
+                            <ActivityIndicator  x:Name="searchStatus"
+                                                WidthRequest="40" 
+                                                HeightRequest="40" 
+                                                IsRunning="{Binding IsLoading}" 
+                                                IsVisible="{Binding IsLoading}" 
+                                                Color="Black" 
+                                                HorizontalOptions="Center" 
+                                                VerticalOptions="CenterAndExpand"/>
                             <!-- Search Icon-->
-                        <Label x:Name="icoSearch"
-                               Text="&#xf002;"
-                               FontSize="Large"
-                               FontFamily="{StaticResource FA-Solid}"
-                               HorizontalOptions="Start"
-                               VerticalOptions="Center"/>
-                        <Entry x:Name="txtSearch"
-                               Placeholder="Something Something..."
-                               HorizontalOptions="Fill"
-                               VerticalOptions="Fill"
-                               Completed="txtSearch_Completed"/>
+                            <Label x:Name="icoSearch"
+                                   Text="&#xf002;"
+                                   FontSize="Large"
+                                   FontFamily="{StaticResource FA-Solid}"
+                                   IsVisible="{Binding !IsLoading}"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"/>
+                            <Entry x:Name="txtSearch"
+                                   Placeholder="Something Something..."
+                                   HorizontalOptions="Fill"
+                                   IsVisible="{Binding !IsLoading}"
+                                   VerticalOptions="Fill"
+                                   Completed="txtSearch_Completed"/>
                         </StackLayout>
                     </Frame>
                 </StackLayout>

@@ -43,40 +43,8 @@ namespace Wikeasy.ViewModels
             _searchResult = new SearchResult();
 
             // Get the seach result
-            GenerateSearchResult(searchInput);
 
 
-        }
-        /// <summary>
-        /// Method allowing to generate a search result
-        /// </summary>
-        private async void GenerateSearchResult(string searchInput)
-        {
-            _isLoading = true;
-
-            WikiData data = await _service.GetWikiData(searchInput);
-
-            // set the page title
-            this.Title = data.displaytitle;
-
-            // Get the html
-            string html = data.sections[0]["text"];
-            // Instanciate the HTML doc
-            HtmlDocument doc = new HtmlDocument();
-            // Loading the doc
-            doc.LoadHtml(html);
-
-            // Get the main node
-            HtmlNode documentNode = doc.DocumentNode;
-
-            // Instanciate the model
-            //_searchResult = new SearchResult()
-            //{
-            //    Img = ;
-            //};
-
-            _isLoading = false;
-            
         }
     }
 }

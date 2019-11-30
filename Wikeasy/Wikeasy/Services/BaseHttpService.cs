@@ -13,21 +13,20 @@ namespace Wikeasy.Services
         {
             var result = default(T);
 
-            // Definir le Get par default
+            
             var method = httpMethod ?? HttpMethod.Get;
 
-            // Serialiser les données requété
             var data = requestData == null ? null : JsonConvert.SerializeObject(requestData);
 
             using (var request = new HttpRequestMessage(method, url))
             {
-                // Ajouter les données requété dans la requete
+               
                 if (data != null)
                 {
                     request.Content = new StringContent(data, Encoding.UTF8, "application/json");
                 }
 
-                // Ajouter le header à la requete
+                
                 if (headers != null)
                 {
                     foreach (var h in headers)
@@ -36,7 +35,7 @@ namespace Wikeasy.Services
                     }
                 }
 
-                // Recuperer la reponse
+
                 using (var handler = new HttpClientHandler())
                 {
                     using (var client = new HttpClient(handler))
@@ -48,6 +47,7 @@ namespace Wikeasy.Services
                             if (response.IsSuccessStatusCode)
                             {
                                 result = JsonConvert.DeserializeObject<T>(content);
+
                             }
                         }
                     }

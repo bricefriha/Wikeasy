@@ -27,13 +27,22 @@ namespace Wikeasy.Views
             BindingContext = this.viewModel = new HomeViewModel();
         }
 
-        private void txtSearch_Completed(object sender, EventArgs e)
+        async void txtSearch_Completed(object sender, EventArgs e)
         {
-            
-            //var animate = new Animation(d => frameSearchBar.WidthRequest = d, 40);
-            //animate.Commit(frameSearchBar, "BarGraph", 16, 3500);
+            await ((Entry)sender).FadeTo(0, 5000, Easing.Linear);
+            await icoSearch.FadeTo(0, 5000, Easing.Linear);
+            double startingHeight = frameSearchBar.Width;
+            double endingHeight = frameSearchBar.Height;
+            Action<double> callback = input => { frameSearchBar.WidthRequest = input; }; // update the height of the layout with this callback
+            uint rate = 16; // pace at which aniation proceeds
+            uint length = 1000; // one second animation
+            Easing easing = Easing.Linear;
+            //var animate = new Animation(d => frameSearchBar.WidthRequest = d, 100);
+            frameSearchBar.Animate("invis", callback, startingHeight, endingHeight, rate, length, easing);
+
+            //animate.Commit(frameSearchBar, "BarGraph", 40, 25, Easing.SpringIn);
             // Navigate the the preview page
-            Navigation.PushAsync(new PreviewPage(((Entry)sender).Text));
+            //Navigation.PushAsync(new PreviewPage(((Entry)sender).Text));
         }
     }
 }

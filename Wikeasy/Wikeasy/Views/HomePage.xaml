@@ -38,7 +38,8 @@
                                  HorizontalOptions="CenterAndExpand"
                                  Spacing="10">
                             <!-- Search Icon-->
-                        <Label Text="&#xf002;"
+                        <Label x:Name="icoSearch"
+                               Text="&#xf002;"
                                FontSize="Large"
                                FontFamily="{StaticResource FA-Solid}"
                                HorizontalOptions="Start"

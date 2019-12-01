@@ -9,6 +9,7 @@ using Wikeasy.Models;
 using Wikeasy.Views;
 using HtmlAgilityPack;
 using Wikeasy.Services;
+using Newtonsoft.Json.Linq;
 
 namespace Wikeasy.ViewModels
 {
@@ -60,11 +61,10 @@ namespace Wikeasy.ViewModels
         public async void GenerateSearchResult(string searchInput)
         {
             IsLoading = true;
-
             var data = await _service.GetWikiData(searchInput);
 
             // set the page title
-            Title = data.displaytitle;
+            Title = data.Lead.Displaytitle;
 
             // Get the html
             //string html = data.sections[0]["text"];

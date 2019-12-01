@@ -45,7 +45,7 @@
                                                 IsRunning="{Binding IsLoading}" 
                                                 IsVisible="{Binding IsLoading}" 
                                                 Color="Black" 
-                                                HorizontalOptions="Center" 
+                                                HorizontalOptions="CenterAndExpand" 
                                                 VerticalOptions="CenterAndExpand"/>
                             <!-- Search Icon-->
                             <Label x:Name="icoSearch"

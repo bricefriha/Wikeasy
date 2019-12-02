@@ -20,7 +20,7 @@
                      Spacing="5">
                 <!-- Title -->
                 <Label x:Name="lblSubtitle"
-                       Text="What do you need to know?" 
+                       Text="{Binding Subtitle}" 
                        FontAttributes="Bold" FontSize="Title"
                        VerticalOptions="CenterAndExpand"
                        HorizontalOptions="CenterAndExpand"

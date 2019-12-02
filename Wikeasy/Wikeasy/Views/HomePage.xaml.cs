@@ -37,10 +37,6 @@ namespace Wikeasy.Views
             await ((Entry)sender).FadeTo(0, 250, Easing.Linear);
             await icoSearch.FadeTo(0, 250, Easing.Linear);
             //
-            // Loading status apparition
-            //searchStatus.IsVisible = true;
-            //searchStatus.IsRunning = true;
-            
             double startingHeight = frameSearchBar.Width;
             double endingHeight = frameSearchBar.Height;
             Action<double> callback = input => { frameSearchBar.WidthRequest = input; }; // update the height of the layout with this callback
@@ -50,12 +46,7 @@ namespace Wikeasy.Views
             frameSearchBar.Animate("invis", callback, startingHeight, endingHeight, rate, length, easing);
 
             // Seaching process
-            lblSubtitle.Text = "Let me check...";
             _vm.GenerateSearchResult(((Entry)sender).Text);
-
-            //animate.Commit(frameSearchBar, "BarGraph", 40, 25, Easing.SpringIn);
-            // Navigate the the preview page
-            //Navigation.PushAsync(new PreviewPage(((Entry)sender).Text));
         }
     }
 }

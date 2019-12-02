@@ -10,6 +10,7 @@ using Wikeasy.Views;
 using HtmlAgilityPack;
 using Wikeasy.Services;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace Wikeasy.ViewModels
 {
@@ -84,7 +85,7 @@ namespace Wikeasy.ViewModels
         /// <summary>
         /// Method allowing to generate a search result
         /// </summary>
-        public async void GenerateSearchResult(string searchInput)
+        public async Task GenerateSearchResult(string searchInput)
         {
             // Set the subtitle
             Subtitle = subtitleLoading;
@@ -98,20 +99,30 @@ namespace Wikeasy.ViewModels
             Title = data.Lead.Displaytitle;
 
             // Get the html
-            //string html = data.sections[0]["text"];
+            string html = data.Lead.Sections[0].Text;
             // Instanciate the HTML doc
-            //HtmlDocument doc = new HtmlDocument();
-            //// Loading the doc
-            //doc.LoadHtml(html);
+            HtmlDocument doc = new HtmlDocument();
+            // Loading the doc
+            doc.LoadHtml(html);
 
             // Get the main node
-            //HtmlNode documentNode = doc.DocumentNode;
+            HtmlNode documentNode = doc.DocumentNode;
+
+            // Get the birthdate
+            string birthdate = documentNode.SelectNodes("//*[@class='bday']")[0].InnerText;
 
             // Instanciate the model
-            //_searchResult = new SearchResult()
-            //{
-            //    Img = ;
-            //};
+            SearchResult = new SearchResult()
+            {
+                Img = data.Lead.Image.Urls["640"].ToString(),
+                Title = data.Lead.Displaytitle,
+                Description = documentNode.SelectNodes("//*[@class='nickname']")[0].InnerText,
+                Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
+                Birthdate = birthdate,
+                Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")[0].Descendants("a").FirstOrDefault().InnerText,
+                Residence = documentNode.SelectNodes("//*[@class='label']")[0].Descendants("a").FirstOrDefault().InnerText,
+
+            };
 
             // Set the loading status as false
             IsLoading = false;

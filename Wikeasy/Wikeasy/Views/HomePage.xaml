@@ -52,13 +52,13 @@
                                    Text="&#xf002;"
                                    FontSize="Large"
                                    FontFamily="{StaticResource FA-Solid}"
-                                   IsVisible="{Binding !IsLoading}"
+                                   IsVisible="{Binding IsNotLoading}"
                                    HorizontalOptions="Start"
                                    VerticalOptions="Center"/>
                             <Entry x:Name="txtSearch"
                                    Placeholder="Something Something..."
                                    HorizontalOptions="Fill"
-                                   IsVisible="{Binding !IsLoading}"
+                                   IsVisible="{Binding IsNotLoading}"
                                    VerticalOptions="Fill"
                                    Completed="txtSearch_Completed"/>
                         </StackLayout>

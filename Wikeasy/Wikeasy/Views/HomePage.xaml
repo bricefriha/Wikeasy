@@ -12,6 +12,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <x:Double x:Key="indSize">40</x:Double>
+            <x:Double x:Key="searchbarHeight">45</x:Double>
+            <x:Double x:Key="searchbarWidth">310</x:Double>
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
@@ -39,23 +41,23 @@
                 <Frame x:Name="frameSearchBar"
                        VerticalOptions="CenterAndExpand"
                        CornerRadius="100"
-                       HeightRequest="45"
-                       WidthRequest="280"
+                       HeightRequest="{StaticResource searchbarHeight}"
+                       WidthRequest="{StaticResource searchbarWidth}"
                        Padding="0">
                         <Frame.Content>
                             <StackLayout Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal"
-                                 HorizontalOptions="CenterAndExpand"
-                                 Spacing="10">
+                                             HorizontalOptions="CenterAndExpand"
+                                             Spacing="10">
                                     <!-- Loading -->
                                     <ActivityIndicator  x:Name="searchStatus"
-                                                WidthRequest="{StaticResource indSize}" 
-                                                HeightRequest="{StaticResource indSize}" 
-                                                IsRunning="{Binding IsLoading}" 
-                                                IsVisible="{Binding IsLoading}" 
-                                                Color="Black" 
-                                                HorizontalOptions="Center" 
-                                                VerticalOptions="Center"/>
+                                                        WidthRequest="{StaticResource indSize}" 
+                                                        HeightRequest="{StaticResource indSize}" 
+                                                        IsRunning="{Binding IsLoading}" 
+                                                        IsVisible="{Binding IsLoading}" 
+                                                        Color="Black" 
+                                                        HorizontalOptions="Center" 
+                                                        VerticalOptions="Center"/>
                                     <!-- Search Icon-->
                                     <Label x:Name="icoSearch"
                                            Text="&#xf002;"
@@ -64,12 +66,12 @@
                                            IsVisible="{Binding IsNotLoading}"
                                            HorizontalOptions="Start"
                                            VerticalOptions="Center"/>
-                                            <Entry x:Name="txtSearch"
-                                           Placeholder="Something Something..."
-                                           HorizontalOptions="Fill"
-                                           IsVisible="{Binding IsNotLoading}"
-                                           VerticalOptions="Fill"
-                                           Completed="txtSearch_Completed"/>
+                                    <Entry x:Name="txtSearch"
+                                            Placeholder="Something Something..."
+                                            HorizontalOptions="Fill"
+                                            IsVisible="{Binding IsNotLoading}"
+                                            VerticalOptions="Fill"
+                                            Completed="txtSearch_Completed"/>
 
 
                                 </StackLayout>

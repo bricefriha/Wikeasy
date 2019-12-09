@@ -52,6 +52,33 @@ namespace Wikeasy.ViewModels
             }
         }
 
+        private bool _isResultSomebody;
+        public bool IsResultSomebody
+        {
+            set
+            {
+                _isResultSomebody = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _isResultSomebody;
+            }
+        }
+        private bool _isResultAvailable;
+        public bool IsResultAvailable
+        {
+            set
+            {
+                _isResultAvailable = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _isResultAvailable;
+            }
+        }
+
         private string _subtitle;
         public string Subtitle
         {
@@ -79,6 +106,8 @@ namespace Wikeasy.ViewModels
             // Set the subtitle
             _subtitle = subtitleDefault;
             _isLoading = false;
+            _isResultSomebody = false;
+            _isResultAvailable = false;
         }
 
 
@@ -116,7 +145,8 @@ namespace Wikeasy.ViewModels
             {
                 Img = data.Lead.Image.Urls["640"].ToString(),
                 Title = data.Lead.Displaytitle,
-                Description = documentNode.SelectNodes("//*[@class='nickname']")[0].InnerText,
+                Description = data.Lead.Description,
+                CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")[0].InnerText,
                 Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
                 Birthdate = birthdate,
                 Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")[0].Descendants("a").FirstOrDefault().InnerText,
@@ -129,6 +159,10 @@ namespace Wikeasy.ViewModels
 
             // Set the Default subtitle
             Subtitle = subtitleResult;
+
+            // Set the result as available
+            IsResultAvailable = true;
+            IsResultSomebody = true;
 
         }
     }

@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
              x:Class="Wikeasy.Views.HomePage"
              Title="{Binding Title}"
              x:Name="homePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <x:Double x:Key="indSize">40</x:Double>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="170"/>
@@ -35,33 +42,87 @@
                        HeightRequest="45"
                        WidthRequest="280"
                        Padding="0">
-                        <StackLayout Orientation="Horizontal"
+                        <Frame.Content>
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"
                                  Spacing="10">
-                            <!-- Loading -->
-                            <ActivityIndicator  x:Name="searchStatus"
-                                                WidthRequest="40" 
-                                                HeightRequest="40" 
+                                    <!-- Loading -->
+                                    <ActivityIndicator  x:Name="searchStatus"
+                                                WidthRequest="{StaticResource indSize}" 
+                                                HeightRequest="{StaticResource indSize}" 
                                                 IsRunning="{Binding IsLoading}" 
                                                 IsVisible="{Binding IsLoading}" 
                                                 Color="Black" 
-                                                HorizontalOptions="CenterAndExpand" 
-                                                VerticalOptions="CenterAndExpand"/>
-                            <!-- Search Icon-->
-                            <Label x:Name="icoSearch"
-                                   Text="&#xf002;"
-                                   FontSize="Large"
-                                   FontFamily="{StaticResource FA-Solid}"
-                                   IsVisible="{Binding IsNotLoading}"
-                                   HorizontalOptions="Start"
-                                   VerticalOptions="Center"/>
-                            <Entry x:Name="txtSearch"
-                                   Placeholder="Something Something..."
-                                   HorizontalOptions="Fill"
-                                   IsVisible="{Binding IsNotLoading}"
-                                   VerticalOptions="Fill"
-                                   Completed="txtSearch_Completed"/>
-                        </StackLayout>
+                                                HorizontalOptions="Center" 
+                                                VerticalOptions="Center"/>
+                                    <!-- Search Icon-->
+                                    <Label x:Name="icoSearch"
+                                           Text="&#xf002;"
+                                           FontSize="Large"
+                                           FontFamily="{StaticResource FA-Solid}"
+                                           IsVisible="{Binding IsNotLoading}"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Center"/>
+                                            <Entry x:Name="txtSearch"
+                                           Placeholder="Something Something..."
+                                           HorizontalOptions="Fill"
+                                           IsVisible="{Binding IsNotLoading}"
+                                           VerticalOptions="Fill"
+                                           Completed="txtSearch_Completed"/>
+
+
+                                </StackLayout>
+
+                                <!-- Result zone-->
+                                <yummy:PancakeView x:Name="cvResult"
+                                                     IsVisible="{Binding IsResultAvailable}"
+                                                     BackgroundColor="WhiteSmoke"
+                                                     HeightRequest="300"
+                                                   CornerRadius="10"
+                                                   >
+                                    <!-- A personality -->
+                                    <StackLayout IsVisible="{Binding IsResultSomebody}"
+                                                 Orientation="Vertical">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="150"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Column="0" Grid.Row="0">
+                                                <Frame  VerticalOptions="Center"
+                                                        HorizontalOptions="Center"
+                                                        Padding="0"
+                                                        CornerRadius="50"
+                                                        IsClippedToBounds="True"
+                                                        Margin="0"
+                                                     >
+                                                    <Image Source="{Binding SearchResult.Img}"
+                                                           Aspect="AspectFill" 
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center"
+                                                           WidthRequest="100"
+                                                           HeightRequest="100"
+                                                           
+                                                   />
+                                                </Frame>
+
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+
+                                            </Grid>
+                                        </Grid>
+                                        
+                                    </StackLayout>
+                                </yummy:PancakeView>
+                            </StackLayout>
+
+                            
+                        </Frame.Content>
                     </Frame>
                 </StackLayout>
 

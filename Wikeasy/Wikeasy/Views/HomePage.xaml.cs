@@ -44,7 +44,7 @@ namespace Wikeasy.Views
             await _vm.GenerateSearchResult(((Entry)sender).Text);
 
             // Annimation backward
-            AnimateSearchBar(height, width);
+            AnimateSearchBar(height, width, height, height + 300);
 
             // search bar disappearance
             await FadeSearchBar(sender, false);
@@ -77,14 +77,45 @@ namespace Wikeasy.Views
         /// </summary>
         /// <param name="startingHeight">Start size</param>
         /// <param name="endingHeight">End size</param>
-        private void AnimateSearchBar(double startingHeight, double endingHeight)
+        private void AnimateSearchBar(double startingWidth, double endingWidth)
         {
-            Action<double> callback = input => { frameSearchBar.WidthRequest = input; }; // update the height of the layout with this callback
-            uint rate = 16; // pace at which aniation proceeds
-            uint length = 700; // one second animation
+            // update the height of the layout with this callback
+            Action<double> callback = input => { frameSearchBar.WidthRequest = input; };
+            // pace at which aniation proceeds
+            uint rate = 16;
+            // one second animation
+            uint length = 700; 
             Easing easing = Easing.Linear;
 
-            frameSearchBar.Animate("invis", callback, startingHeight, endingHeight, rate, length, easing);
+            frameSearchBar.Animate("invis", callback, startingWidth, endingWidth, rate, length, easing);
         }
+        /// <summary>
+        /// Method allowing the searchbar annimation
+        /// </summary>
+        /// <param name="startingHeight">Start size</param>
+        /// <param name="endingHeight">End size</param>
+        private void AnimateSearchBar( double startingWidth, double endingWidth, double startingHeight, double endingHeight)
+        {
+            // pace at which aniation proceeds
+            uint rate = 16; 
+            // one second animation
+            uint length = 700; 
+            Easing easing = Easing.Linear;
+            // update the height of the layout with this callback
+            Action<double> callbackWidth = input => { frameSearchBar.WidthRequest = input; }; 
+            
+            // Width anniation
+            frameSearchBar.Animate("invisWidth", callbackWidth, startingWidth, endingWidth, rate, length, easing);
+            // update the height of the layout with this callback
+            Action<double> callbackHeight = input => { frameSearchBar.HeightRequest = input; }; 
+
+            // Height anniation
+            frameSearchBar.Animate("invisHeight", callbackHeight, startingHeight, endingHeight, rate, length, easing);
+
+            // Change de corner radius
+            frameSearchBar.CornerRadius = 15;
+
+        }
+
     }
 }

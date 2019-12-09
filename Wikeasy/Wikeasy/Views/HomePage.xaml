@@ -114,8 +114,14 @@
                                                 </Frame>
 
                                             </Grid>
-                                            <Grid Grid.Column="1">
-
+                                            <Grid Grid.Column="1" Grid.Row="0">
+                                                <!-- Quick description -->
+                                                <StackLayout Margin="10">
+                                                    <!-- Name -->
+                                                    <Label Text="{Binding SearchResult.Title}"
+                                                           HorizontalOptions="CenterAndExpand"
+                                                           FontAttributes="Bold"/>
+                                                </StackLayout>
                                             </Grid>
                                         </Grid>
                                         

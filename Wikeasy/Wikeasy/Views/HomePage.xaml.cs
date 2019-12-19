@@ -44,7 +44,7 @@ namespace Wikeasy.Views
             await _vm.GenerateSearchResult(((Entry)sender).Text);
 
             // Annimation backward
-            AnimateSearchBar(height, width, height, height + 300);
+            AnimateSearchBar(height, width, height, height + 500);
 
             // search bar disappearance
             await FadeSearchBar(sender, false);

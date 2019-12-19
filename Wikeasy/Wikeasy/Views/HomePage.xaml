@@ -13,14 +13,16 @@
         <ResourceDictionary>
             <x:Double x:Key="indSize">40</x:Double>
             <x:Double x:Key="searchbarHeight">45</x:Double>
-            <x:Double x:Key="searchbarWidth">310</x:Double>
+            <x:Double x:Key="searchbarWidth">330</x:Double>
+            <x:Double x:Key="descriptionSpacing">2</x:Double>
+            <x:Double x:Key="resultSize">700</x:Double>
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="170"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <StackLayout 
@@ -80,30 +82,34 @@
                                 <yummy:PancakeView x:Name="cvResult"
                                                      IsVisible="{Binding IsResultAvailable}"
                                                      BackgroundColor="WhiteSmoke"
-                                                     HeightRequest="300"
+                                                     HeightRequest="{StaticResource resultSize}"
                                                    CornerRadius="10"
+                                                   BorderColor="Black"
                                                    >
                                     <!-- A personality -->
-                                    <StackLayout IsVisible="{Binding IsResultSomebody}"
+                                    <StackLayout IsVisible="True"
                                                  Orientation="Vertical">
+                                        <!--{Binding IsResultSomebody}-->
                                         <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="120"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+                                            
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="150"/>
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
-                                            <Grid Grid.Column="0" Grid.Row="0">
-                                                <Frame  VerticalOptions="Center"
+                                            <Grid Grid.Row="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0">
+                                                    <Frame  VerticalOptions="Center"
                                                         HorizontalOptions="Center"
                                                         Padding="0"
                                                         CornerRadius="50"
                                                         IsClippedToBounds="True"
                                                         Margin="0"
                                                      >
-                                                    <Image Source="{Binding SearchResult.Img}"
+                                                        <Image Source="{Binding SearchResult.Img}"
                                                            Aspect="AspectFill" 
                                                            HorizontalOptions="Center"
                                                            VerticalOptions="Center"
@@ -111,18 +117,74 @@
                                                            HeightRequest="100"
                                                            
                                                    />
-                                                </Frame>
+                                                    </Frame>
+                                                </Grid>
+                                                <Grid Grid.Column="1" >
+                                                    <!-- Quick description -->
+                                                    <StackLayout Margin="10">
+                                                        <!-- Name -->
+                                                        <Label Text="{Binding SearchResult.Title}"
+                                                           HorizontalOptions="CenterAndExpand"
+                                                           FontAttributes="Bold"
+                                                           FontSize="Title"/>
+                                                        <!-- Age-->
+                                                        <StackLayout Orientation="Horizontal"
+                                                                 HorizontalOptions="CenterAndExpand"
+                                                                 Spacing="{StaticResource descriptionSpacing}">
+                                                            <Label Text="{Binding SearchResult.Age}"/>
+                                                            <Label Text="Years old"
+                                                               FontAttributes="Italic, Bold"/>
+                                                        </StackLayout>
+                                                        <!-- Description-->
+                                                        <Label Text="{Binding SearchResult.Description}"
+                                                               Margin="5"/>
+                                                        
+                                                    </StackLayout>
+                                                </Grid>
+
 
                                             </Grid>
-                                            <Grid Grid.Column="1" Grid.Row="0">
+                                            <Grid Grid.Row="1" 
+                                                  BackgroundColor="White">
+                                                
                                                 <!-- Quick description -->
                                                 <StackLayout Margin="10">
-                                                    <!-- Name -->
-                                                    <Label Text="{Binding SearchResult.Title}"
-                                                           HorizontalOptions="CenterAndExpand"
-                                                           FontAttributes="Bold"/>
+                                                    
+                                                    <!-- birthdate -->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 HorizontalOptions="StartAndExpand"
+                                                                 Spacing="{StaticResource descriptionSpacing}">
+                                                        <Label Text="Born :"
+                                                               FontAttributes=" Bold"/>
+                                                        <Label Text="{Binding SearchResult.Birthdate}"
+                                                               HorizontalOptions="End"/>
+
+                                                    </StackLayout>
+                                                    <!-- birth place -->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 HorizontalOptions="StartAndExpand"
+                                                                 Spacing="{StaticResource descriptionSpacing}">
+                                                        <Label Text="Birthplace :"
+                                                               FontAttributes=" Bold"/>
+                                                        <Label Text="{Binding SearchResult.Birthplace}"
+                                                               HorizontalOptions="End"/>
+
+                                                    </StackLayout>
+
+                                                    <!-- Residence -->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 HorizontalOptions="StartAndExpand"
+                                                                 Spacing="{StaticResource descriptionSpacing}">
+                                                        <Label Text="Residence :"
+                                                               FontAttributes=" Bold"/>
+                                                        <Label Text="{Binding SearchResult.Residence}"/>
+                                                        
+                                                    </StackLayout>
+
+
                                                 </StackLayout>
                                             </Grid>
+
                                         </Grid>
                                         
                                     </StackLayout>

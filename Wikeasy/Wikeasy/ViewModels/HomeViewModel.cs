@@ -148,9 +148,9 @@ namespace Wikeasy.ViewModels
                 Description = data.Lead.Description,
                 CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")[0].InnerText,
                 Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
-                Birthdate = birthdate,
-                Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")[0].Descendants("a").FirstOrDefault().InnerText,
-                Residence = documentNode.SelectNodes("//*[@class='label']")[0].Descendants("a").FirstOrDefault().InnerText,
+                Birthdate = DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"),
+                Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")[0].InnerText,
+                Residence = documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
 
             };
 

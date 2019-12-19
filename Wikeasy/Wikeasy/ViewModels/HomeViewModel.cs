@@ -138,7 +138,7 @@ namespace Wikeasy.ViewModels
             HtmlNode documentNode = doc.DocumentNode;
 
             // Get the birthdate
-            string birthdate = documentNode.SelectNodes("//*[@class='bday']")[0].InnerText;
+            string birthdate = documentNode.SelectNodes("//*[@class='bday']") is null ? null : documentNode.SelectNodes("//*[@class='bday']")[0].InnerText;
 
             // Instanciate the model
             SearchResult = new SearchResult()
@@ -146,11 +146,11 @@ namespace Wikeasy.ViewModels
                 Img = data.Lead.Image.Urls["640"].ToString(),
                 Title = data.Lead.Displaytitle,
                 Description = data.Lead.Description,
-                CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")[0].InnerText,
+                CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']") is null ? null : documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")[0].InnerText,
                 Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
-                Birthdate = DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"),
-                Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")[0].InnerText,
-                Residence = documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
+                Birthdate =  DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"),
+                Birthplace = documentNode.SelectNodes("//*[@class='birthplace']") is null ? null : documentNode.SelectNodes("//*[@class='birthplace']")[0].InnerText,
+                Residence = documentNode.SelectNodes("//*[@class='label']") is null ? null : documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
 
             };
 

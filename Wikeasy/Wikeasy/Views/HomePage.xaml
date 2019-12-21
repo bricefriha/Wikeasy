@@ -11,6 +11,7 @@
              x:Name="homePage">
 
     <ContentPage.Resources>
+        <Helpers:StringNullOrEmptyBoolConverter x:Key="NullToVisibilityConverter"/>
         <ResourceDictionary>
             <x:Double x:Key="indSize">40</x:Double>
             <x:Double x:Key="searchbarHeight">45</x:Double>
@@ -132,7 +133,9 @@
                                                         <!-- Age-->
                                                         <StackLayout Orientation="Horizontal"
                                                                  HorizontalOptions="CenterAndExpand"
-                                                                 Spacing="{StaticResource descriptionSpacing}">
+                                                                 Spacing="{StaticResource descriptionSpacing}"
+                                                                 IsVisible="{Binding SearchResult.Age,
+                                                                            Converter ={StaticResource NullToVisibilityConverter} }">
                                                             <Label Text="{Binding SearchResult.Age}"/>
                                                             <Label Text="Years old"
                                                                FontAttributes="Italic, Bold"/>
@@ -155,7 +158,9 @@
                                                     <!-- birthdate -->
                                                     <StackLayout Orientation="Horizontal"
                                                                  HorizontalOptions="StartAndExpand"
-                                                                 Spacing="{StaticResource descriptionSpacing}">
+                                                                 Spacing="{StaticResource descriptionSpacing}"
+                                                                 IsVisible="{Binding SearchResult.Residence,
+                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
                                                         <Label Text="Born :"
                                                                FontAttributes=" Bold"/>
                                                         <Label Text="{Binding SearchResult.Birthdate}"
@@ -165,7 +170,9 @@
                                                     <!-- birth place -->
                                                     <StackLayout Orientation="Horizontal"
                                                                  HorizontalOptions="StartAndExpand"
-                                                                 Spacing="{StaticResource descriptionSpacing}">
+                                                                 Spacing="{StaticResource descriptionSpacing}"
+                                                                 IsVisible="{Binding SearchResult.Birthplace,
+                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
                                                         <Label Text="Birthplace :"
                                                                FontAttributes=" Bold"/>
                                                         <Label Text="{Binding SearchResult.Birthplace}"
@@ -177,7 +184,8 @@
                                                     <StackLayout Orientation="Horizontal"
                                                                  HorizontalOptions="StartAndExpand"
                                                                  Spacing="{StaticResource descriptionSpacing}"
-                                                                 IsVisible="{Binding SearchResult.Residence}">
+                                                                 IsVisible="{Binding SearchResult.Residence,
+                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
                                                         <Label Text="Residence :"
                                                                FontAttributes=" Bold"/>
                                                         <Label Text="{Binding SearchResult.Residence}"/>

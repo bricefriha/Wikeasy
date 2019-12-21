@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
+             xmlns:Helpers="clr-namespace:Wikeasy.Helpers"
              x:Class="Wikeasy.Views.HomePage"
              Title="{Binding Title}"
              x:Name="homePage">
@@ -73,7 +74,8 @@
                                             HorizontalOptions="Fill"
                                             IsVisible="{Binding IsNotLoading}"
                                             VerticalOptions="Fill"
-                                            Completed="txtSearch_Completed"/>
+                                            Completed="txtSearch_Completed"
+                                            Focused="txtSearch_Focused"/>
 
 
                                 </StackLayout>
@@ -174,7 +176,8 @@
                                                     <!-- Residence -->
                                                     <StackLayout Orientation="Horizontal"
                                                                  HorizontalOptions="StartAndExpand"
-                                                                 Spacing="{StaticResource descriptionSpacing}">
+                                                                 Spacing="{StaticResource descriptionSpacing}"
+                                                                 IsVisible="{Binding SearchResult.Residence}">
                                                         <Label Text="Residence :"
                                                                FontAttributes=" Bold"/>
                                                         <Label Text="{Binding SearchResult.Residence}"/>

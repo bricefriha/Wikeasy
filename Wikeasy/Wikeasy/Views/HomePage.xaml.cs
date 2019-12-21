@@ -18,11 +18,18 @@ namespace Wikeasy.Views
     [DesignTimeVisible(false)]
     public partial class HomePage : ContentPage
     {
+        double width;
+        double height;
         HomeViewModel _vm;
+        #region constant
+        const float SbDefaultCornerRadius = 100;
+        const float SbActiveCornerRadius = 15;
+
+        #endregion
 
         public HomePage()
         {
-            InitializeComponent();
+            InitializeComponent() ;
 
             BindingContext = this._vm = new HomeViewModel();
         }
@@ -34,8 +41,8 @@ namespace Wikeasy.Views
             // search bar disappearance
             await FadeSearchBar(sender, true);
             //
-            double width = frameSearchBar.Width;
-            double height = frameSearchBar.Height;
+            width = frameSearchBar.Width;
+            height = frameSearchBar.Height;
 
             // Annimation forward
             AnimateSearchBar(width, height);
@@ -46,8 +53,32 @@ namespace Wikeasy.Views
             // Annimation backward
             AnimateSearchBar(height, width, height, height + 500);
 
-            // search bar disappearance
+            // Change de corner radius
+            frameSearchBar.CornerRadius = SbActiveCornerRadius;
+
+            // Search bar disappearance
             await FadeSearchBar(sender, false);
+        }
+        /// <summary>
+        /// Entry focus event 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtSearch_Focused(object sender, FocusEventArgs e)
+        {
+            // If a result has been shown
+            if (_vm.IsResultAvailable)
+            {
+                // Reset the SearchBar Height 
+                AnimateHeightSearchBar(frameSearchBar.Height, height, 60, 300);
+
+                // Set the result as unavailable
+                _vm.IsResultAvailable = false;
+
+                // Change de corner radius
+                frameSearchBar.CornerRadius = SbDefaultCornerRadius;
+            }
+
         }
         /// <summary>
         /// Method allowing the searchBar disappearance/appearance
@@ -81,14 +112,36 @@ namespace Wikeasy.Views
         {
             // update the height of the layout with this callback
             Action<double> callback = input => { frameSearchBar.WidthRequest = input; };
+
             // pace at which aniation proceeds
             uint rate = 16;
+
             // one second animation
-            uint length = 700; 
+            const uint length = 700; 
             Easing easing = Easing.Linear;
 
             frameSearchBar.Animate("invis", callback, startingWidth, endingWidth, rate, length, easing);
         }
+        /// <summary>
+        /// Method allowing the searchbar annimation
+        /// </summary>
+        /// <param name="startingHeight">Start size</param>
+        /// <param name="endingHeight">End size</param>
+        /// <param name="rate">pace at which aniation proceeds</param>
+        /// <param name="length">The number of milliseconds over which to interpolate the animation</param>
+        private void AnimateHeightSearchBar(double startingHeight, double endingHeight, uint rate, uint length)
+        {
+            // update the height of the layout with this callback
+            Action<double> callback = input => { frameSearchBar.HeightRequest = input; };
+            
+            
+            Easing easing = Easing.Linear;
+
+            frameSearchBar.Animate("invis", callback, startingHeight, endingHeight, rate, length, easing);
+
+            
+        }
+
         /// <summary>
         /// Method allowing the searchbar annimation
         /// </summary>
@@ -112,8 +165,7 @@ namespace Wikeasy.Views
             // Height anniation
             frameSearchBar.Animate("invisHeight", callbackHeight, startingHeight, endingHeight, rate, length, easing);
 
-            // Change de corner radius
-            frameSearchBar.CornerRadius = 15;
+            
 
         }
 

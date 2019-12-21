@@ -12,11 +12,15 @@ namespace Wikeasy.Models
 
         [JsonProperty(PropertyName = "lead")]
         public WikiDataLead Lead { get; set; }
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
         //[JsonProperty(PropertyName = "remaining")]
         //public IDictionary<string, Match> Remaining { get; set; }
     }
     public class WikiDataLead
     {
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
         [JsonProperty(PropertyName = "displaytitle")]
         public string Displaytitle { get; set; }
         [JsonProperty(PropertyName = "normalizedtitle")]
@@ -27,6 +31,7 @@ namespace Wikeasy.Models
         public WikiDataImage Image { get; set; }
         [JsonProperty(PropertyName = "sections")]
         public WikiDataSection[] Sections { get; set; }
+        
 
 
     }

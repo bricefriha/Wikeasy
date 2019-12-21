@@ -22,6 +22,10 @@ namespace Wikeasy.ViewModels
         private const string subtitleDefault = "What do you need to know?";
         private const string subtitleLoading = "Let me check...";
         private const string subtitleResult = "Here's what I found:";
+        private const string subtitleDataNotFound = "I didn't found anything, please try again:";
+
+        // Not found
+        private const string dataNotFound = "Not found.";
         #endregion
         static IWikipediaApiDataService _service;
         private SearchResult _searchResult;
@@ -124,35 +128,43 @@ namespace Wikeasy.ViewModels
 
             var data = await _service.GetWikiData(searchInput);
 
-            // set the page title
-            Title = data.Lead.Displaytitle;
+            
 
-            // Get the html
-            string html = data.Lead.Sections[0].Text;
-            // Instanciate the HTML doc
-            HtmlDocument doc = new HtmlDocument();
-            // Loading the doc
-            doc.LoadHtml(html);
-
-            // Get the main node
-            HtmlNode documentNode = doc.DocumentNode;
-
-            // Get the birthdate
-            string birthdate = documentNode.SelectNodes("//*[@class='bday']") is null ? null : documentNode.SelectNodes("//*[@class='bday']")[0].InnerText;
-
-            // Instanciate the model
-            SearchResult = new SearchResult()
+            if (data is null)
+                Subtitle = subtitleDataNotFound;
+            else
             {
-                Img = data.Lead.Image.Urls["640"].ToString(),
-                Title = data.Lead.Displaytitle,
-                Description = data.Lead.Description,
-                CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']") is null ? null : documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")[0].InnerText,
-                Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
-                Birthdate =  DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"),
-                Birthplace = documentNode.SelectNodes("//*[@class='birthplace']") is null ? null : documentNode.SelectNodes("//*[@class='birthplace']")[0].InnerText,
-                Residence = documentNode.SelectNodes("//*[@class='label']") is null ? null : documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
+                // set the page title
+                Title = data.Lead.Displaytitle;
 
-            };
+                // Get the html
+                string html = data.Lead.Sections[0].Text;
+                // Instanciate the HTML doc
+                HtmlDocument doc = new HtmlDocument();
+                // Loading the doc
+                doc.LoadHtml(html);
+
+                // Get the main node
+                HtmlNode documentNode = doc.DocumentNode;
+
+                // Get the birthdate
+                string birthdate = documentNode.SelectNodes("//*[@class='bday']") is null ? null : documentNode.SelectNodes("//*[@class='bday']")[0].InnerText;
+
+                // Instanciate the model
+                SearchResult = new SearchResult()
+                {
+                    Img = data.Lead.Image.Urls["640"].ToString(),
+                    Title = data.Lead.Displaytitle,
+                    Description = data.Lead.Description,
+                    CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']") is null ? null : documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")[0].InnerText,
+                    Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
+                    Birthdate = DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"),
+                    Birthplace = documentNode.SelectNodes("//*[@class='birthplace']") is null ? null : documentNode.SelectNodes("//*[@class='birthplace']")[0].InnerText,
+                    Residence = documentNode.SelectNodes("//*[@class='label']") is null ? null : documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
+
+                };
+            }
+            
 
             // Set the loading status as false
             IsLoading = false;

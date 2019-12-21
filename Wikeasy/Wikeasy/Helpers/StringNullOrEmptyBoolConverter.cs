@@ -7,7 +7,8 @@ namespace Wikeasy.Helpers
 {
     public class StringNullOrEmptyBoolConverter : IValueConverter
     {
-        /// <summary>Returns false if string is null or empty
+        /// <summary>
+        /// Returns false if string is null or empty
         /// 
         /// </summary>
         /// <param name="value"></param>

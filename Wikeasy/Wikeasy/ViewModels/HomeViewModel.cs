@@ -22,7 +22,7 @@ namespace Wikeasy.ViewModels
         private const string subtitleDefault = "What do you need to know?";
         private const string subtitleLoading = "Let me check...";
         private const string subtitleResult = "Here's what I found:";
-        private const string subtitleDataNotFound = "I didn't found anything, please try again:";
+        private const string subtitleDataNotFound = "Result not found, please try again:";
 
         // Not found
         private const string dataNotFound = "Not found.";
@@ -134,7 +134,7 @@ namespace Wikeasy.ViewModels
                 Subtitle = subtitleDataNotFound;
             else
             {
-                // set the page title
+                // Set the page title
                 Title = data.Lead.Displaytitle;
 
                 // Get the html
@@ -163,18 +163,18 @@ namespace Wikeasy.ViewModels
                     Residence = documentNode.SelectNodes("//*[@class='label']") is null ? null : documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
 
                 };
+                // Set the Default subtitle
+                Subtitle = subtitleResult;
+
+                // Set the result as available
+                IsResultAvailable = true;
+                IsResultSomebody = true;
             }
             
 
             // Set the loading status as false
             IsLoading = false;
 
-            // Set the Default subtitle
-            Subtitle = subtitleResult;
-
-            // Set the result as available
-            IsResultAvailable = true;
-            IsResultSomebody = true;
 
         }
     }

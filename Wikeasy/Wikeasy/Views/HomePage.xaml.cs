@@ -21,7 +21,7 @@ namespace Wikeasy.Views
         double width;
         double height;
         HomeViewModel _vm;
-        #region constant
+        #region constraint
         const float SbDefaultCornerRadius = 100;
         const float SbActiveCornerRadius = 15;
 
@@ -45,16 +45,22 @@ namespace Wikeasy.Views
             height = frameSearchBar.Height;
 
             // Annimation forward
-            AnimateSearchBar(width, height);
+            AnimateWidthSearchBar(width, height);
 
             // Seaching process
             await _vm.GenerateSearchResult(((Entry)sender).Text);
 
-            // Annimation backward
-            AnimateSearchBar(height, width, height, height + 500);
+            // Do we get a result?
+            if (_vm.IsResultAvailable)
+            {
+                // Annimation backward
+                AnimateSearchBar(height, width, height, height + 500);
 
-            // Change de corner radius
-            frameSearchBar.CornerRadius = SbActiveCornerRadius;
+                // Change de corner radius
+                frameSearchBar.CornerRadius = SbActiveCornerRadius;
+            }
+            else
+                AnimateWidthSearchBar(height, width);
 
             // Search bar disappearance
             await FadeSearchBar(sender, false);
@@ -108,7 +114,7 @@ namespace Wikeasy.Views
         /// </summary>
         /// <param name="startingHeight">Start size</param>
         /// <param name="endingHeight">End size</param>
-        private void AnimateSearchBar(double startingWidth, double endingWidth)
+        private void AnimateWidthSearchBar(double startingWidth, double endingWidth)
         {
             // update the height of the layout with this callback
             Action<double> callback = input => { frameSearchBar.WidthRequest = input; };

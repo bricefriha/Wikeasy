@@ -160,6 +160,7 @@ namespace Wikeasy.ViewModels
                     Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
                     Birthdate = DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"),
                     Birthplace = documentNode.SelectNodes("//*[@class='birthplace']") is null ? null : documentNode.SelectNodes("//*[@class='birthplace']")[0].InnerText,
+                    Deathplace = documentNode.SelectNodes("//*[@class='deathplace']") is null ? null : documentNode.SelectNodes("//*[@class='deathplace']")[0].InnerText,
                     Residence = documentNode.SelectNodes("//*[@class='label']") is null ? null : documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
 
                 };

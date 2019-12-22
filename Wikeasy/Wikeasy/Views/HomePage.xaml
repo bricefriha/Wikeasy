@@ -12,6 +12,7 @@
 
     <ContentPage.Resources>
         <Helpers:StringNullOrEmptyBoolConverter x:Key="NullToVisibilityConverter"/>
+        <Helpers:StringNotNullOrEmptyBoolConverter x:Key="StringNotNullOrEmptyBoolConverter"/>
         <ResourceDictionary>
             <x:Double x:Key="indSize">40</x:Double>
             <x:Double x:Key="searchbarHeight">45</x:Double>
@@ -83,11 +84,12 @@
 
                                 <!-- Result zone-->
                                 <yummy:PancakeView x:Name="cvResult"
-                                                     IsVisible="{Binding IsResultAvailable}"
-                                                     BackgroundColor="WhiteSmoke"
-                                                     HeightRequest="{StaticResource resultSize}"
+                                                   IsVisible="{Binding IsResultAvailable}"
+                                                   BackgroundColor="WhiteSmoke"
+                                                   HeightRequest="{StaticResource resultSize}"
                                                    CornerRadius="10"
                                                    BorderColor="Black"
+                                                   Padding="5"
                                                    >
                                     <!-- A personality -->
                                     <StackLayout IsVisible="True"
@@ -108,7 +110,7 @@
                                                     <Frame  VerticalOptions="Center"
                                                         HorizontalOptions="Center"
                                                         Padding="0"
-                                                        CornerRadius="50"
+                                                        CornerRadius="25"
                                                         IsClippedToBounds="True"
                                                         Margin="0"
                                                      >
@@ -134,8 +136,8 @@
                                                         <StackLayout Orientation="Horizontal"
                                                                  HorizontalOptions="CenterAndExpand"
                                                                  Spacing="{StaticResource descriptionSpacing}"
-                                                                 IsVisible="{Binding SearchResult.Age,
-                                                                            Converter ={StaticResource NullToVisibilityConverter} }">
+                                                                 IsVisible="{Binding SearchResult.Deathplace,
+                                                                            Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }">
                                                             <Label Text="{Binding SearchResult.Age}"/>
                                                             <Label Text="Years old"
                                                                FontAttributes="Italic, Bold"/>
@@ -189,6 +191,18 @@
                                                         <Label Text="Residence :"
                                                                FontAttributes=" Bold"/>
                                                         <Label Text="{Binding SearchResult.Residence}"/>
+                                                        
+                                                    </StackLayout>
+                                                    
+                                                    <!-- Deathplace -->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 HorizontalOptions="StartAndExpand"
+                                                                 Spacing="{StaticResource descriptionSpacing}"
+                                                                 IsVisible="{Binding SearchResult.Deathplace,
+                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
+                                                        <Label Text="Deathplace :"
+                                                               FontAttributes=" Bold"/>
+                                                        <Label Text="{Binding SearchResult.Deathplace}"/>
                                                         
                                                     </StackLayout>
 

@@ -76,7 +76,7 @@ namespace Wikeasy.Views
             if (_vm.IsResultAvailable)
             {
                 // Reset the SearchBar Height 
-                AnimateHeightSearchBar(frameSearchBar.Height, height, 60, 300);
+                AnimateHeightSearchBar(frameSearchBar.Height, height, 60, 150);
 
                 // Set the result as unavailable
                 _vm.IsResultAvailable = false;

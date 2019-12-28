@@ -21,6 +21,7 @@
             <x:Double x:Key="resultSize">700</x:Double>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="170"/>
@@ -161,7 +162,7 @@
                                                     <StackLayout Orientation="Horizontal"
                                                                  HorizontalOptions="StartAndExpand"
                                                                  Spacing="{StaticResource descriptionSpacing}"
-                                                                 IsVisible="{Binding SearchResult.Residence,
+                                                                 IsVisible="{Binding SearchResult.Birthdate,
                                                                              Converter ={StaticResource NullToVisibilityConverter} }">
                                                         <Label Text="Born :"
                                                                FontAttributes=" Bold"/>

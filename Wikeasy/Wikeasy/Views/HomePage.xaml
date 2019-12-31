@@ -208,7 +208,28 @@
                                                     </StackLayout>
 
 
+
+                                                    <!-- Mention source -->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                 HorizontalOptions="End"
+                                                                 VerticalOptions="End">
+
+                                                        <!-- Wikipedia lqbel-->
+                                                        <Label Text="From Wikipedia"
+                                                               FontSize="Small"/>
+
+                                                        <!-- Wikipedia logo-->
+                                                        <Label x:Name="icoWikipedia"
+                                                                   Text="&#xf266;"
+                                                                   FontSize="Small"
+                                                                   FontFamily="{StaticResource FA-Brands}"
+                                                                   IsVisible="{Binding IsNotLoading}"
+                                                                   HorizontalOptions="Start"
+                                                                   VerticalOptions="Center"/>
+
+                                                    </StackLayout>
                                                 </StackLayout>
+                                                
                                             </Grid>
 
                                         </Grid>

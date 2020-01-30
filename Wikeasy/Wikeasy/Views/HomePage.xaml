@@ -21,8 +21,8 @@
             <x:Double x:Key="resultSize">700</x:Double>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
-    <Grid>
+
+    <Grid BackgroundColor="{DynamicResource ThemeBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="170"/>
             <RowDefinition Height="*"/>

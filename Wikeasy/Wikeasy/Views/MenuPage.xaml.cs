@@ -20,9 +20,9 @@ namespace Wikeasy.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Home, Title="Home" },
-                new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                new HomeMenuItem {Id = MenuItemType.Home, Title="Home", Icon = "\xf015"  },
+                new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", Icon = "\xf1de" },
+                //new HomeMenuItem {Id = MenuItemType.About, Title="About", Icon = "&#xf05a;" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

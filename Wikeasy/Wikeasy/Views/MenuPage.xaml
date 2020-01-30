@@ -9,7 +9,13 @@
              
     <StackLayout VerticalOptions="FillAndExpand">
         <ListView x:Name="ListViewMenu"
-                    HasUnevenRows="True">
+                    HasUnevenRows="True"
+                  BackgroundColor="White">
+            <!-- Balnk space-->
+            <ListView.Header>
+                <BoxView BackgroundColor="WhiteSmoke"
+                         HeightRequest="55"/>
+            </ListView.Header>
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Item 1</x:String>
@@ -19,10 +25,20 @@
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
                 <DataTemplate>
+                    
                     <ViewCell>
-                        <Grid Padding="10">
-                            <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20" TextColor="#B68E2B"/>
-                        </Grid>
+                        <StackLayout Orientation="Horizontal">
+                            <!-- Icon -->
+                            <Label Text="{Binding Icon}"
+                                   FontFamily="{StaticResource FA-Solid}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   FontSize="Medium"
+                                   Padding="10"/>
+                            <Grid Padding="10">
+                                <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20" TextColor="#B68E2B"/>
+                            </Grid>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

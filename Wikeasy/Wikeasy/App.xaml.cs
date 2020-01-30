@@ -64,13 +64,13 @@ namespace Wikeasy
                 case Theme.Dark:
                     // Switch to dark theme
                     //_vm.ThemeUrl = "/Themes/DarkTheme.xaml";
-                    App.Current.Resources.MergedDictionaries.Add(new LightTheme());
+                    App.Current.Resources.MergedDictionaries.Add(new DarkTheme());
                     break;
                 // If the system theme is light
                 case Theme.Light:
                     // Switch to light theme
                     //_vm.ThemeUrl = "/Themes/LightTheme.xaml";
-                    App.Current.Resources.MergedDictionaries.Add(new DarkTheme());
+                    App.Current.Resources.MergedDictionaries.Add(new LightTheme());
                     break;
             }
         }

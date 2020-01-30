@@ -5,8 +5,11 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      mc:Ignorable="d"
                      x:Class="Wikeasy.Themes.LightTheme">
-            <Color x:Key="BackgroundColor">#FFe0e0e0</Color>
-            <Style x:Key="Title" TargetType="Label">
+            <Color x:Key="ThemeBackgroundColor">#FFe0e0e0</Color>
+    <Color x:Key="ThemePrimaryColor">#B68E2B</Color>
+            <Color x:Key="ThemeSearchBarColor">WhiteSmoke</Color>
+    <Color x:Key="ThemeTextColor">#4C4C4C</Color> 
+    <Style x:Key="Title" TargetType="Label">
                 <!--<Setter Property="TextColor" 
                         Value="{StaticResource TextPrimaryColor}"/>-->
                 <Setter Property="FontSize" Value="Large"/>

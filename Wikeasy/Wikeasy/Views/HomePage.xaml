@@ -8,6 +8,7 @@
              xmlns:Helpers="clr-namespace:Wikeasy.Helpers"
              x:Class="Wikeasy.Views.HomePage"
              Title="{Binding Title}"
+             
              x:Name="homePage">
 
     <ContentPage.Resources>
@@ -39,18 +40,22 @@
                        FontAttributes="Bold" FontSize="Title"
                        VerticalOptions="CenterAndExpand"
                        HorizontalOptions="CenterAndExpand"
+                       TextColor="{DynamicResource ThemeTitleColor}"
                        />
                 <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="CenterAndExpand"
                                  Spacing="10">
                 <!-- Search bar-->
-                <Frame x:Name="frameSearchBar"
+                    <yummy:PancakeView x:Name="frameSearchBar"
                        VerticalOptions="CenterAndExpand"
                        CornerRadius="100"
                        HeightRequest="{StaticResource searchbarHeight}"
                        WidthRequest="{StaticResource searchbarWidth}"
+                       BackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                       HasShadow="True"
+                       
                        Padding="0">
-                        <Frame.Content>
+                        <yummy:PancakeView.Content>
                             <StackLayout Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal"
                                              HorizontalOptions="CenterAndExpand"
@@ -70,6 +75,7 @@
                                            FontSize="Large"
                                            FontFamily="{StaticResource FA-Solid}"
                                            IsVisible="{Binding IsNotLoading}"
+                                           TextColor="{DynamicResource ThemeTextColor}"
                                            HorizontalOptions="Start"
                                            VerticalOptions="Center"/>
                                     <Entry x:Name="txtSearch"
@@ -78,6 +84,8 @@
                                             IsVisible="{Binding IsNotLoading}"
                                             VerticalOptions="Fill"
                                             Completed="txtSearch_Completed"
+                                           TextColor="{DynamicResource ThemeTextColor}"
+                                           PlaceholderColor="{DynamicResource ThemeTextColor}"
                                             Focused="txtSearch_Focused"/>
 
 
@@ -86,7 +94,7 @@
                                 <!-- Result zone-->
                                 <yummy:PancakeView x:Name="cvResult"
                                                    IsVisible="{Binding IsResultAvailable}"
-                                                   BackgroundColor="WhiteSmoke"
+                                                   BackgroundColor="{DynamicResource ThemeBackgroundColor}"
                                                    HeightRequest="{StaticResource resultSize}"
                                                    CornerRadius="10"
                                                    BorderColor="Black"
@@ -130,6 +138,7 @@
                                                     <StackLayout Margin="10">
                                                         <!-- Name -->
                                                         <Label Text="{Binding SearchResult.Title}"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"
                                                            HorizontalOptions="CenterAndExpand"
                                                            FontAttributes="Bold"
                                                            FontSize="Title"/>
@@ -139,12 +148,14 @@
                                                                  Spacing="{StaticResource descriptionSpacing}"
                                                                  IsVisible="{Binding SearchResult.Deathplace,
                                                                             Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }">
-                                                            <Label Text="{Binding SearchResult.Age}"/>
+                                                            <Label Text="{Binding SearchResult.Age}"
+                                                                   TextColor="{DynamicResource ThemeTitleColor}"/>
                                                             <Label Text="Years old"
                                                                FontAttributes="Italic, Bold"/>
                                                         </StackLayout>
                                                         <!-- Description-->
                                                         <Label Text="{Binding SearchResult.Description}"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"
                                                                Margin="5"/>
                                                         
                                                     </StackLayout>
@@ -163,10 +174,13 @@
                                                                  HorizontalOptions="StartAndExpand"
                                                                  Spacing="{StaticResource descriptionSpacing}"
                                                                  IsVisible="{Binding SearchResult.Birthdate,
-                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
+                                                                             Converter ={StaticResource NullToVisibilityConverter} }"
+                                                                 >
                                                         <Label Text="Born :"
-                                                               FontAttributes=" Bold"/>
+                                                               FontAttributes=" Bold"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
                                                         <Label Text="{Binding SearchResult.Birthdate}"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"
                                                                HorizontalOptions="End"/>
 
                                                     </StackLayout>
@@ -177,8 +191,10 @@
                                                                  IsVisible="{Binding SearchResult.Birthplace,
                                                                              Converter ={StaticResource NullToVisibilityConverter} }">
                                                         <Label Text="Birthplace :"
-                                                               FontAttributes=" Bold"/>
+                                                               FontAttributes=" Bold"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
                                                         <Label Text="{Binding SearchResult.Birthplace}"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"
                                                                HorizontalOptions="End"/>
 
                                                     </StackLayout>
@@ -188,10 +204,13 @@
                                                                  HorizontalOptions="StartAndExpand"
                                                                  Spacing="{StaticResource descriptionSpacing}"
                                                                  IsVisible="{Binding SearchResult.Residence,
-                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
+                                                                             Converter ={StaticResource NullToVisibilityConverter} }"
+                                                                 >
                                                         <Label Text="Residence :"
-                                                               FontAttributes=" Bold"/>
-                                                        <Label Text="{Binding SearchResult.Residence}"/>
+                                                               FontAttributes=" Bold"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                        <Label Text="{Binding SearchResult.Residence}"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
                                                         
                                                     </StackLayout>
                                                     
@@ -202,8 +221,10 @@
                                                                  IsVisible="{Binding SearchResult.Deathplace,
                                                                              Converter ={StaticResource NullToVisibilityConverter} }">
                                                         <Label Text="Deathplace :"
-                                                               FontAttributes=" Bold"/>
-                                                        <Label Text="{Binding SearchResult.Deathplace}"/>
+                                                               FontAttributes=" Bold"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                        <Label Text="{Binding SearchResult.Deathplace}"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
                                                         
                                                     </StackLayout>
 
@@ -216,7 +237,8 @@
 
                                                         <!-- Wikipedia lqbel-->
                                                         <Label Text="From Wikipedia"
-                                                               FontSize="Small"/>
+                                                               FontSize="Small"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
 
                                                         <!-- Wikipedia logo-->
                                                         <Label x:Name="icoWikipedia"
@@ -225,7 +247,8 @@
                                                                    FontFamily="{StaticResource FA-Brands}"
                                                                    IsVisible="{Binding IsNotLoading}"
                                                                    HorizontalOptions="Start"
-                                                                   VerticalOptions="Center"/>
+                                                                   VerticalOptions="Center"
+                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
 
                                                     </StackLayout>
                                                 </StackLayout>
@@ -239,8 +262,8 @@
                             </StackLayout>
 
                             
-                        </Frame.Content>
-                    </Frame>
+                        </yummy:PancakeView.Content>
+                    </yummy:PancakeView>
                 </StackLayout>
 
             </StackLayout>

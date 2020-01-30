@@ -13,8 +13,8 @@
             <!--Global Styles-->
             <Color x:Key="NavigationPrimary">#B68E2B</Color>
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="BarTextColor" Value="WhiteSmoke" />
+                <Setter Property="BarBackgroundColor" Value="{DynamicResource ThemePrimaryColor}" />
+                <Setter Property="BarTextColor" Value="{DynamicResource ThemeTitleColor}" />
             </Style>
         </ResourceDictionary>
         <!-- Font Awesome -->

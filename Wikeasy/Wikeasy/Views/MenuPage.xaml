@@ -10,10 +10,10 @@
     <StackLayout VerticalOptions="FillAndExpand">
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True"
-                  BackgroundColor="White">
+                  BackgroundColor="{DynamicResource ThemeSearchBarColor}">
             <!-- Balnk space-->
             <ListView.Header>
-                <BoxView BackgroundColor="WhiteSmoke"
+                <BoxView BackgroundColor="{DynamicResource ThemeBackgroundColor}"
                          HeightRequest="55"/>
             </ListView.Header>
             <d:ListView.ItemsSource>
@@ -31,12 +31,13 @@
                             <!-- Icon -->
                             <Label Text="{Binding Icon}"
                                    FontFamily="{StaticResource FA-Solid}"
+                                   TextColor="{DynamicResource ThemePrimaryColor}"
                                    VerticalOptions="Center"
                                    HorizontalOptions="Center"
                                    FontSize="Medium"
                                    Padding="10"/>
                             <Grid Padding="10">
-                                <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20" TextColor="#B68E2B"/>
+                                <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20" TextColor="{DynamicResource ThemeTextColor}"/>
                             </Grid>
                         </StackLayout>
                     </ViewCell>

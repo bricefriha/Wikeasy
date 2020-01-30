@@ -20,6 +20,13 @@ namespace Wikeasy
         protected override void OnStart()
         {
             // Handle when your app starts
+
+            // Detect the theme
+            base.OnStart();
+
+            Theme theme = DependencyService.Get<IEnvironment>().GetOperatingSystemTheme();
+
+            SetTheme(theme);
         }
 
         protected override void OnSleep()
@@ -30,6 +37,21 @@ namespace Wikeasy
         protected override void OnResume()
         {
             // Handle when your app resumes
+
+            // Detect the theme
+            base.OnStart();
+
+            Theme theme = DependencyService.Get<IEnvironment>().GetOperatingSystemTheme();
+
+            SetTheme(theme);
+        }
+        /// <summary>
+        /// To handle Light Theme & Dark Theme
+        /// </summary>
+        /// <param name="theme"></param>
+        void SetTheme(Theme theme)
+        {
+            //Handle Light Theme & Dark Theme
         }
     }
 }

@@ -10,5 +10,5 @@ namespace Wikeasy.Services
         Theme GetOperatingSystemTheme();
         Task<Theme> GetOperatingSystemThemeAsync();
     }
-    public enum Theme { Light, Dark }
+    public enum Theme { Light, Dark, system }
 }

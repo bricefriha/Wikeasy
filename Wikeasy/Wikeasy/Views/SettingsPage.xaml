@@ -3,13 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:steven="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
-             x:Class="Wikeasy.Views.SettingsPage">
+             x:Class="Wikeasy.Views.SettingsPage"
+             BackgroundColor="{DynamicResource ThemeBackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Settings"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout 
+                     Margin="20">
+                <!-- Display title -->
+                <Label Text="Display"
+                       Margin="10"
+                       FontAttributes="Bold"
+                       FontSize="23"
+                       TextColor="{DynamicResource ThemeTitleColor}"/>
+
+                <!-- Display settings-->
+                <steven:PancakeView BackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                    BorderThickness="10"
+                                    CornerRadius="20"
+                                    Padding="20">
+                    <!-- Themes-->
+                    <StackLayout Orientation="Vertical"
+                                 HorizontalOptions="StartAndExpand"
+                                 VerticalOptions="CenterAndExpand"
+                                 Spacing="5"
+                                 >
+                        <Label Text="Theme:"
+                               FontAttributes="Bold"
+                               FontSize="16"
+                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                        <Picker x:Name="themePicker"
+                                Title="Choose your theme" 
+                                WidthRequest="300" 
+                                ItemsSource="{Binding ThemesString}" 
+                                SelectedItem="{Binding SelectedTheme}"
+                                SelectedIndexChanged="themePicker_SelectedIndexChanged"
+                               />
+                    </StackLayout>
+                </steven:PancakeView>
+
+
+            </StackLayout>
+        </ScrollView>
+        
     </ContentPage.Content>
 </ContentPage>

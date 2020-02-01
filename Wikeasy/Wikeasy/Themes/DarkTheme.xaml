@@ -12,7 +12,7 @@
     <Color x:Key="ThemeTitleColor">#4C4C4C</Color> 
     <Style x:Key="Title" TargetType="Label">
         <!--<Setter Property="TextColor" 
-            Value="{StaticResource TextPrimaryColor}"/>-->
+                    Value="{StaticResource TextPrimaryColor}"/>-->
         <Setter Property="FontSize" Value="Large"/>
     </Style>
     

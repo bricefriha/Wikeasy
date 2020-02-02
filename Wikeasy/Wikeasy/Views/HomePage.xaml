@@ -66,7 +66,7 @@
                                                         HeightRequest="{StaticResource indSize}" 
                                                         IsRunning="{Binding IsLoading}" 
                                                         IsVisible="{Binding IsLoading}" 
-                                                        Color="Black" 
+                                                        Color="{DynamicResource ThemeTextColor}" 
                                                         HorizontalOptions="Center" 
                                                         VerticalOptions="Center"/>
                                     <!-- Search Icon-->
@@ -94,7 +94,7 @@
                                 <!-- Result zone-->
                                 <yummy:PancakeView x:Name="cvResult"
                                                    IsVisible="{Binding IsResultAvailable}"
-                                                   BackgroundColor="{DynamicResource ThemeBackgroundColor}"
+                                                   BackgroundColor="{DynamicResource ThemeResultBackgroundColour}"
                                                    HeightRequest="{StaticResource resultSize}"
                                                    CornerRadius="10"
                                                    BorderColor="Black"
@@ -138,7 +138,7 @@
                                                     <StackLayout Margin="10">
                                                         <!-- Name -->
                                                         <Label Text="{Binding SearchResult.Title}"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"
+                                                               TextColor="{DynamicResource ThemeTextColor}"
                                                            HorizontalOptions="CenterAndExpand"
                                                            FontAttributes="Bold"
                                                            FontSize="Title"/>
@@ -149,13 +149,14 @@
                                                                  IsVisible="{Binding SearchResult.Deathplace,
                                                                             Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }">
                                                             <Label Text="{Binding SearchResult.Age}"
-                                                                   TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                                   TextColor="{DynamicResource ThemeTextColor}"/>
                                                             <Label Text="Years old"
-                                                               FontAttributes="Italic, Bold"/>
+                                                               FontAttributes="Italic, Bold"
+                                                                   TextColor="{DynamicResource ThemeTextColor}"/>
                                                         </StackLayout>
                                                         <!-- Description-->
                                                         <Label Text="{Binding SearchResult.Description}"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"
+                                                               TextColor="{DynamicResource ThemeTextColor}"
                                                                Margin="5"/>
                                                         
                                                     </StackLayout>
@@ -164,7 +165,7 @@
 
                                             </Grid>
                                             <Grid Grid.Row="1" 
-                                                  BackgroundColor="White">
+                                                  BackgroundColor="{DynamicResource ThemeSearchBarColor}">
                                                 
                                                 <!-- Quick description -->
                                                 <StackLayout Margin="10">
@@ -178,9 +179,9 @@
                                                                  >
                                                         <Label Text="Born :"
                                                                FontAttributes=" Bold"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                               TextColor="{DynamicResource ThemeTextColor}"/>
                                                         <Label Text="{Binding SearchResult.Birthdate}"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"
+                                                               TextColor="{DynamicResource ThemeTextColor}"
                                                                HorizontalOptions="End"/>
 
                                                     </StackLayout>
@@ -192,9 +193,9 @@
                                                                              Converter ={StaticResource NullToVisibilityConverter} }">
                                                         <Label Text="Birthplace :"
                                                                FontAttributes=" Bold"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                               TextColor="{DynamicResource ThemeTextColor}"/>
                                                         <Label Text="{Binding SearchResult.Birthplace}"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"
+                                                               TextColor="{DynamicResource ThemeTextColor}"
                                                                HorizontalOptions="End"/>
 
                                                     </StackLayout>
@@ -222,9 +223,9 @@
                                                                              Converter ={StaticResource NullToVisibilityConverter} }">
                                                         <Label Text="Deathplace :"
                                                                FontAttributes=" Bold"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                               TextColor="{DynamicResource ThemeTextColor}"/>
                                                         <Label Text="{Binding SearchResult.Deathplace}"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                               TextColor="{DynamicResource ThemeTextColor}"/>
                                                         
                                                     </StackLayout>
 
@@ -238,7 +239,7 @@
                                                         <!-- Wikipedia lqbel-->
                                                         <Label Text="From Wikipedia"
                                                                FontSize="Small"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                               TextColor="{DynamicResource ThemeTextColor}"/>
 
                                                         <!-- Wikipedia logo-->
                                                         <Label x:Name="icoWikipedia"
@@ -248,7 +249,7 @@
                                                                    IsVisible="{Binding IsNotLoading}"
                                                                    HorizontalOptions="Start"
                                                                    VerticalOptions="Center"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                               TextColor="{DynamicResource ThemeTextColor}"/>
 
                                                     </StackLayout>
                                                 </StackLayout>

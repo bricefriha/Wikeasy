@@ -9,7 +9,8 @@
     <Color x:Key="ThemePrimaryColor">#B68E2B</Color>
     <Color x:Key="ThemeSearchBarColor">#4C4C4C</Color>
     <Color x:Key="ThemeTextColor">WhiteSmoke</Color>
-    <Color x:Key="ThemeTitleColor">#4C4C4C</Color> 
+    <Color x:Key="ThemeTitleColor">#B68E2B</Color>
+    <Color x:Key="ThemeMainTitleColor">WhiteSmoke</Color> 
     <Style x:Key="Title" TargetType="Label">
         <!--<Setter Property="TextColor" 
                     Value="{StaticResource TextPrimaryColor}"/>-->

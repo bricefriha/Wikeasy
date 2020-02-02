@@ -25,7 +25,7 @@ namespace Wikeasy
         {
             base.OnStart();
             // Set the theme from the key stored in preferences
-            SetFromThemeId(Preferences.Get("theme",2));
+            SetFromThemeId(Preferences.Get("Theme", 2));
 
             // Detect the theme
             //base.OnStart();
@@ -48,8 +48,9 @@ namespace Wikeasy
         protected override void OnResume()
         {
             base.OnResume();
+
             // Set the theme from the key stored in preferences
-            SetFromThemeId(Preferences.Get("theme", 2));
+            SetFromThemeId(Preferences.Get("Theme", 2));
         }
 
         /// <summary>

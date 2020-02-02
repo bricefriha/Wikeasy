@@ -6,7 +6,8 @@
              xmlns:steven="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
              x:Class="Wikeasy.Views.SettingsPage"
-             BackgroundColor="{DynamicResource ThemeBackgroundColor}">
+             BackgroundColor="{DynamicResource ThemeBackgroundColor}"
+             Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
         </ResourceDictionary>
@@ -36,12 +37,13 @@
                         <Label Text="Theme:"
                                FontAttributes="Bold"
                                FontSize="16"
-                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                               TextColor="{DynamicResource ThemeTextColor}"/>
                         <Picker x:Name="themePicker"
                                 Title="Choose your theme" 
                                 WidthRequest="300" 
                                 ItemsSource="{Binding ThemesString}" 
                                 SelectedItem="{Binding SelectedTheme}"
+                                TextColor="{DynamicResource ThemeTextColor}"
                                 SelectedIndexChanged="themePicker_SelectedIndexChanged"
                                />
                     </StackLayout>

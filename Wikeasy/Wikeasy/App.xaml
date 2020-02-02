@@ -14,7 +14,7 @@
             <Color x:Key="NavigationPrimary">#B68E2B</Color>
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{DynamicResource ThemePrimaryColor}" />
-                <Setter Property="BarTextColor" Value="{DynamicResource ThemeTitleColor}" />
+                <Setter Property="BarTextColor" Value="{DynamicResource ThemeMainTitleColor}" />
             </Style>
         </ResourceDictionary>
         <!-- Font Awesome -->

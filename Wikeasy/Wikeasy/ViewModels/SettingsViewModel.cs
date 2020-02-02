@@ -47,7 +47,7 @@ namespace Wikeasy.ViewModels
         }
         public SettingsViewModel()
         {
-            
+            Title = "Settings";
             _themesString = new ObservableCollection<string>();
             _themes = new ObservableCollection<ThemeSwitch>()
             {

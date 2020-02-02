@@ -111,7 +111,7 @@ namespace Wikeasy.ViewModels
             }
 
             // Set selected theme
-            _selectedTheme = ((ThemeSwitch)Themes.Where(theme => Preferences.Get("theme", 2) == theme.Id).FirstOrDefault()).Name;
+            _selectedTheme = ((ThemeSwitch)Themes.Where(theme => Preferences.Get("Theme", 2) == theme.Id).FirstOrDefault()).Name;
 
 
         }

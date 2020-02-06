@@ -86,6 +86,7 @@
                                             Completed="txtSearch_Completed"
                                            TextColor="{DynamicResource ThemeTextColor}"
                                            PlaceholderColor="{DynamicResource ThemeTextColor}"
+                                           ReturnType="Search"
                                             Focused="txtSearch_Focused"/>
 
 

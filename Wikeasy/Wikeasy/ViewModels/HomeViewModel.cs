@@ -135,7 +135,7 @@ namespace Wikeasy.ViewModels
             else
             {
                 // Set the page title
-                Title = data.Lead.Displaytitle;
+                //Title = data.Lead.Displaytitle;
 
                 // Get the html
                 string html = data.Lead.Sections[0].Text;
@@ -177,6 +177,17 @@ namespace Wikeasy.ViewModels
             IsLoading = false;
 
 
+        }
+        /// <summary>
+        /// Reset the search
+        /// </summary>
+        public void ResetSearch()
+        {
+            // Set the result as unavailable
+            IsResultAvailable = false;
+
+            // Switch subtitle
+            Subtitle = subtitleDefault;
         }
     }
 }

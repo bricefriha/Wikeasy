@@ -78,8 +78,9 @@ namespace Wikeasy.Views
                 // Reset the SearchBar Height 
                 AnimateHeightSearchBar(frameSearchBar.Height, height, 60, 150);
 
-                // Set the result as unavailable
-                _vm.IsResultAvailable = false;
+                
+
+                _vm.ResetSearch();
 
                 // Change de corner radius
                 frameSearchBar.CornerRadius = SbDefaultCornerRadius;
@@ -100,6 +101,8 @@ namespace Wikeasy.Views
                 // Disappearance
                 await ((Entry)sender).FadeTo(0, Length, Easing.Linear);
                 await icoSearch.FadeTo(0, Length, Easing.Linear);
+
+                
             }
             else
             {

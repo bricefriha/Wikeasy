@@ -16,6 +16,7 @@
                 <Setter Property="BarBackgroundColor" Value="{DynamicResource ThemeBarBackgroundColor}" />
                 <Setter Property="BarTextColor" Value="{DynamicResource ThemeBarTextColor}" />
             </Style>
+            
         </ResourceDictionary>
         <!-- Font Awesome -->
         <OnPlatform x:TypeArguments="x:String" x:Key="FA-Regular">

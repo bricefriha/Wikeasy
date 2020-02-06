@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using Wikeasy.Helpers;
 using Xamarin.Forms;
 
 using Wikeasy.Models;
@@ -126,7 +126,7 @@ namespace Wikeasy.ViewModels
             // Set the loading status as true
             IsLoading = true;
 
-            var data = await _service.GetWikiData(searchInput);
+            var data = await _service.GetWikiData(WkeToolbox.FiltringInputSearch(searchInput));
 
             
 

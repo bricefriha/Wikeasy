@@ -210,9 +210,9 @@
                                                                  >
                                                         <Label Text="Residence :"
                                                                FontAttributes=" Bold"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                               TextColor="{DynamicResource ThemeTextColor}"/>
                                                         <Label Text="{Binding SearchResult.Residence}"
-                                                               TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                               TextColor="{DynamicResource ThemeTextColor}"/>
                                                         
                                                     </StackLayout>
                                                     

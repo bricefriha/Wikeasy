@@ -147,6 +147,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\WikeasyIcon.png" />
     <Content Include="WikeasyIcon.ico" />
   </ItemGroup>
 </Project>

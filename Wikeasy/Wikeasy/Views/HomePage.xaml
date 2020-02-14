@@ -25,10 +25,40 @@
 
     <Grid BackgroundColor="{DynamicResource ThemeBackgroundColor}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="170"/>
+            <!--<RowDefinition Height="10"/>-->
+            <RowDefinition Height="180"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
+        <!--Logo -->
+        <yummy:PancakeView Grid.Row="0"
+                           VerticalOptions="Center"
+                           WidthRequest="360"
+                           HorizontalOptions="Center"
+                           BackgroundGradientStartColor="{DynamicResource ThemeSearchBarColor}"
+                           BackgroundGradientEndColor="{DynamicResource ThemeBackgroundColor}"
+                           BorderColor="{DynamicResource ThemeSearchBarColor}"
+                            BorderThickness="0"
+                            CornerRadius="38"
+                            Padding="10"
+                                       >
+            <StackLayout  Spacing="0">
+                <!-- App logo -->
+                <Image Source="WikeasyIcon.png"
+                       WidthRequest="90"
+                       HeightRequest="90"/>
+
+                <!--Title-->
+                <Label Text="Wikeasy"
+                   TextColor="{DynamicResource ThemeTextColor}"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   FontSize="20"/>
+            </StackLayout>
+
+        </yummy:PancakeView>
+
+
         <Grid Grid.Row="1">
             <StackLayout 
                      VerticalOptions="Start"

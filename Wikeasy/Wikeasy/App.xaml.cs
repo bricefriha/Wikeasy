@@ -6,6 +6,9 @@ using Wikeasy.Views;
 using Wikeasy.ViewModels;
 using Wikeasy.Themes;
 using Xamarin.Essentials;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace Wikeasy
 {
@@ -24,14 +27,15 @@ namespace Wikeasy
         protected override void OnStart()
         {
             base.OnStart();
+
+            // Start appcenter Analytics
+            AppCenter.Start("android=0f7e20a1-c425-4498-9dcc-bdcd0e3ab3c3;" +
+                  "uwp={Your UWP App secret here};" +
+                  "ios={Your iOS App secret here}",
+                  typeof(Analytics), typeof(Crashes));
+
             // Set the theme from the key stored in preferences
             SetFromThemeId(Preferences.Get("Theme", 2));
-
-            // Detect the theme
-            //base.OnStart();
-            //Theme theme = DependencyService.Get<IEnvironment>().GetOperatingSystemTheme();
-
-            //SetTheme(theme);
         }
 
         /// <summary>

@@ -30,7 +30,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <!--Logo -->
+        <!--Header banner -->
         <yummy:PancakeView Grid.Row="0"
                            VerticalOptions="Center"
                            WidthRequest="360"
@@ -39,7 +39,8 @@
                            BackgroundGradientEndColor="{DynamicResource ThemeBackgroundColor}"
                            BorderColor="{DynamicResource ThemeSearchBarColor}"
                             BorderThickness="0"
-                            CornerRadius="38"
+                            CornerRadius="18"
+                           BackgroundGradientAngle="180"
                             Padding="10"
                                        >
             <StackLayout  Spacing="0">

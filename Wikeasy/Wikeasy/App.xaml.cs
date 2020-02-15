@@ -31,7 +31,7 @@ namespace Wikeasy
             // Start appcenter Analytics
             AppCenter.Start("android=0f7e20a1-c425-4498-9dcc-bdcd0e3ab3c3;" +
                   "uwp={Your UWP App secret here};" +
-                  "ios={Your iOS App secret here}",
+                  "ios=a2b4fe58-e1f1-4ee8-9d17-3e6155b41c51",
                   typeof(Analytics), typeof(Crashes));
 
             // Set the theme from the key stored in preferences

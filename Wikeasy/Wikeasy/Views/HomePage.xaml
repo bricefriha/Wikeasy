@@ -51,7 +51,7 @@
 
                 <!--Title-->
                 <Label Text="Wikeasy"
-                   TextColor="{DynamicResource ThemeTextColor}"
+                   TextColor="{DynamicResource ThemeTitleColor}"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    FontSize="20"/>

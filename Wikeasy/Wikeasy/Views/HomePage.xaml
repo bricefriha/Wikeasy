@@ -44,7 +44,7 @@
                                        >
             <StackLayout  Spacing="0">
                 <!-- App logo -->
-                <Image Source="WikeasyIcon.png"
+                <Image Source="WikeasyLogo.png"
                        WidthRequest="90"
                        HeightRequest="90"/>
 

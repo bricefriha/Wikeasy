@@ -11,6 +11,8 @@ using HtmlAgilityPack;
 using Wikeasy.Services;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using static Wikeasy.Models.SearchResult;
+using Wikeasy.Objects;
 
 namespace Wikeasy.ViewModels
 {
@@ -126,44 +128,18 @@ namespace Wikeasy.ViewModels
             // Set the loading status as true
             IsLoading = true;
 
-            var data = await _service.GetWikiData(WkeToolbox.FiltringInputSearch(searchInput));
+            //var data = await _service.GetWikiData(WkeToolbox.FiltringInputSearch(searchInput));
+            // Define a new Data result
+            DataResult dataResult = new DataResult(await _service.GetWikiData(WkeToolbox.FiltringInputSearch(searchInput)));
 
-            
 
-            if (data is null)
+            if (dataResult.Wikidata is null)
                 Subtitle = subtitleDataNotFound;
             else
             {
-                // Set the page title
-                //Title = data.Lead.Displaytitle;
+                // Get the search result after building it
+                SearchResult = dataResult.BuildResult();
 
-                // Get the html
-                string html = data.Lead.Sections[0].Text;
-                // Instanciate the HTML doc
-                HtmlDocument doc = new HtmlDocument();
-                // Loading the doc
-                doc.LoadHtml(html);
-
-                // Get the main node
-                HtmlNode documentNode = doc.DocumentNode;
-
-                // Get the birthdate
-                string birthdate = documentNode.SelectNodes("//*[@class='bday']") is null ? null : documentNode.SelectNodes("//*[@class='bday']")[0].InnerText;
-
-                // Instanciate the model
-                SearchResult = new SearchResult()
-                {
-                    Img = data.Lead.Image.Urls["640"].ToString(),
-                    Title = data.Lead.Displaytitle,
-                    Description = data.Lead.Description,
-                    CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']") is null ? null : documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")[0].InnerText,
-                    Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
-                    Birthdate = DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"),
-                    Birthplace = documentNode.SelectNodes("//*[@class='birthplace']") is null ? null : documentNode.SelectNodes("//*[@class='birthplace']")[0].InnerText,
-                    Deathplace = documentNode.SelectNodes("//*[@class='deathplace']") is null ? null : documentNode.SelectNodes("//*[@class='deathplace']")[0].InnerText,
-                    Residence = documentNode.SelectNodes("//*[@class='label']") is null ? null : documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
-
-                };
                 // Set the Default subtitle
                 Subtitle = subtitleResult;
 
@@ -189,5 +165,6 @@ namespace Wikeasy.ViewModels
             // Switch subtitle
             Subtitle = subtitleDefault;
         }
+        
     }
 }

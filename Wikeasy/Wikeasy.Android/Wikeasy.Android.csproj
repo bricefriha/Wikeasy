@@ -32,6 +32,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>C:\Users\Work\AppData\Local\Xamarin\Mono for Android\Keystore\Wikeasy\Wikeasy.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyAlias>wikeasy</AndroidSigningKeyAlias>
+    <AndroidSigningStorePass>W1kK3y</AndroidSigningStorePass>
+    <AndroidSigningKeyPass>W1kK3y</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

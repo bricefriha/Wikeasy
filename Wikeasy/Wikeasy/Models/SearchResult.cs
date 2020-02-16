@@ -18,5 +18,8 @@ namespace Wikeasy.Models
         public string Deathplace { get; set; }
         public string Residence { get; set; }
 
+
     }
+
+
 }

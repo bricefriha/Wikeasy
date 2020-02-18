@@ -33,7 +33,7 @@ namespace Wikeasy.Objects
             if (birthdate != null)
             {
                 // it's a movie star
-                if (descriptionExist && (_wikidata.Lead.Description.Contains("filmaker") || _wikidata.Lead.Description.Contains("actor")|| _wikidata.Lead.Description.Contains("actress"))
+                if (descriptionExist && (_wikidata.Lead.Description.Contains("filmaker") || _wikidata.Lead.Description.Contains("actor")|| _wikidata.Lead.Description.Contains("actress")))
                     _resultType = ResultType.MovieStar;
 
                 // other wise
@@ -91,6 +91,7 @@ namespace Wikeasy.Objects
                         Birthplace = documentNode.SelectNodes("//*[@class='birthplace']") is null ? null : documentNode.SelectNodes("//*[@class='birthplace']")[0].InnerText,
                         Deathplace = documentNode.SelectNodes("//*[@class='deathplace']") is null ? null : documentNode.SelectNodes("//*[@class='deathplace']")[0].InnerText,
                         Residence = documentNode.SelectNodes("//*[@class='label']") is null ? null : documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
+                        Type = _resultType,
 
                     };
                     // ToDo: Add iMDB data too
@@ -109,6 +110,7 @@ namespace Wikeasy.Objects
                         Birthplace = documentNode.SelectNodes("//*[@class='birthplace']") is null ? null : documentNode.SelectNodes("//*[@class='birthplace']")[0].InnerText,
                         Deathplace = documentNode.SelectNodes("//*[@class='deathplace']") is null ? null : documentNode.SelectNodes("//*[@class='deathplace']")[0].InnerText,
                         Residence = documentNode.SelectNodes("//*[@class='label']") is null ? null : documentNode.SelectNodes("//*[@class='label']")[0].InnerText,
+                        Type = _resultType,
 
                     };
                     break;
@@ -118,10 +120,11 @@ namespace Wikeasy.Objects
                         Img = _wikidata.Lead.Image.Urls["640"].ToString(),
                         Title = _wikidata.Lead.Displaytitle,
                         Description = _wikidata.Lead.Description,
+                        Type = _resultType,
 
                     };
                     break;
-                // Otherwise, to avoid crashes
+                // Otherwise... to avoid crashes...
                 default:
                     _actualResult = new SearchResult();
                     break;

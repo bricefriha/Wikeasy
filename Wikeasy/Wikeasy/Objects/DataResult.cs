@@ -1,7 +1,5 @@
 ﻿using HtmlAgilityPack;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Wikeasy.Models;
 
 namespace Wikeasy.Objects
@@ -15,6 +13,7 @@ namespace Wikeasy.Objects
 
         public DataResult(WikiData wikidata)
         {
+            _wikidata = new WikiData();
             _wikidata = wikidata;
         }
 
@@ -28,11 +27,13 @@ namespace Wikeasy.Objects
         /// <param name="birthdate">birthdate</param>
         private void SetResultType(string birthdate)
         {
+
+            bool descriptionExist = !string.IsNullOrEmpty(_wikidata.Lead.Description);
             // ToDo: I feel there is a way to optimise all these stuffs
             if (birthdate != null)
             {
                 // it's a movie star
-                if (_wikidata.Lead.Description.Contains("filmaker") || _wikidata.Lead.Description.Contains("actor"))
+                if (descriptionExist && (_wikidata.Lead.Description.Contains("filmaker") || _wikidata.Lead.Description.Contains("actor")|| _wikidata.Lead.Description.Contains("actress"))
                     _resultType = ResultType.MovieStar;
 
                 // other wise
@@ -42,7 +43,7 @@ namespace Wikeasy.Objects
             else
             {
                 // is a movie
-                if (_wikidata.Lead.Description.Contains("film") || _wikidata.Lead.Description.Contains("movie"))
+                if (descriptionExist && (_wikidata.Lead.Description.Contains("film") || _wikidata.Lead.Description.Contains("movie")))
                     _resultType = ResultType.Movie;
                 
                 // Otherwise

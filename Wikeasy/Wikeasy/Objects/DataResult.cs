@@ -117,7 +117,7 @@ namespace Wikeasy.Objects
                 case ResultType.Other:
                     _actualResult = new SearchResult()
                     {
-                        Img = _wikidata.Lead.Image.Urls["640"].ToString(),
+                        Img = _wikidata.Lead.Image is null ? null : _wikidata.Lead.Image.Urls["640"].ToString(),
                         Title = _wikidata.Lead.Displaytitle,
                         Description = _wikidata.Lead.Description,
                         Type = _resultType,

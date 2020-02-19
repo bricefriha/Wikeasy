@@ -325,13 +325,11 @@
                                                                 Margin="0"
                                                                 >
                                                             <Image Source="{Binding SearchResult.Img}"
-                                                        Aspect="AspectFill" 
-                                                        HorizontalOptions="Center"
-                                                        VerticalOptions="Center"
-                                                        WidthRequest="100"
-                                                        HeightRequest="100"
-                                                           
-                                                />
+                                                                    Aspect="AspectFill" 
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="Center"
+                                                                    WidthRequest="100"
+                                                                    HeightRequest="100"/>
                                                         </Frame>
                                                     </Grid>
                                                     <Grid Grid.Column="1" >
@@ -468,28 +466,25 @@
                                                     <Setter Property="IsVisible" Value="true" />
                                                 </DataTrigger>
                                             </StackLayout.Triggers>
-                                            <Grid>
-
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="150"/>
-                                                    <RowDefinition Height="*"/>
-                                                </Grid.RowDefinitions>
-                                                <StackLayout Grid.Row="0">
-                                                    <!-- Picture -->
-                                                    <Frame
+                                            <StackLayout>
+                                                <!-- Picture -->
+                                                <Frame
+                                                        Grid.Row="0"
                                                         VerticalOptions="FillAndExpand"
                                                         HorizontalOptions="FillAndExpand"
                                                         Padding="0"
                                                         CornerRadius="25"
+                                                        HeightRequest="200"
                                                         IsClippedToBounds="True"
-                                                        Margin="0">
+                                                        Margin="2"
+                                                        IsVisible="{Binding SearchResult.Img,
+                                                                            Converter ={StaticResource NullToVisibilityConverter} }">
 
-                                                        <Image Source="{Binding SearchResult.Img}"
+                                                    <Image Source="{Binding SearchResult.Img}"
                                                             Aspect="AspectFill" 
                                                             WidthRequest="100"
                                                             HeightRequest="100" />
-                                                    </Frame>
-                                                </StackLayout>
+                                                </Frame>
 
 
                                                 <Grid Grid.Row="1" 
@@ -539,7 +534,7 @@
 
                                                 </Grid>
 
-                                            </Grid>
+                                            </StackLayout>
 
                                         </StackLayout>
                                     </StackLayout>

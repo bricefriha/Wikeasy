@@ -121,6 +121,7 @@ namespace Wikeasy.Objects
                         Title = _wikidata.Lead.Displaytitle,
                         Description = _wikidata.Lead.Description,
                         Type = _resultType,
+                        ExtendedDescription = html,
 
                     };
                     break;

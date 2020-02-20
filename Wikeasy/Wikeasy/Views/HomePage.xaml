@@ -132,6 +132,7 @@
                                                 BorderColor="Black"
                                                 Padding="5"
                                                 >
+                                    <ScrollView>
                                     <StackLayout>
                                         <!-- A personality -->
                                         <StackLayout IsVisible="False"
@@ -508,7 +509,7 @@
 
                                                         </StackLayout>
 
-
+                                                        <Label TextType="Html" Text="{Binding SearchResult.ExtendedDescription}"/>
                                                         <!-- Mention source -->
                                                         <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="End"
@@ -538,6 +539,7 @@
 
                                         </StackLayout>
                                     </StackLayout>
+                                    </ScrollView>
                                 </yummy:PancakeView>
                             </StackLayout>
 

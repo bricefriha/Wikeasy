@@ -58,6 +58,20 @@ namespace Wikeasy.ViewModels
             }
         }
 
+        private bool _isOtherResult;
+        public bool IsOtherResult
+        {
+            set
+            {
+                _isOtherResult = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _isOtherResult;
+            }
+        }
+
         private bool _isResultSomebody;
         public bool IsResultSomebody
         {
@@ -145,6 +159,8 @@ namespace Wikeasy.ViewModels
 
                 // Set the result as available
                 IsResultAvailable = true;
+
+                // 
                 IsResultSomebody = true;
             }
             

@@ -37,6 +37,8 @@
     <AndroidSigningKeyAlias>wikeasy</AndroidSigningKeyAlias>
     <AndroidSigningStorePass>W1kK3y</AndroidSigningStorePass>
     <AndroidSigningKeyPass>W1kK3y</AndroidSigningKeyPass>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

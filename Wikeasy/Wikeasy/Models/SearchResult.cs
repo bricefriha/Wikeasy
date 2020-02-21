@@ -17,6 +17,8 @@ namespace Wikeasy.Models
         public string Birthplace { get; set; }
         public string Deathplace { get; set; }
         public string Residence { get; set; }
+        public ResultType Type { get; set; }
+        public string ExtendedDescription { get; set; }
 
 
     }

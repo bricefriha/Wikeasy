@@ -510,7 +510,7 @@
 
                                                         </StackLayout>
 
-                                                        <Label TextType="Html" Text="{Binding SearchResult.ExtendedDescription}"/>
+                                                        <Label  Text="{Binding SearchResult.ExtendedDescription}"/>
                                                         <!-- Mention source -->
                                                         <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="End"

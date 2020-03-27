@@ -39,6 +39,7 @@
     <AndroidSigningKeyPass>W1kK3y</AndroidSigningKeyPass>
     <DocumentationFile>
     </DocumentationFile>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

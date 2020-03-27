@@ -142,7 +142,6 @@ namespace Wikeasy.ViewModels
             // Set the loading status as true
             IsLoading = true;
 
-            //var data = await _service.GetWikiData(WkeToolbox.FiltringInputSearch(searchInput));
             // Define a new Data result
             DataResult dataResult = new DataResult(await _service.GetWikiData(WkeToolbox.FiltringInputSearch(searchInput)));
 

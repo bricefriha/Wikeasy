@@ -104,7 +104,7 @@ namespace Wikeasy.Objects
                 case ResultType.Person:
                     _actualResult = new SearchResult()
                     {
-                        Img = _wikidata.Lead.Image.Urls["640"].ToString(),
+                        Img = _wikidata.Lead.Image?.Urls["640"].ToString(),
                         Title = _wikidata.Lead.Displaytitle,
                         Description = _wikidata.Lead.Description,
                         CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")?[0].InnerText,

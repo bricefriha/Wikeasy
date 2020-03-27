@@ -79,7 +79,6 @@ namespace Wikeasy.Views
                 AnimateHeightSearchBar(frameSearchBar.Height, height, 60, 150);
 
                 
-
                 _vm.ResetSearch();
 
                 // Change de corner radius

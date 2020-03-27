@@ -100,16 +100,17 @@
                                                         Color="{DynamicResource ThemeTextColor}" 
                                                         HorizontalOptions="Center" 
                                                         VerticalOptions="Center"
+                                                        Margin="2,0,0,0"
                                                         />
                                     <!-- Search Icon-->
                                     <Label x:Name="icoSearch"
-                                        Text="&#xf002;"
-                                        FontSize="Large"
-                                        FontFamily="{StaticResource FA-Solid}"
-                                        IsVisible="{Binding IsNotLoading}"
-                                        TextColor="{DynamicResource ThemeTextColor}"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Center"/>
+                                            Text="&#xf002;"
+                                            FontSize="Large"
+                                            FontFamily="{StaticResource FA-Solid}"
+                                            IsVisible="{Binding IsNotLoading}"
+                                            TextColor="{DynamicResource ThemeTextColor}"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="Center"/>
                                     
                                     <!-- Search entry-->
                                     <Entry x:Name="txtSearch"
@@ -329,7 +330,7 @@
                                                                 IsClippedToBounds="True"
                                                                 Margin="0"
                                                                 IsVisible="{Binding SearchResult.Img,
-                                                                        Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }"
+                                                                        Converter ={StaticResource NullToVisibilityConverter} }"
                                                                 >
                                                             <Image Source="{Binding SearchResult.Img}"
                                                                     Aspect="AspectFill" 

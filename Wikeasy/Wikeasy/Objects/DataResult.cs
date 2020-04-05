@@ -1,6 +1,13 @@
 ﻿using HtmlAgilityPack;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using TMDbLib.Client;
+using TMDbLib.Objects.Collections;
+using TMDbLib.Objects.General;
+using TMDbLib.Objects.People;
+using TMDbLib.Objects.Search;
 using Wikeasy.Models;
 
 namespace Wikeasy.Objects
@@ -83,10 +90,25 @@ namespace Wikeasy.Objects
             {
                 // Set movie star property
                 case ResultType.MovieStar:
+
+                    // Get Tmdb information
+                    string movieStarName = _wikidata.Lead.Displaytitle;
+
+                    // Get the client
+                    TMDbClient client = new TMDbClient(App.Current.Resources["TmdbKey"].ToString());
+
+                    // Get a collection from the research
+                    SearchContainer<SearchPerson> collectons = client.SearchPersonAsync(movieStarName).Result;
+
+                    // Get person information
+                    var movieStar = collectons.Results.First();
+
+                    
+
                     _actualResult = new SearchResult()
                     {
                         Img = _wikidata.Lead.Image.Urls["640"].ToString(),
-                        Title = _wikidata.Lead.Displaytitle,
+                        Title = movieStar.Name,// movieStarName,
                         Description = _wikidata.Lead.Description,
                         CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")?[0].InnerText,
                         Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),

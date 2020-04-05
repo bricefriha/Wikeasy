@@ -16,6 +16,8 @@
                 <Setter Property="BarBackgroundColor" Value="{DynamicResource ThemeBarBackgroundColor}" />
                 <Setter Property="BarTextColor" Value="{DynamicResource ThemeBarTextColor}" />
             </Style>
+            <!-- API keys -->
+            <x:String x:Key="TmdbKey">f7985347f887858d02be549bef0f65e5</x:String>
             
         </ResourceDictionary>
         <!-- Font Awesome -->

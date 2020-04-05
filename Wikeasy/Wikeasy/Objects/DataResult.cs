@@ -102,13 +102,12 @@ namespace Wikeasy.Objects
 
                     // Get person information
                     var movieStar = collectons.Results.First();
+                    //var movieStarExtra = client.GetCollectionAsync(collectons.Results.First().Id).Result;
 
-                    
-
-                    _actualResult = new SearchResult()
+                     _actualResult = new MovieStarResult()
                     {
                         Img = _wikidata.Lead.Image.Urls["640"].ToString(),
-                        Title = movieStar.Name,// movieStarName,
+                        Title = movieStar.Name,
                         Description = _wikidata.Lead.Description,
                         CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")?[0].InnerText,
                         Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
@@ -117,8 +116,9 @@ namespace Wikeasy.Objects
                         Deathplace = documentNode.SelectNodes("//*[@class='deathplace']")?[0].InnerText,
                         Residence = documentNode.SelectNodes("//*[@class='label']")?[0].InnerText,
                         Type = _resultType,
+                        KnownFor = movieStar.KnownFor,
 
-                    };
+                     };
                     // ToDo: Add iMDB data too
                     break;
 

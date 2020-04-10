@@ -346,10 +346,10 @@
                                                         <StackLayout Margin="10">
                                                             <!-- Name -->
                                                             <Label Text="{Binding SearchResult.Title}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"
-                                                        HorizontalOptions="CenterAndExpand"
-                                                        FontAttributes="Bold"
-                                                        FontSize="Title"/>
+                                                                    TextColor="{DynamicResource ThemeTextColor}"
+                                                                    HorizontalOptions="CenterAndExpand"
+                                                                    FontAttributes="Bold"
+                                                                    FontSize="Title"/>
                                                             <!-- Age-->
                                                             <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="CenterAndExpand"
@@ -372,11 +372,11 @@
 
 
                                                 </Grid>
-                                                <Grid Grid.Row="1" 
-                                                BackgroundColor="{DynamicResource ThemeSearchBarColor}">
+                                                <StackLayout Grid.Row="1">
 
                                                     <!-- Quick description -->
-                                                    <StackLayout Margin="10">
+                                                    <StackLayout Padding="10"
+                                                                 BackgroundColor="{DynamicResource ThemeSearchBarColor}">
 
                                                         <!-- birthdate -->
                                                         <StackLayout Orientation="Horizontal"
@@ -440,17 +440,17 @@
 
 
                                                         <!-- Mention source -->
-                                                        <StackLayout Orientation="Horizontal"
+                                                            <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="End"
                                                                 VerticalOptions="End">
 
-                                                            <!-- Wikipedia label-->
-                                                            <Label Text="From Wikipedia"
+                                                                <!-- Wikipedia label-->
+                                                                <Label Text="From Wikipedia"
                                                             FontSize="Small"
                                                             TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                                            <!-- Wikipedia logo-->
-                                                            <Label 
+                                                                <!-- Wikipedia logo-->
+                                                                <Label 
                                                                 Text="&#xf266;"
                                                                 FontSize="Small"
                                                                 FontFamily="{StaticResource FA-Brands}"
@@ -459,10 +459,72 @@
                                                                 VerticalOptions="Center"
                                                             TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                                        </StackLayout>
+                                                            </StackLayout>
                                                     </StackLayout>
+                                                    <!-- TMDB result -->
+                                                    <StackLayout Padding="10"
+                                                                 Margin="2"
+                                                                BackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                 HeightRequest="450">
+                                                            <Label Text="is known for"
+                                                                   TextColor="{DynamicResource ThemeTextColor}"
+                                                                   HorizontalOptions="Center"
+                                                                   FontSize="20"
+                                                                   FontAttributes="Bold"
+                                                                   Margin="5"
+                                                                   />
+                                                            <CollectionView ItemsSource="{Binding SearchResult.KnownFor}"
+                                                                          >
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                                                                    
+                                                                </CollectionView.ItemsLayout>
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <StackLayout>
+                                                                            <Frame WidthRequest="150"
+                                                                                   CornerRadius="8">
+                                                                                <Grid>
+                                                                                    <Grid.RowDefinitions>
+                                                                                        <RowDefinition Height="2*"/>
+                                                                                        <RowDefinition Height="*"/>
+                                                                                    </Grid.RowDefinitions>
+                                                                                    <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
+                                                                                           Aspect="AspectFit"
+                                                                                           HeightRequest="200"
+                                                                                           WidthRequest="200"
+                                                                                           HorizontalOptions="Center"
+                                                                                           Grid.Row="0"/>
+                                                                                    <Label Text="{Binding Title}"
+                                                                                           FontAttributes="Bold"
+                                                                                           FontSize="20"
+                                                                                           HorizontalOptions="Center"
+                                                                                           Grid.Row="1"/>
+                                                                                </Grid>
+                                                                            </Frame>
+                                                                        </StackLayout>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                            <StackLayout Orientation="Horizontal"
+                                                                HorizontalOptions="End"
+                                                                VerticalOptions="End">
 
-                                                </Grid>
+                                                                <!-- TMDB label-->
+                                                                <Label Text="From "
+                                                                        FontSize="Small"
+                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
+
+                                                                <!-- TMDB logo-->
+                                                                <Image Source="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
+                                                                       WidthRequest="10"
+                                                                       HeightRequest="10"
+                                                                       />
+
+                                                            </StackLayout>
+                                                        </StackLayout>
+
+                                                    </StackLayout>
 
                                             </Grid>
 

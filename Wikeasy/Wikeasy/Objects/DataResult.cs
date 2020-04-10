@@ -103,7 +103,6 @@ namespace Wikeasy.Objects
                     // Get person information
                     var movieStar = collectons.Results.First();
                     //var movieStarExtra = client.GetCollectionAsync(collectons.Results.First().Id).Result;
-
                      _actualResult = new MovieStarResult()
                     {
                         Img = _wikidata.Lead.Image.Urls["640"].ToString(),

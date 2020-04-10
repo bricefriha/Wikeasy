@@ -118,7 +118,6 @@ namespace Wikeasy.Objects
                         KnownFor = movieStar.KnownFor,
 
                      };
-                    // ToDo: Add iMDB data too
                     break;
 
                 // Set movie star property

@@ -124,8 +124,7 @@
                                             PlaceholderColor="{DynamicResource ThemeTextColor}"
                                             WidthRequest="250"
                                             ReturnType="Search"
-                                            Focused="txtSearch_Focused"
-                                           Text="Jake Gyllenhaal"/>
+                                            Focused="txtSearch_Focused"/>
 
 
                                 </StackLayout>

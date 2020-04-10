@@ -7,6 +7,7 @@
             mc:Ignorable="d"
             xmlns:Helpers="clr-namespace:Wikeasy.Helpers"
             xmlns:Wikes="clr-namespace:Wikeasy.Models"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
             x:Class="Wikeasy.Views.HomePage"
             Title="{Binding Title}"
              
@@ -507,19 +508,22 @@
                                                                 </CollectionView.ItemTemplate>
                                                             </CollectionView>
                                                             <StackLayout Orientation="Horizontal"
-                                                                HorizontalOptions="End"
-                                                                VerticalOptions="End">
+                                                                         HorizontalOptions="End"
+                                                                         Margin="0">
 
                                                                 <!-- TMDB label-->
                                                                 <Label Text="From "
-                                                                        FontSize="Small"
+                                                                        FontSize="15"
+                                                                       VerticalOptions="Center"
                                                                         TextColor="{DynamicResource ThemeTextColor}"/>
 
                                                                 <!-- TMDB logo-->
-                                                                <Image Source="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
-                                                                       WidthRequest="10"
-                                                                       HeightRequest="10"
-                                                                       />
+                                                                <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
+                                                                                                  HeightRequest="65" 
+                                                                                                  VerticalOptions="Center"
+                                                                                                  Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
+
+
 
                                                             </StackLayout>
                                                         </StackLayout>

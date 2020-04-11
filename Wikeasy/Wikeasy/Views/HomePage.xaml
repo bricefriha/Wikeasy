@@ -447,18 +447,18 @@
 
                                                                 <!-- Wikipedia label-->
                                                                 <Label Text="From Wikipedia"
-                                                            FontSize="Small"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                        FontSize="Small"
+                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
 
                                                                 <!-- Wikipedia logo-->
                                                                 <Label 
-                                                                Text="&#xf266;"
-                                                                FontSize="Small"
-                                                                FontFamily="{StaticResource FA-Brands}"
-                                                                IsVisible="{Binding IsNotLoading}"
-                                                                HorizontalOptions="Start"
-                                                                VerticalOptions="Center"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                    Text="&#xf266;"
+                                                                    FontSize="Small"
+                                                                    FontFamily="{StaticResource FA-Brands}"
+                                                                    IsVisible="{Binding IsNotLoading}"
+                                                                    HorizontalOptions="Start"
+                                                                    VerticalOptions="Center"
+                                                                    TextColor="{DynamicResource ThemeTextColor}"/>
 
                                                             </StackLayout>
                                                     </StackLayout>
@@ -466,25 +466,89 @@
                                                     <StackLayout Padding="10"
                                                                  Margin="2"
                                                                 BackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                 HeightRequest="450">
-                                                            <Label Text="is known for"
+                                                                 HeightRequest="850">
+                                                            <!--Title of the "KnownFor" sction -->
+                                                            <Label Text="Known for"
                                                                    TextColor="{DynamicResource ThemeTextColor}"
-                                                                   HorizontalOptions="Center"
+                                                                   HorizontalOptions="Start"
                                                                    FontSize="20"
                                                                    FontAttributes="Bold"
                                                                    Margin="5"
                                                                    />
                                                             <CollectionView ItemsSource="{Binding SearchResult.KnownFor}"
-                                                                          >
+                                                                            ItemsUpdatingScrollMode="KeepScrollOffset">
                                                                 <CollectionView.ItemsLayout>
-                                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-                                                                    
+                                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                                 </CollectionView.ItemsLayout>
                                                                 <CollectionView.ItemTemplate>
                                                                     <DataTemplate>
                                                                         <StackLayout>
                                                                             <Frame WidthRequest="150"
-                                                                                   CornerRadius="8">
+                                                                                   CornerRadius="8"
+                                                                                   BackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                                   IsVisible="{Binding SearchResult.ReleaseDate,
+                                                                                    Converter ={StaticResource NullToVisibilityConverter} }"
+                                                                                   HasShadow="True"
+                                                                                   HeightRequest="550"
+                                                                                   BorderColor="Black">
+                                                                                <Grid >
+                                                                                    <Grid.RowDefinitions>
+                                                                                        <RowDefinition Height="200"/>
+                                                                                        <RowDefinition Height="100"/>
+                                                                                    </Grid.RowDefinitions>
+                                                                                    <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
+                                                                                           Aspect="AspectFit"
+                                                                                           HeightRequest="200"
+                                                                                           WidthRequest="200"
+                                                                                           HorizontalOptions="Center"
+                                                                                           Grid.Row="0"/>
+                                                                                    <StackLayout Grid.Row="1"
+                                                                                                 VerticalOptions="Center">
+                                                                                        <!-- Title -->
+                                                                                        <Label Text="{Binding Title}"
+                                                                                           FontAttributes="Bold"
+                                                                                           FontSize="20"
+                                                                                           HorizontalOptions="Center"
+                                                                                           Grid.Row="1"/>
+                                                                                        <!-- Release date -->
+                                                                                        <Label Text="{Binding ReleaseDate,StringFormat='{0:dd MMMM yyyy}'}"
+                                                                                               FontSize="12"
+                                                                                               HorizontalOptions="Center"
+
+                                                                                               Grid.Row="1"/>
+                                                                                    </StackLayout>
+                                                                                </Grid>
+                                                                            </Frame>
+                                                                        </StackLayout>
+                                                                    </DataTemplate>
+                                                                </CollectionView.ItemTemplate>
+                                                            </CollectionView>
+                                                            <!--Title of the "seen on" -->
+                                                            <Label Text="Seen on"
+                                                                   TextColor="{DynamicResource ThemeTextColor}"
+                                                                   HorizontalOptions="Start"
+                                                                   FontSize="20"
+                                                                   FontAttributes="Bold"
+                                                                   Margin="5"
+                                                                   />
+                                                            <CollectionView ItemsSource="{Binding SearchResult.SeenOn}"
+                                                                            ItemsUpdatingScrollMode="KeepScrollOffset"
+                                                                          >
+                                                                <CollectionView.ItemsLayout>
+                                                                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+
+                                                                </CollectionView.ItemsLayout>
+                                                                <CollectionView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <StackLayout>
+                                                                            <Frame WidthRequest="150"
+                                                                                   CornerRadius="8"
+                                                                                   BackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                                   IsVisible="{Binding SearchResult.ReleaseDate,
+                                                                                    Converter ={StaticResource NullToVisibilityConverter} }"
+                                                                                   HasShadow="True"
+                                                                                   BorderColor="Black"
+                                                                                   HeightRequest="500">
                                                                                 <Grid>
                                                                                     <Grid.RowDefinitions>
                                                                                         <RowDefinition Height="2*"/>
@@ -496,17 +560,26 @@
                                                                                            WidthRequest="200"
                                                                                            HorizontalOptions="Center"
                                                                                            Grid.Row="0"/>
-                                                                                    <Label Text="{Binding Title}"
+                                                                                    <StackLayout Grid.Row="1">
+                                                                                        <!-- Title -->
+                                                                                        <Label Text="{Binding Title}"
                                                                                            FontAttributes="Bold"
                                                                                            FontSize="20"
                                                                                            HorizontalOptions="Center"
                                                                                            Grid.Row="1"/>
+                                                                                        <!-- Release date -->
+                                                                                        <Label Text="{Binding ReleaseDate,StringFormat='{0:dd MMMM yyyy}'}"
+                                                                                           FontSize="12"
+                                                                                           HorizontalOptions="Center"
+                                                                                           Grid.Row="1"/>
+                                                                                    </StackLayout>
                                                                                 </Grid>
                                                                             </Frame>
                                                                         </StackLayout>
                                                                     </DataTemplate>
                                                                 </CollectionView.ItemTemplate>
                                                             </CollectionView>
+                                                            
                                                             <StackLayout Orientation="Horizontal"
                                                                          HorizontalOptions="End"
                                                                          Margin="0">
@@ -522,9 +595,6 @@
                                                                                                   HeightRequest="65" 
                                                                                                   VerticalOptions="Center"
                                                                                                   Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
-
-
-
                                                             </StackLayout>
                                                         </StackLayout>
 

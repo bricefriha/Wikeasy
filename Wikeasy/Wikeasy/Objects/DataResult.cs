@@ -102,8 +102,8 @@ namespace Wikeasy.Objects
 
                     // Get person information
                     var movieStar = collectons.Results.First();
-                    //var movieStarExtra = client.GetCollectionAsync(collectons.Results.First().Id).Result;
-                     _actualResult = new MovieStarResult()
+                    MovieCredits movieCredit = client.GetPersonMovieCreditsAsync(movieStar.Id).Result;
+                    _actualResult = new MovieStarResult()
                     {
                         Img = _wikidata.Lead.Image.Urls["640"].ToString(),
                         Title = movieStar.Name,
@@ -116,8 +116,9 @@ namespace Wikeasy.Objects
                         Residence = documentNode.SelectNodes("//*[@class='label']")?[0].InnerText,
                         Type = _resultType,
                         KnownFor = movieStar.KnownFor,
+                        SeenOn = movieCredit.Cast.OrderBy(movie => movie.ReleaseDate).Reverse().ToList<MovieRole>(),
 
-                     };
+                    };
                     break;
 
                 // Set movie star property

@@ -4,12 +4,18 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:steven="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
              mc:Ignorable="d"
              x:Class="Wikeasy.Views.SettingsPage"
              BackgroundColor="{DynamicResource ThemeBackgroundColor}"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <!-- Section Body -->
+            <x:Int16 x:Key="sectionBodyCornerRadius">17</x:Int16>
+            <x:Int16 x:Key="sectionBodyElevation">8</x:Int16>
+            <x:Int16 x:Key="sectionBodyMargin">1</x:Int16>
+            <x:Int16 x:Key="sectionBodyPadding">20</x:Int16>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -24,10 +30,11 @@
                        TextColor="{DynamicResource ThemeTitleColor}"/>
 
                 <!-- Display settings-->
-                <steven:PancakeView BackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                    BorderThickness="10"
-                                    CornerRadius="20"
-                                    Padding="20">
+                <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                             CornerRadius="{DynamicResource sectionBodyCornerRadius}"
+                                             Elevation="{DynamicResource sectionBodyElevation}"
+                                             Margin="{DynamicResource sectionBodyMargin}"
+                                             Padding="{DynamicResource sectionBodyPadding}">
                     <!-- Themes-->
                     <StackLayout Orientation="Vertical"
                                  HorizontalOptions="StartAndExpand"
@@ -47,7 +54,7 @@
                                 SelectedIndexChanged="themePicker_SelectedIndexChanged"
                                />
                     </StackLayout>
-                </steven:PancakeView>
+                </renderedViews:MaterialFrame>
 
 
             </StackLayout>

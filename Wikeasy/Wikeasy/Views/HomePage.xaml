@@ -8,7 +8,7 @@
             xmlns:Helpers="clr-namespace:Wikeasy.Helpers"
              xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
             xmlns:Wikes="clr-namespace:Wikeasy.Models"
-             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+            xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
             x:Class="Wikeasy.Views.HomePage"
             Title="{Binding Title}"
              

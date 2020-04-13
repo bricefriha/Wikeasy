@@ -23,6 +23,49 @@
             <x:Double x:Key="searchbarWidth">350</x:Double>
             <x:Double x:Key="descriptionSpacing">2</x:Double>
             <x:Double x:Key="resultSize">700</x:Double>
+
+            <!-- Templates -->
+            <DataTemplate x:Key="movieListTemplate">
+                <StackLayout>
+                    <renderedViews:MaterialFrame
+                        Elevation="5"
+                        WidthRequest="150"
+                        CornerRadius="8"
+                        Margin="2"
+                        LightThemeBackgroundColor="{DynamicResource ThemeResultBackgroundColour}"
+                        IsVisible="{Binding SearchResult.ReleaseDate,
+                        Converter ={StaticResource NullToVisibilityConverter} }"
+                        HeightRequest="290">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
+                                    Aspect="AspectFit"
+                                    HeightRequest="200"
+                                    WidthRequest="200"
+                                    HorizontalOptions="Center"
+                                    Grid.Row="0"/>
+                            <StackLayout Grid.Row="1">
+                                <!-- Title -->
+                                <Label Text="{Binding Title}"
+                                        TextColor="{DynamicResource ThemeTextColor}"
+                                        FontAttributes="Bold"
+                                        FontSize="20"
+                                        HorizontalOptions="Center"
+                                        Grid.Row="1"/>
+                                <!-- Release date -->
+                                <Label Text="{Binding ReleaseDate,StringFormat='{0:dd MMMM yyyy}'}"
+                                        TextColor="{DynamicResource ThemeTextColor}"
+                                        FontSize="12"
+                                        HorizontalOptions="Center"
+                                        Grid.Row="1"/>
+                            </StackLayout>
+                        </Grid>
+                    </renderedViews:MaterialFrame>
+                </StackLayout>
+            </DataTemplate>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -480,54 +523,11 @@
                                                                    Margin="5"
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.KnownFor}"
-                                                                            ItemsUpdatingScrollMode="KeepScrollOffset">
+                                                                            ItemsUpdatingScrollMode="KeepScrollOffset"
+                                                                        ItemTemplate="{StaticResource movieListTemplate}">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                             </CollectionView.ItemsLayout>
-                                                            <CollectionView.ItemTemplate>
-                                                                <DataTemplate>
-                                                                    <StackLayout>
-                                                                        <renderedViews:MaterialFrame
-                                                                            Elevation="10"
-                                                                            WidthRequest="150"
-                                                                                   CornerRadius="8"
-                                                                                   LightThemeBackgroundColor="{DynamicResource ThemeResultBackgroundColour}"
-                                                                                   IsVisible="{Binding SearchResult.ReleaseDate,
-                                                                                    Converter ={StaticResource NullToVisibilityConverter} }"
-                                                                                   HeightRequest="550">
-                                                                            <Grid >
-                                                                                <Grid.RowDefinitions>
-                                                                                    <RowDefinition Height="200"/>
-                                                                                    <RowDefinition Height="100"/>
-                                                                                </Grid.RowDefinitions>
-                                                                                <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
-                                                                                           Aspect="AspectFit"
-                                                                                           HeightRequest="200"
-                                                                                           WidthRequest="200"
-                                                                                           HorizontalOptions="Center"
-                                                                                           Grid.Row="0"/>
-                                                                                <StackLayout Grid.Row="1"
-                                                                                                 VerticalOptions="Center">
-                                                                                    <!-- Title -->
-                                                                                    <Label Text="{Binding Title}"
-                                                                                           TextColor="{DynamicResource ThemeTextColor}"
-                                                                                           FontAttributes="Bold"
-                                                                                           FontSize="20"
-                                                                                           HorizontalOptions="Center"
-                                                                                           Grid.Row="1"/>
-                                                                                    <!-- Release date -->
-                                                                                    <Label Text="{Binding ReleaseDate,StringFormat='{0:dd MMMM yyyy}'}"
-                                                                                           TextColor="{DynamicResource ThemeTextColor}"
-                                                                                               FontSize="12"
-                                                                                               HorizontalOptions="Center"
-
-                                                                                               Grid.Row="1"/>
-                                                                                </StackLayout>
-                                                                            </Grid>
-                                                                        </renderedViews:MaterialFrame>
-                                                                    </StackLayout>
-                                                                </DataTemplate>
-                                                            </CollectionView.ItemTemplate>
                                                         </CollectionView>
                                                         <!--Title of the "seen on" -->
                                                         <Label Text="Seen on"
@@ -539,53 +539,12 @@
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.SeenOn}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
+                                                                        ItemTemplate="{StaticResource movieListTemplate}"
                                                                           >
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
 
                                                             </CollectionView.ItemsLayout>
-                                                            <CollectionView.ItemTemplate>
-                                                                <DataTemplate>
-                                                                    <StackLayout>
-                                                                        <renderedViews:MaterialFrame
-                                                                            Elevation="10"
-                                                                            WidthRequest="150"
-                                                                                   CornerRadius="8"
-                                                                                   LightThemeBackgroundColor="{DynamicResource ThemeResultBackgroundColour}"
-                                                                                   IsVisible="{Binding SearchResult.ReleaseDate,
-                                                                                    Converter ={StaticResource NullToVisibilityConverter} }"
-                                                                                   HeightRequest="550">
-                                                                            <Grid>
-                                                                                <Grid.RowDefinitions>
-                                                                                    <RowDefinition Height="2*"/>
-                                                                                    <RowDefinition Height="*"/>
-                                                                                </Grid.RowDefinitions>
-                                                                                <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
-                                                                                           Aspect="AspectFit"
-                                                                                           HeightRequest="200"
-                                                                                           WidthRequest="200"
-                                                                                           HorizontalOptions="Center"
-                                                                                           Grid.Row="0"/>
-                                                                                <StackLayout Grid.Row="1">
-                                                                                    <!-- Title -->
-                                                                                    <Label Text="{Binding Title}"
-                                                                                           TextColor="{DynamicResource ThemeTextColor}"
-                                                                                           FontAttributes="Bold"
-                                                                                           FontSize="20"
-                                                                                           HorizontalOptions="Center"
-                                                                                           Grid.Row="1"/>
-                                                                                    <!-- Release date -->
-                                                                                    <Label Text="{Binding ReleaseDate,StringFormat='{0:dd MMMM yyyy}'}"
-                                                                                           TextColor="{DynamicResource ThemeTextColor}"
-                                                                                           FontSize="12"
-                                                                                           HorizontalOptions="Center"
-                                                                                           Grid.Row="1"/>
-                                                                                </StackLayout>
-                                                                            </Grid>
-                                                                        </renderedViews:MaterialFrame>
-                                                                    </StackLayout>
-                                                                </DataTemplate>
-                                                            </CollectionView.ItemTemplate>
                                                         </CollectionView>
 
                                                         <StackLayout Orientation="Horizontal"

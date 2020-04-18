@@ -28,14 +28,14 @@
             <DataTemplate x:Key="movieListTemplate">
                 <StackLayout>
                     <renderedViews:MaterialFrame
-                        Elevation="5"
-                        WidthRequest="150"
-                        CornerRadius="8"
-                        Margin="2"
-                        LightThemeBackgroundColor="{DynamicResource ThemeResultBackgroundColour}"
-                        IsVisible="{Binding SearchResult.ReleaseDate,
-                        Converter ={StaticResource NullToVisibilityConverter} }"
-                        HeightRequest="290">
+                                    Elevation="5"
+                                    WidthRequest="150"
+                                    CornerRadius="8"
+                                    Margin="2"
+                                    LightThemeBackgroundColor="{DynamicResource ThemeResultBackgroundColour}"
+                                    IsVisible="{Binding SearchResult.ReleaseDate,
+                                    Converter ={StaticResource NullToVisibilityConverter} }"
+                                    HeightRequest="290">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"/>

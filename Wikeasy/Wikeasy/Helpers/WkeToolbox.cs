@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Wikeasy.Helpers
 {
@@ -15,6 +16,16 @@ namespace Wikeasy.Helpers
         {
 
             return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(input.ToLower());
+        }
+        /// <summary>
+        /// Remove every html node from a string
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string HtmlEscape(string input)
+        {
+
+            return Regex.Replace(input, "<.*?>", String.Empty);
         }
     }
 }

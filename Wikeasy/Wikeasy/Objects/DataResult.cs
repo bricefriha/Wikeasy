@@ -8,6 +8,7 @@ using TMDbLib.Objects.Collections;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.People;
 using TMDbLib.Objects.Search;
+using Wikeasy.Helpers;
 using Wikeasy.Models;
 
 namespace Wikeasy.Objects
@@ -102,7 +103,7 @@ namespace Wikeasy.Objects
 
                     // Get person information
                     var movieStar = collectons.Results.First();
-                    MovieCredits movieCredit = client.GetPersonMovieCreditsAsync(movieStar.Id).Result;
+                    MovieCredits movieStarCredit = client.GetPersonMovieCreditsAsync(movieStar.Id).Result;
                     _actualResult = new MovieStarResult()
                     {
                         Img = _wikidata.Lead.Image.Urls["640"].ToString(),
@@ -116,12 +117,37 @@ namespace Wikeasy.Objects
                         Residence = documentNode.SelectNodes("//*[@class='label']")?[0].InnerText,
                         Type = _resultType,
                         KnownFor = movieStar.KnownFor,
-                        SeenOn = movieCredit.Cast.OrderBy(movie => movie.ReleaseDate).Reverse().ToList<MovieRole>(),
+                        SeenOn = movieStarCredit.Cast.OrderBy(movie => movie.ReleaseDate).Reverse().ToList<MovieRole>(),
 
                     };
                     break;
-
                 // Set movie star property
+                case ResultType.Movie:
+
+                    // Get Tmdb information
+                    string movieTitle = WkeToolbox.HtmlEscape(_wikidata.Lead.Displaytitle);
+
+                    // Get the client
+                    TMDbClient clientMovie = new TMDbClient(App.Current.Resources["TmdbKey"].ToString());
+
+                    // Get a collection from the research
+                    SearchContainer<SearchMovie> movieInfo = clientMovie.SearchMovieAsync(movieTitle).Result;
+
+                    // Get person information
+                    var movie = movieInfo.Results.First();
+
+                    var movieCredit = clientMovie.GetMovieCreditsAsync(movie.Id).Result;
+                    _actualResult = new MovieResult()
+                    {
+                        Img = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie.PosterPath,
+                        Title = movie.Title,
+                        Description = movie.Overview,
+                        Casts = movieCredit.Cast,
+                        Rate = movie.VoteAverage.ToString() + "/10",
+                    };
+                    break;
+
+                // Set Person property
                 case ResultType.Person:
                     _actualResult = new SearchResult()
                     {

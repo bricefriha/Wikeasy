@@ -137,6 +137,7 @@ namespace Wikeasy.Objects
                     var movie = movieInfo.Results.First();
 
                     var movieCredit = clientMovie.GetMovieCreditsAsync(movie.Id).Result;
+                    //var movieGenre = clientMovie.GetGenreMoviesAsync(movie.Id).Result;
                     _actualResult = new MovieResult()
                     {
                         Img = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie.PosterPath,
@@ -144,6 +145,8 @@ namespace Wikeasy.Objects
                         Description = movie.Overview,
                         Casts = movieCredit.Cast,
                         Rate = movie.VoteAverage.ToString() + "/10",
+                        ReleaseDate = movie.ReleaseDate.Value,
+                        Type = _resultType,
                     };
                     break;
 

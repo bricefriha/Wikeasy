@@ -4,6 +4,7 @@
             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+            xmlns:rainbows="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows" 
             mc:Ignorable="d"
             xmlns:Helpers="clr-namespace:Wikeasy.Helpers"
              xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
@@ -23,6 +24,9 @@
             <x:Double x:Key="searchbarWidth">350</x:Double>
             <x:Double x:Key="descriptionSpacing">2</x:Double>
             <x:Double x:Key="resultSize">700</x:Double>
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="rainbows:DebugRainbow.ShowColors" Value="False" />
+            </Style>
 
             <!-- Templates -->
             <DataTemplate x:Key="movieListTemplate">
@@ -568,6 +572,124 @@
                                                 </StackLayout>
 
                                             </Grid>
+
+                                        </StackLayout>
+                                        <!-- Movie -->
+                                        <StackLayout IsVisible="False"
+                                                Orientation="Vertical">
+                                            <StackLayout.Triggers>
+                                                <DataTrigger TargetType="VisualElement" Binding="{Binding SearchResult.Type}" Value="{x:Static Wikes:ResultType.Movie}">
+                                                    <Setter Property="IsVisible" Value="true" />
+                                                </DataTrigger>
+                                            </StackLayout.Triggers>
+                                            <!-- Title -->
+                                                <Label Text="{Binding SearchResult.Title}"
+                                                        TextColor="{DynamicResource ThemeTextColor}"
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Title"
+                                                       Margin="10"/>
+                                                <Grid Margin="8" HorizontalOptions="CenterAndExpand">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="175"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <renderedViews:MaterialFrame
+                                                                Elevation="4"
+                                                                VerticalOptions="Center"
+                                                                HorizontalOptions="Center"
+                                                                Padding="0"
+                                                                CornerRadius="5"
+                                                                IsClippedToBounds="True"
+                                                                Margin="0"
+                                                                Grid.Column="0"
+                                                                IsVisible="{Binding SearchResult.Img,
+                                                                        Converter ={StaticResource NullToVisibilityConverter} }">
+                                                        <Image Source="{Binding SearchResult.Img}"
+                                                                    Aspect="AspectFill" 
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="Center"
+                                                                    WidthRequest="150"
+                                                                    HeightRequest="200"/>
+                                                    </renderedViews:MaterialFrame>
+
+                                                    <!-- Quick description -->
+                                                    <StackLayout Margin="10" Grid.Column="1" Spacing="{StaticResource descriptionSpacing}" >
+                                                    <!-- Release date-->
+                                                    <StackLayout Orientation="Vertical"
+                                                                HorizontalOptions="Start"
+                                                                Spacing="{StaticResource descriptionSpacing}"
+                                                                IsVisible="{Binding SearchResult.ReleaseDate,
+                                                                        Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }"
+                                                                 Padding="0">
+
+                                                        <Label Text="Release date:"
+                                                            FontAttributes="Italic, Bold"
+                                                                TextColor="{DynamicResource ThemeTextColor}"/>
+                                                        <Label Text="{Binding SearchResult.ReleaseDate,StringFormat='{0:dd MMMM yyyy}'}"
+                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                    </StackLayout>
+                                                    <!-- Rate -->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                HorizontalOptions="Start"
+                                                                Spacing="{StaticResource descriptionSpacing}"
+                                                                >
+
+                                                        <Label Text="Rating :"
+                                                            FontAttributes="Italic, Bold"
+                                                                TextColor="{DynamicResource ThemeTextColor}"/>
+                                                        <Label Text="{Binding SearchResult.Rate}"
+                                                                TextColor="{DynamicResource ThemeTextColor}"/>
+                                                    </StackLayout>
+
+                                                </StackLayout>
+                                                </Grid>
+
+
+                                            <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                             Elevation="2">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="20"/>
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout Grid.Row="0"
+                                                                     Margin="0">
+                                                        <!-- Overview sction -->
+                                                        <Label Text="Overview"
+                                                                   TextColor="{DynamicResource ThemeTextColor}"
+                                                                   HorizontalOptions="Start"
+                                                                   FontSize="20"
+                                                                   FontAttributes="Bold"
+                                                                   Margin="5"
+                                                                   />
+                                                        <Label Text="{Binding SearchResult.Description}"
+                                                               HorizontalOptions="Center"
+                                                                   />
+                                                    </StackLayout>
+
+                                                    <!-- Mention source -->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                    HorizontalOptions="End"
+                                                                    VerticalOptions="End"
+                                                                 Grid.Row="1"
+                                                                     >
+
+                                                        <!-- TMDB label-->
+                                                        <Label Text="From "
+                                                                        FontSize="15"
+                                                                       VerticalOptions="Center"
+                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
+
+                                                        <!-- TMDB logo-->
+                                                        <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
+                                                                                        HeightRequest="65" 
+                                                                                        VerticalOptions="Center"
+                                                                                        Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
+
+                                                    </StackLayout>
+                                                </Grid>
+                                            </renderedViews:MaterialFrame>
 
                                         </StackLayout>
                                         <!-- Another -->

@@ -26,7 +26,7 @@
             <x:Double x:Key="resultSize">700</x:Double>
             <!-- Debug Rainbow-->
             <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
-                <Setter Property="rainbows:DebugRainbow.ShowColors" Value="True" />
+                <Setter Property="rainbows:DebugRainbow.ShowColors" Value="False" />
             </Style>
 
             <!-- Templates -->
@@ -86,12 +86,21 @@
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Image Source="{Binding ProfilePath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
-                                    Aspect="AspectFit"
-                                    HeightRequest="200"
-                                    WidthRequest="200"
-                                    HorizontalOptions="Center"
-                                    Grid.Row="0"/>
+                            <renderedViews:MaterialFrame
+                                                    Elevation="2"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Center"
+                                                    Padding="0"
+                                                    CornerRadius="25"
+                                                    IsClippedToBounds="True"
+                                                    Margin="0"
+                                                    Grid.Row="0"
+                                                    IsVisible="{Binding SearchResult.Img,
+                                                            Converter ={StaticResource NullToVisibilityConverter} }"              
+                                                    >
+                                <Image Source="{Binding ProfilePath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
+                                    Aspect="AspectFit"/>
+                            </renderedViews:MaterialFrame>
                             <StackLayout Grid.Row="1">
                                 <!-- Title -->
                                 <Label Text="{Binding Name}"
@@ -195,13 +204,13 @@
                                                         />
                                 <!-- Search Icon-->
                                 <Label x:Name="icoSearch"
-                                            Text="&#xf002;"
-                                            FontSize="Large"
-                                            FontFamily="{StaticResource FA-Solid}"
-                                            IsVisible="{Binding IsNotLoading}"
-                                            TextColor="{DynamicResource ThemeTextColor}"
-                                            HorizontalOptions="Start"
-                                            VerticalOptions="Center"/>
+                                        Text="&#xf002;"
+                                        FontSize="Large"
+                                        FontFamily="{StaticResource FA-Solid}"
+                                        IsVisible="{Binding IsNotLoading}"
+                                        TextColor="{DynamicResource ThemeTextColor}"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Center"/>
 
                                 <!-- Search entry-->
                                 <Entry x:Name="txtSearch"
@@ -730,8 +739,7 @@
                                                     <StackLayout Orientation="Horizontal"
                                                                     HorizontalOptions="End"
                                                                     VerticalOptions="End"
-                                                                 Grid.Row="1"
-                                                                     >
+                                                                 Grid.Row="1">
 
                                                         <!-- TMDB label-->
                                                         <Label Text="From "

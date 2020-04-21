@@ -24,6 +24,7 @@
             <x:Double x:Key="searchbarWidth">350</x:Double>
             <x:Double x:Key="descriptionSpacing">2</x:Double>
             <x:Double x:Key="resultSize">700</x:Double>
+            <x:Double x:Key="collectionViewHeight">300</x:Double>
             <!-- Debug Rainbow-->
             <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                 <Setter Property="rainbows:DebugRainbow.ShowColors" Value="False" />
@@ -46,12 +47,23 @@
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
+                            <renderedViews:MaterialFrame
+                                                    Elevation="6"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Center"
+                                                    Padding="0"
+                                                    CornerRadius="8"
+                                                    IsClippedToBounds="True"
+                                                    Margin="0"
+                                                    Grid.Row="0"
+                                                    IsVisible="{Binding SearchResult.Img,
+                                                            Converter ={StaticResource NullToVisibilityConverter} }"  >
+                                <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
                                     Aspect="AspectFit"
-                                    HeightRequest="200"
-                                    WidthRequest="200"
-                                    HorizontalOptions="Center"
-                                    Grid.Row="0"/>
+                                    HorizontalOptions="Center"/>
+                                
+                            </renderedViews:MaterialFrame>
+                            
                             <StackLayout Grid.Row="1">
                                 <!-- Title -->
                                 <Label Text="{Binding Title}"
@@ -87,7 +99,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <renderedViews:MaterialFrame
-                                                    Elevation="2"
+                                                    Elevation="6"
                                                     VerticalOptions="Center"
                                                     HorizontalOptions="Center"
                                                     Padding="0"
@@ -214,16 +226,16 @@
 
                                 <!-- Search entry-->
                                 <Entry x:Name="txtSearch"
-                                            Placeholder="Something Something..."
-                                            HorizontalOptions="Fill"
-                                            IsVisible="{Binding IsNotLoading}"
-                                            VerticalOptions="Fill"
-                                            Completed="txtSearch_Completed"
-                                            TextColor="{DynamicResource ThemeTextColor}"
-                                            PlaceholderColor="{DynamicResource ThemeTextColor}"
-                                            WidthRequest="250"
-                                            ReturnType="Search"
-                                            Focused="txtSearch_Focused"
+                                        Placeholder="Something Something..."
+                                        HorizontalOptions="Fill"
+                                        IsVisible="{Binding IsNotLoading}"
+                                        VerticalOptions="Fill"
+                                        Completed="txtSearch_Completed"
+                                        TextColor="{DynamicResource ThemeTextColor}"
+                                        PlaceholderColor="{DynamicResource ThemeTextColor}"
+                                        WidthRequest="250"
+                                        ReturnType="Search"
+                                        Focused="txtSearch_Focused"
                                        Text="Fight Club"/>
 
 
@@ -578,7 +590,8 @@
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.KnownFor}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
-                                                                        ItemTemplate="{StaticResource movieListTemplate}">
+                                                                        ItemTemplate="{StaticResource movieListTemplate}"
+                                                                        HeightRequest="{StaticResource collectionViewHeight}">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                             </CollectionView.ItemsLayout>
@@ -594,10 +607,9 @@
                                                         <CollectionView ItemsSource="{Binding SearchResult.SeenOn}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource movieListTemplate}"
-                                                                          >
+                                                                        HeightRequest="{StaticResource collectionViewHeight}">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
-
                                                             </CollectionView.ItemsLayout>
                                                         </CollectionView>
 
@@ -727,8 +739,7 @@
                                                         <CollectionView ItemsSource="{Binding SearchResult.Casts}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource castListTemplate}"
-                                                                        HeightRequest="230"
-                                                                          >
+                                                                        HeightRequest="{StaticResource collectionViewHeight}">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
                                                             </CollectionView.ItemsLayout>

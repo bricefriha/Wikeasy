@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using System.Linq;
 using static Wikeasy.Models.SearchResult;
 using Wikeasy.Objects;
+using Xamarin.Essentials;
 
 namespace Wikeasy.ViewModels
 {
@@ -55,6 +56,20 @@ namespace Wikeasy.ViewModels
             get
             {
                 return _isLoading;
+            }
+        }
+
+        private Command _goToSource;
+        public Command GoToSource
+        {
+            //set
+            //{
+            //    _goToSource = value;
+            //    OnPropertyChanged();
+            //}
+            get
+            {
+                return _goToSource;
             }
         }
 
@@ -118,6 +133,8 @@ namespace Wikeasy.ViewModels
             _service = new WikipediaApiDataService();
 
             _searchResult = new SearchResult();
+
+            _goToSource = new Command(url => Launcher.OpenAsync(new Uri(url.ToString())));
 
             // Default values
             //

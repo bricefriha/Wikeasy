@@ -29,6 +29,56 @@
             <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                 <Setter Property="rainbows:DebugRainbow.ShowColors" Value="False" />
             </Style>
+            <!-- Wikipedia sources-->
+            <ContentView x:Key="WikipediaSource">
+                <StackLayout Orientation="Horizontal"
+                            HorizontalOptions="End"
+                            VerticalOptions="End">
+                    <!-- Tap to get acces to the source -->
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.WikipediaLink}"/>
+                    </StackLayout.GestureRecognizers>
+
+                    <!-- Wikipedia label-->
+                    <Label Text="From Wikipedia"
+                            FontSize="Small"
+                            TextColor="{DynamicResource ThemeTextColor}"/>
+
+                    <!-- Wikipedia logo-->
+                    <Label 
+                            Text="&#xf266;"
+                            FontSize="Small"
+                            FontFamily="{StaticResource FA-Brands}"
+                            IsVisible="{Binding IsNotLoading}"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            TextColor="{DynamicResource ThemeTextColor}"/>
+
+                </StackLayout>
+            </ContentView>
+            <!-- TMDB sources-->
+            <ContentView x:Key="TmdbSource">
+                <StackLayout Orientation="Horizontal"
+                            HorizontalOptions="End"
+                            Margin="0">
+                    <!-- Tap to get acces to the source -->
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.TmdbLink}"/>
+                    </StackLayout.GestureRecognizers>
+
+                    <!-- TMDB label-->
+                    <Label Text="From "
+                            FontSize="15"
+                            VerticalOptions="Center"
+                            TextColor="{DynamicResource ThemeTextColor}"/>
+
+                    <!-- TMDB logo-->
+                    <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
+                                                    HeightRequest="65" 
+                                                    VerticalOptions="Center"
+                                                    Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
+                </StackLayout>
+            </ContentView>
 
             <!-- Templates -->
             <DataTemplate x:Key="movieListTemplate">
@@ -389,26 +439,7 @@
 
 
                                                         <!-- Mention source -->
-                                                        <StackLayout Orientation="Horizontal"
-                                                                HorizontalOptions="End"
-                                                                VerticalOptions="End">
-
-                                                            <!-- Wikipedia lqbel-->
-                                                            <Label Text="From Wikipedia"
-                                                            FontSize="Small"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-
-                                                            <!-- Wikipedia logo-->
-                                                            <Label 
-                                                                Text="&#xf266;"
-                                                                FontSize="Small"
-                                                                FontFamily="{StaticResource FA-Brands}"
-                                                                IsVisible="{Binding IsNotLoading}"
-                                                                HorizontalOptions="Start"
-                                                                VerticalOptions="Center"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-
-                                                        </StackLayout>
+                                                        <ContentView Content="{StaticResource WikipediaSource}"/>
                                                     </StackLayout>
 
                                                 </Grid>
@@ -554,26 +585,7 @@
 
 
                                                         <!-- Mention source -->
-                                                        <StackLayout Orientation="Horizontal"
-                                                                HorizontalOptions="End"
-                                                                VerticalOptions="End">
-
-                                                            <!-- Wikipedia label-->
-                                                            <Label Text="From Wikipedia"
-                                                                        FontSize="Small"
-                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
-
-                                                            <!-- Wikipedia logo-->
-                                                            <Label 
-                                                                    Text="&#xf266;"
-                                                                    FontSize="Small"
-                                                                    FontFamily="{StaticResource FA-Brands}"
-                                                                    IsVisible="{Binding IsNotLoading}"
-                                                                    HorizontalOptions="Start"
-                                                                    VerticalOptions="Center"
-                                                                    TextColor="{DynamicResource ThemeTextColor}"/>
-
-                                                        </StackLayout>
+                                                        <ContentView Content="{StaticResource WikipediaSource}"/>
                                                     </StackLayout>
                                                     <!-- TMDB result -->
                                                     <StackLayout Padding="10"
@@ -612,23 +624,26 @@
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                             </CollectionView.ItemsLayout>
                                                         </CollectionView>
+                                                        
+                                                        <!-- Mention TMDB sources-->
+                                                        <ContentView Content="{StaticResource TmdbSource}"/>
 
-                                                        <StackLayout Orientation="Horizontal"
+                                                        <!--<StackLayout Orientation="Horizontal"
                                                                          HorizontalOptions="End"
                                                                          Margin="0">
 
-                                                            <!-- TMDB label-->
+                                                            --><!-- TMDB label--><!--
                                                             <Label Text="From "
                                                                         FontSize="15"
                                                                        VerticalOptions="Center"
                                                                         TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                                            <!-- TMDB logo-->
+                                                            --><!-- TMDB logo--><!--
                                                             <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
                                                                                                   HeightRequest="65" 
                                                                                                   VerticalOptions="Center"
                                                                                                   Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
-                                                        </StackLayout>
+                                                        </StackLayout>-->
                                                     </StackLayout>
 
                                                 </StackLayout>
@@ -746,25 +761,8 @@
                                                         </CollectionView>
                                                     </StackLayout>
 
-                                                    <!-- Mention source -->
-                                                    <StackLayout Orientation="Horizontal"
-                                                                    HorizontalOptions="End"
-                                                                    VerticalOptions="End"
-                                                                 Grid.Row="1">
-
-                                                        <!-- TMDB label-->
-                                                        <Label Text="From "
-                                                                        FontSize="15"
-                                                                       VerticalOptions="Center"
-                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
-
-                                                        <!-- TMDB logo-->
-                                                        <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
-                                                                                        HeightRequest="65" 
-                                                                                        VerticalOptions="Center"
-                                                                                        Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
-
-                                                    </StackLayout>
+                                                    <!-- Mention TMDB sources-->
+                                                    <ContentView Grid.Row="1" Content="{StaticResource TmdbSource}"/>
                                                 </Grid>
                                             </renderedViews:MaterialFrame>
 
@@ -821,26 +819,7 @@
 
                                                         <Label  Text="{Binding SearchResult.ExtendedDescription}"/>
                                                         <!-- Mention source -->
-                                                        <StackLayout Orientation="Horizontal"
-                                                                HorizontalOptions="End"
-                                                                VerticalOptions="End">
-
-                                                            <!-- Wikipedia label-->
-                                                            <Label Text="From Wikipedia"
-                                                            FontSize="Small"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-
-                                                            <!-- Wikipedia logo-->
-                                                            <Label 
-                                                                Text="&#xf266;"
-                                                                FontSize="Small"
-                                                                FontFamily="{StaticResource FA-Brands}"
-                                                                IsVisible="{Binding IsNotLoading}"
-                                                                HorizontalOptions="Start"
-                                                                VerticalOptions="Center"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-
-                                                        </StackLayout>
+                                                        <ContentView Content="{StaticResource WikipediaSource}"/>
                                                     </StackLayout>
 
                                                 </Grid>

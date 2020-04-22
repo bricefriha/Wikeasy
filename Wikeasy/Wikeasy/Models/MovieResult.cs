@@ -6,7 +6,7 @@ using TMDbLib.Objects.Search;
 
 namespace Wikeasy.Models
 {
-    public class MovieResult : SearchResult
+    public class MovieResult : MovieContentResult
     {
         public string Overview { get; set; }
         public string Rate { get; set; }

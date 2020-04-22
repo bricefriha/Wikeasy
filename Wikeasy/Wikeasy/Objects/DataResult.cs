@@ -87,6 +87,7 @@ namespace Wikeasy.Objects
             // Set result type
             this.SetResultType(birthdate);
 
+            string displaytitle = _wikidata.Lead.Displaytitle;
             // Set actual result
             switch (_resultType)
             {
@@ -105,10 +106,11 @@ namespace Wikeasy.Objects
                     // Get person information
                     var movieStar = collectons.Results.First();
                     MovieCredits movieStarCredit = client.GetPersonMovieCreditsAsync(movieStar.Id).Result;
+                    string name = movieStar.Name;
                     _actualResult = new MovieStarResult()
                     {
                         Img = _wikidata.Lead.Image.Urls["640"].ToString(),
-                        Title = movieStar.Name,
+                        Title = name,
                         Description = _wikidata.Lead.Description,
                         CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")?[0].InnerText,
                         Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
@@ -118,7 +120,9 @@ namespace Wikeasy.Objects
                         Residence = documentNode.SelectNodes("//*[@class='label']")?[0].InnerText,
                         Type = _resultType,
                         KnownFor = movieStar.KnownFor,
-                        SeenOn = movieStarCredit.Cast.OrderBy(movie => movie.ReleaseDate).Reverse().ToList<MovieRole>(),
+                        WikipediaLink = _wikipediaBaseUrl + displaytitle.Replace(' ', '_'),
+                        TmdbLink = ("https://www.themoviedb.org/" + movieStar.MediaType.ToString() + "/" + movieStarCredit.Id + "-" + name.Replace(' ', '-')).ToLower(),
+                        SeenOn = movieStarCredit.Cast.OrderBy(movie => movie.ReleaseDate).Reverse().ToList(),
 
                     };
                     break;
@@ -139,21 +143,23 @@ namespace Wikeasy.Objects
 
                     var movieCredit = clientMovie.GetMovieCreditsAsync(movie.Id).Result;
                     //var movieGenre = clientMovie.GetGenreMoviesAsync(movie.Id).Result;
+                    string movieName = movie.Title;
                     _actualResult = new MovieResult()
                     {
                         Img = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movie.PosterPath,
-                        Title = movie.Title,
+                        Title = movieName,
                         Description = movie.Overview,
                         Casts = movieCredit.Cast,
                         Rate = movie.VoteAverage.ToString() + "/10",
                         ReleaseDate = movie.ReleaseDate.Value,
+                        WikipediaLink = _wikipediaBaseUrl + displaytitle.Replace(' ', '_'),
+                        TmdbLink = ("https://www.themoviedb.org/"+ movie.MediaType.ToString() + "/" + movieCredit.Id + "-" + movieName.Replace(' ', '-')).ToLower(),
                         Type = _resultType,
                     };
                     break;
 
                 // Set Person property
                 case ResultType.Person:
-                    string displaytitle = _wikidata.Lead.Displaytitle;
                     _actualResult = new SearchResult()
                     {
                         Img = _wikidata.Lead.Image?.Urls["640"].ToString(),
@@ -179,6 +185,7 @@ namespace Wikeasy.Objects
                         Title = _wikidata.Lead.Displaytitle,
                         Description = _wikidata.Lead.Description,
                         Type = _resultType,
+                        WikipediaLink = _wikipediaBaseUrl + displaytitle.Replace(' ', '_'),
                         ExtendedDescription = htmlDoc.DocumentNode.InnerText,
 
                     };

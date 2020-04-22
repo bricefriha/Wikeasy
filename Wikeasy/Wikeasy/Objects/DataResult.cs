@@ -15,6 +15,7 @@ namespace Wikeasy.Objects
 {
     public class DataResult
     {
+        private const string _wikipediaBaseUrl = "https://en.wikipedia.org/wiki/";
         private const string _blueSquare = "<table class=\"box-More_citations_needed plainlinks metadata ambox ambox-content ambox-Refimprove\" role=\"presentation\"><tbody><tr><td class=\"mbox-image\">";
 
         // Attributs
@@ -152,10 +153,11 @@ namespace Wikeasy.Objects
 
                 // Set Person property
                 case ResultType.Person:
+                    string displaytitle = _wikidata.Lead.Displaytitle;
                     _actualResult = new SearchResult()
                     {
                         Img = _wikidata.Lead.Image?.Urls["640"].ToString(),
-                        Title = _wikidata.Lead.Displaytitle,
+                        Title = displaytitle,
                         Description = _wikidata.Lead.Description,
                         CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")?[0].InnerText,
                         Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
@@ -163,6 +165,7 @@ namespace Wikeasy.Objects
                         Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")?[0].InnerText,
                         Deathplace = documentNode.SelectNodes("//*[@class='deathplace']")?[0].InnerText,
                         Residence = documentNode.SelectNodes("//*[@class='label']")?[0].InnerText,
+                        WikipediaLink = _wikipediaBaseUrl + displaytitle.Replace(' ', '_'),
                         Type = _resultType,
 
                     };

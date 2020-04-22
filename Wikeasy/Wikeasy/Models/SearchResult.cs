@@ -19,6 +19,7 @@ namespace Wikeasy.Models
         public string Residence { get; set; }
         public ResultType Type { get; set; }
         public string ExtendedDescription { get; set; }
+        public string WikipediaLink { get; set; }
 
 
     }

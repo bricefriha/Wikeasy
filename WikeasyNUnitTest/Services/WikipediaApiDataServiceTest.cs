@@ -21,13 +21,13 @@ namespace WikeasyNUnitTest.Services
         [Test]
         public async Task GetWikiData()
         {
-            //// Arrage
-            //WikiData result = new WikiData();
+            // Arrage
+            WikiData result = new WikiData();
 
-            //result = await _service.GetWikiData("Jack Dorsey");
+            result = await _service.GetWikiData("Jack Dorsey");
 
-            //Console.WriteLine(result);
-            //Assert.Pass();
+            Console.WriteLine(result);
+            Assert.Pass();
         }
     }
 }

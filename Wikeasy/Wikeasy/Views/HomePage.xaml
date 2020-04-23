@@ -33,7 +33,7 @@
             <ContentView x:Key="WikipediaSource">
                 <StackLayout Orientation="Horizontal"
                             HorizontalOptions="End"
-                            VerticalOptions="End">
+                             Margin="0">
                     <!-- Tap to get acces to the source -->
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.WikipediaLink}"/>
@@ -286,7 +286,7 @@
                                         WidthRequest="250"
                                         ReturnType="Search"
                                         Focused="txtSearch_Focused"
-                                       Text="Fight Club"/>
+                                       Text="Jake Gyllenhaal"/>
 
 
                             </StackLayout>
@@ -371,103 +371,130 @@
 
 
                                                 </Grid>
-                                                <Grid Grid.Row="1" 
-                                                      BackgroundColor="{DynamicResource ThemeSearchBarColor}">
+                                                <!-- Quick description -->
+                                                <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                             Elevation="2"
+                                                                             Grid.Row="1" Padding="0" Margin="0">
+                                                    <Grid Margin="10">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="20"/>
+                                                        </Grid.RowDefinitions>
 
-                                                    <!-- Quick description -->
-                                                    <StackLayout Margin="10">
+                                                        <!-- Quick description -->
+                                                        <StackLayout  BackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                         Grid.Row="0">
 
-                                                        <!-- birthdate -->
-                                                        <StackLayout Orientation="Horizontal"
-                                                                HorizontalOptions="StartAndExpand"
-                                                                Spacing="{StaticResource descriptionSpacing}"
-                                                                IsVisible="{Binding SearchResult.Birthdate,
-                                                                            Converter ={StaticResource NullToVisibilityConverter} }"
-                                                                >
-                                                            <Label Text="Born :"
-                                                            FontAttributes=" Bold"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-                                                            <Label Text="{Binding SearchResult.Birthdate}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"
-                                                            HorizontalOptions="End"/>
+                                                            <!-- birthdate -->
+                                                            <StackLayout Orientation="Horizontal"
+                                                                                HorizontalOptions="StartAndExpand"
+                                                                                Spacing="{StaticResource descriptionSpacing}"
+                                                                                IsVisible="{Binding SearchResult.Birthdate,
+                                                                            Converter ={StaticResource NullToVisibilityConverter} }">
+                                                                <Label Text="Born :"
+                                                                            FontAttributes=" Bold"
+                                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="{Binding SearchResult.Birthdate}"
+                                                                            TextColor="{DynamicResource ThemeTextColor}"
+                                                                            HorizontalOptions="End"/>
 
-                                                        </StackLayout>
-                                                        <!-- birth place -->
-                                                        <StackLayout Orientation="Horizontal"
+                                                            </StackLayout>
+                                                            <!-- birth place -->
+                                                            <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="StartAndExpand"
                                                                 Spacing="{StaticResource descriptionSpacing}"
                                                                 IsVisible="{Binding SearchResult.Birthplace,
                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
-                                                            <Label Text="Birthplace :"
-                                                            FontAttributes=" Bold"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-                                                            <Label Text="{Binding SearchResult.Birthplace}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"
-                                                            HorizontalOptions="End"/>
+                                                                <Label Text="Birthplace :"
+                                                                    FontAttributes=" Bold"
+                                                                    TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="{Binding SearchResult.Birthplace}"
+                                                                    TextColor="{DynamicResource ThemeTextColor}"
+                                                                    HorizontalOptions="End"/>
 
-                                                        </StackLayout>
+                                                            </StackLayout>
 
-                                                        <!-- Residence -->
-                                                        <StackLayout Orientation="Horizontal"
+                                                            <!-- Residence -->
+                                                            <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="StartAndExpand"
                                                                 Spacing="{StaticResource descriptionSpacing}"
                                                                 IsVisible="{Binding SearchResult.Residence,
                                                                             Converter ={StaticResource NullToVisibilityConverter} }"
                                                                 >
-                                                            <Label Text="Residence :"
-                                                            FontAttributes=" Bold"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-                                                            <Label Text="{Binding SearchResult.Residence}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="Residence :"
+                                                                            FontAttributes=" Bold"
+                                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="{Binding SearchResult.Residence}"
+                                                                            TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                                        </StackLayout>
+                                                            </StackLayout>
 
-                                                        <!-- Deathplace -->
-                                                        <StackLayout Orientation="Horizontal"
+                                                            <!-- Deathplace -->
+                                                            <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="StartAndExpand"
                                                                 Spacing="{StaticResource descriptionSpacing}"
                                                                 IsVisible="{Binding SearchResult.Deathplace,
                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
-                                                            <Label Text="Deathplace :"
-                                                            FontAttributes=" Bold"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-                                                            <Label Text="{Binding SearchResult.Deathplace}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="Deathplace :"
+                                                                        FontAttributes=" Bold"
+                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="{Binding SearchResult.Deathplace}"
+                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
+
+                                                            </StackLayout>
+                                                        </StackLayout>
+
+                                                        <!-- Mention source -->
+                                                        <!--<ContentView Grid.Row="1" Content="{StaticResource WikipediaSource}"/>-->
+                                                        <StackLayout Orientation="Horizontal"
+                                                                            HorizontalOptions="End"
+                                                                             Margin="0"
+                                                                     Grid.Row="1">
+                                                            <!-- Tap to get acces to the source -->
+                                                            <StackLayout.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.WikipediaLink}"/>
+                                                            </StackLayout.GestureRecognizers>
+
+                                                            <!-- Wikipedia label-->
+                                                            <Label Text="From Wikipedia"
+                                                                    FontSize="Small"
+                                                                    TextColor="{DynamicResource ThemeTextColor}"/>
+
+                                                            <!-- Wikipedia logo-->
+                                                            <Label 
+                                                                Text="&#xf266;"
+                                                                FontSize="Small"
+                                                                FontFamily="{StaticResource FA-Brands}"
+                                                                IsVisible="{Binding IsNotLoading}"
+                                                                HorizontalOptions="Start"
+                                                                VerticalOptions="Center"
+                                                                TextColor="{DynamicResource ThemeTextColor}"/>
 
                                                         </StackLayout>
 
 
-
-                                                        <!-- Mention source -->
-                                                        <ContentView Content="{StaticResource WikipediaSource}"/>
-                                                    </StackLayout>
-
-                                                </Grid>
+                                                    </Grid>
+                                                </renderedViews:MaterialFrame>
 
                                             </Grid>
 
                                         </StackLayout>
                                         <!-- A movie star -->
                                         <StackLayout IsVisible="False"
-                                                Orientation="Vertical">
+                                                Orientation="Vertical"
+                                                     >
                                             <StackLayout.Triggers>
                                                 <DataTrigger TargetType="VisualElement" Binding="{Binding SearchResult.Type}" Value="{x:Static Wikes:ResultType.MovieStar}">
                                                     <Setter Property="IsVisible" Value="true" />
                                                 </DataTrigger>
                                             </StackLayout.Triggers>
-                                            <Grid>
-
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="150"/>
-                                                    <RowDefinition Height="*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid Grid.Row="0">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="100"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Grid Grid.Column="0">
-                                                        <renderedViews:MaterialFrame
+                                            
+                                            <Grid >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <renderedViews:MaterialFrame
                                                                 Elevation="4"
                                                                 VerticalOptions="Center"
                                                                 HorizontalOptions="Center"
@@ -475,135 +502,176 @@
                                                                 CornerRadius="25"
                                                                 IsClippedToBounds="True"
                                                                 Margin="0"
+                                                                Grid.Column="0"
                                                                 IsVisible="{Binding SearchResult.Img,
                                                                         Converter ={StaticResource NullToVisibilityConverter} }"
+                                                                     
                                                                 >
-                                                            <Image Source="{Binding SearchResult.Img}"
+                                                    <Image Source="{Binding SearchResult.Img}"
                                                                     Aspect="AspectFill" 
                                                                     HorizontalOptions="Center"
                                                                     VerticalOptions="Center"
                                                                     WidthRequest="100"
                                                                     HeightRequest="100"/>
-                                                        </renderedViews:MaterialFrame>
-                                                    </Grid>
-                                                    <Grid Grid.Column="1" >
-                                                        <!-- Quick description -->
-                                                        <StackLayout Margin="10">
-                                                            <!-- Name -->
-                                                            <Label Text="{Binding SearchResult.Title}"
+                                                </renderedViews:MaterialFrame>
+                                                <!-- Quick description -->
+                                                <StackLayout Margin="10" Grid.Column="1" >
+                                                    <!-- Name -->
+                                                    <Label Text="{Binding SearchResult.Title}"
                                                                     TextColor="{DynamicResource ThemeTextColor}"
                                                                     HorizontalOptions="CenterAndExpand"
                                                                     FontAttributes="Bold"
                                                                     FontSize="Title"/>
-                                                            <!-- Age-->
-                                                            <StackLayout Orientation="Horizontal"
+                                                    <!-- Age-->
+                                                    <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="CenterAndExpand"
                                                                 Spacing="{StaticResource descriptionSpacing}"
                                                                 IsVisible="{Binding SearchResult.Deathplace,
                                                                         Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }">
-                                                                <Label Text="{Binding SearchResult.Age}"
+                                                        <Label Text="{Binding SearchResult.Age}"
                                                                 TextColor="{DynamicResource ThemeTextColor}"/>
-                                                                <Label Text="Years old"
-                                                            FontAttributes="Italic, Bold"
-                                                                TextColor="{DynamicResource ThemeTextColor}"/>
-                                                            </StackLayout>
-                                                            <!-- Description-->
-                                                            <Label Text="{Binding SearchResult.Description}"
+                                                        <Label Text="Years old"
+                                                                        FontAttributes="Italic, Bold"
+                                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                    </StackLayout>
+                                                    <!-- Description-->
+                                                    <Label Text="{Binding SearchResult.Description}"
                                                             TextColor="{DynamicResource ThemeTextColor}"
                                                             Margin="5"/>
 
-                                                        </StackLayout>
-                                                    </Grid>
+                                                </StackLayout>
 
 
-                                                </Grid>
-                                                <StackLayout Grid.Row="1">
+                                            </Grid>
 
-                                                    <!-- Quick description -->
-                                                    <StackLayout Padding="10"
-                                                                 BackgroundColor="{DynamicResource ThemeSearchBarColor}">
+                                            <!-- Quick description -->
+                                                <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                             Elevation="2"
+                                                                             Padding="0" Margin="0">
+                                                    <Grid Margin="10">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="20"/>
+                                                        </Grid.RowDefinitions>
 
-                                                        <!-- birthdate -->
-                                                        <StackLayout Orientation="Horizontal"
-                                                                HorizontalOptions="StartAndExpand"
-                                                                Spacing="{StaticResource descriptionSpacing}"
-                                                                IsVisible="{Binding SearchResult.Birthdate,
-                                                                            Converter ={StaticResource NullToVisibilityConverter} }"
-                                                                >
-                                                            <Label Text="Born :"
-                                                            FontAttributes=" Bold"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-                                                            <Label Text="{Binding SearchResult.Birthdate}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"
-                                                            HorizontalOptions="End"/>
+                                                        <!-- Quick description -->
+                                                        <StackLayout  BackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                         Grid.Row="0">
 
-                                                        </StackLayout>
-                                                        <!-- birth place -->
-                                                        <StackLayout Orientation="Horizontal"
+                                                            <!-- birthdate -->
+                                                            <StackLayout Orientation="Horizontal"
+                                                                                HorizontalOptions="StartAndExpand"
+                                                                                Spacing="{StaticResource descriptionSpacing}"
+                                                                                IsVisible="{Binding SearchResult.Birthdate,
+                                                                            Converter ={StaticResource NullToVisibilityConverter} }">
+                                                                <Label Text="Born :"
+                                                                            FontAttributes=" Bold"
+                                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="{Binding SearchResult.Birthdate}"
+                                                                            TextColor="{DynamicResource ThemeTextColor}"
+                                                                            HorizontalOptions="End"/>
+
+                                                            </StackLayout>
+                                                            <!-- birth place -->
+                                                            <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="StartAndExpand"
                                                                 Spacing="{StaticResource descriptionSpacing}"
                                                                 IsVisible="{Binding SearchResult.Birthplace,
                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
-                                                            <Label Text="Birthplace :"
-                                                            FontAttributes=" Bold"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-                                                            <Label Text="{Binding SearchResult.Birthplace}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"
-                                                            HorizontalOptions="End"/>
+                                                                <Label Text="Birthplace :"
+                                                                    FontAttributes=" Bold"
+                                                                    TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="{Binding SearchResult.Birthplace}"
+                                                                    TextColor="{DynamicResource ThemeTextColor}"
+                                                                    HorizontalOptions="End"/>
 
-                                                        </StackLayout>
+                                                            </StackLayout>
 
-                                                        <!-- Residence -->
-                                                        <StackLayout Orientation="Horizontal"
+                                                            <!-- Residence -->
+                                                            <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="StartAndExpand"
                                                                 Spacing="{StaticResource descriptionSpacing}"
                                                                 IsVisible="{Binding SearchResult.Residence,
                                                                             Converter ={StaticResource NullToVisibilityConverter} }"
                                                                 >
-                                                            <Label Text="Residence :"
-                                                            FontAttributes=" Bold"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-                                                            <Label Text="{Binding SearchResult.Residence}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="Residence :"
+                                                                            FontAttributes=" Bold"
+                                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="{Binding SearchResult.Residence}"
+                                                                            TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                                        </StackLayout>
+                                                            </StackLayout>
 
-                                                        <!-- Deathplace -->
-                                                        <StackLayout Orientation="Horizontal"
+                                                            <!-- Deathplace -->
+                                                            <StackLayout Orientation="Horizontal"
                                                                 HorizontalOptions="StartAndExpand"
                                                                 Spacing="{StaticResource descriptionSpacing}"
                                                                 IsVisible="{Binding SearchResult.Deathplace,
                                                                             Converter ={StaticResource NullToVisibilityConverter} }">
-                                                            <Label Text="Deathplace :"
-                                                            FontAttributes=" Bold"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
-                                                            <Label Text="{Binding SearchResult.Deathplace}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="Deathplace :"
+                                                                        FontAttributes=" Bold"
+                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
+                                                                <Label Text="{Binding SearchResult.Deathplace}"
+                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
 
+                                                            </StackLayout>
                                                         </StackLayout>
 
-
-
                                                         <!-- Mention source -->
-                                                        <ContentView Content="{StaticResource WikipediaSource}"/>
+                                                        <!--<ContentView Grid.Row="1" Content="{StaticResource WikipediaSource}"/>-->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                            HorizontalOptions="End"
+                                                                             Margin="0"
+                                                                     Grid.Row="1">
+                                                        <!-- Tap to get acces to the source -->
+                                                        <StackLayout.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.WikipediaLink}"/>
+                                                        </StackLayout.GestureRecognizers>
+
+                                                        <!-- Wikipedia label-->
+                                                        <Label Text="From Wikipedia"
+                                                                    FontSize="Small"
+                                                                    TextColor="{DynamicResource ThemeTextColor}"/>
+
+                                                        <!-- Wikipedia logo-->
+                                                        <Label 
+                                                                Text="&#xf266;"
+                                                                FontSize="Small"
+                                                                FontFamily="{StaticResource FA-Brands}"
+                                                                IsVisible="{Binding IsNotLoading}"
+                                                                HorizontalOptions="Start"
+                                                                VerticalOptions="Center"
+                                                                TextColor="{DynamicResource ThemeTextColor}"/>
+
                                                     </StackLayout>
-                                                    <!-- TMDB result -->
-                                                    <StackLayout Padding="10"
-                                                                 Margin="2"
-                                                                BackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                 HeightRequest="850">
+
+
+                                                </Grid>
+                                                </renderedViews:MaterialFrame>
+                                            <!-- TMDB result -->
+                                            <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                         Elevation="2"
+                                                                         Padding="0" Margin="0">
+                                                <Grid >
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="20"/>
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout  Grid.Row="0"
+                                                                Margin="0">
                                                         <!--Title of the "KnownFor" sction -->
                                                         <Label Text="Known for"
                                                                    TextColor="{DynamicResource ThemeTextColor}"
                                                                    HorizontalOptions="Start"
                                                                    FontSize="20"
                                                                    FontAttributes="Bold"
-                                                                   Margin="5"
+                                                                   Margin="10"
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.KnownFor}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource movieListTemplate}"
-                                                                        HeightRequest="{StaticResource collectionViewHeight}">
+                                                                        HeightRequest="{StaticResource collectionViewHeight}"
+                                                                        Margin="10,0,0,0">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                             </CollectionView.ItemsLayout>
@@ -614,42 +682,43 @@
                                                                    HorizontalOptions="Start"
                                                                    FontSize="20"
                                                                    FontAttributes="Bold"
-                                                                   Margin="5"
+                                                                   Margin="10"
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.SeenOn}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource movieListTemplate}"
-                                                                        HeightRequest="{StaticResource collectionViewHeight}">
+                                                                        HeightRequest="{StaticResource collectionViewHeight}"
+                                                                        Margin="10,0,0,0">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                             </CollectionView.ItemsLayout>
                                                         </CollectionView>
-                                                        
-                                                        <!-- Mention TMDB sources-->
-                                                        <ContentView Content="{StaticResource TmdbSource}"/>
 
-                                                        <!--<StackLayout Orientation="Horizontal"
-                                                                         HorizontalOptions="End"
-                                                                         Margin="0">
-
-                                                            --><!-- TMDB label--><!--
-                                                            <Label Text="From "
-                                                                        FontSize="15"
-                                                                       VerticalOptions="Center"
-                                                                        TextColor="{DynamicResource ThemeTextColor}"/>
-
-                                                            --><!-- TMDB logo--><!--
-                                                            <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
-                                                                                                  HeightRequest="65" 
-                                                                                                  VerticalOptions="Center"
-                                                                                                  Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
-                                                        </StackLayout>-->
                                                     </StackLayout>
+                                                    <!-- Mention TMDB sources-->
+                                                    <!--<ContentView Grid.Row="1" Content="{StaticResource TmdbSource}"/>-->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                    HorizontalOptions="End"
+                                                                 Grid.Row="1">
+                                                        <!-- Tap to get acces to the source -->
+                                                        <StackLayout.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.TmdbLink}"/>
+                                                        </StackLayout.GestureRecognizers>
 
-                                                </StackLayout>
+                                                        <!-- TMDB label-->
+                                                        <Label Text="From "
+                                                                FontSize="15"
+                                                                VerticalOptions="Center"
+                                                                TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                            </Grid>
-
+                                                        <!-- TMDB logo-->
+                                                        <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
+                                                                HeightRequest="65" 
+                                                                VerticalOptions="Center"
+                                                                Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </renderedViews:MaterialFrame>
                                         </StackLayout>
                                         <!-- Movie -->
                                         <StackLayout IsVisible="False"
@@ -724,7 +793,8 @@
 
 
                                             <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                             Elevation="2">
+                                                                             Elevation="2"
+                                                                         Margin="0" Padding="10">
                                                 <Grid>
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="*"/>
@@ -749,7 +819,7 @@
                                                                    HorizontalOptions="Start"
                                                                    FontSize="20"
                                                                    FontAttributes="Bold"
-                                                                   Margin="5"
+                                                                   Margin="5,0,0,0"
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.Casts}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"

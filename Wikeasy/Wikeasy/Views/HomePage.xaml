@@ -188,45 +188,55 @@
     <Grid BackgroundColor="{DynamicResource ThemeBackgroundColor}">
         <Grid.RowDefinitions>
             <!--<RowDefinition Height="10"/>-->
-            <RowDefinition Height="180"/>
+            <!--<RowDefinition Height="150"/>-->
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <!--Header banner -->
-        <yummy:PancakeView Grid.Row="0"
-                        VerticalOptions="Center"
-                        WidthRequest="360"
-                        HorizontalOptions="Center"
-                        BackgroundGradientStartColor="{DynamicResource ThemeSearchBarColor}"
-                        BackgroundGradientEndColor="{DynamicResource ThemeBackgroundColor}"
-                        BorderColor="{DynamicResource ThemeSearchBarColor}"
-                        BorderThickness="0"
-                        CornerRadius="18"
-                        BackgroundGradientAngle="180"
-                        Padding="10"
-                                    >
-            <StackLayout  Spacing="0">
-                <!-- App logo -->
-                <Image Source="WikeasyLogo.png"
-                    WidthRequest="90"
-                    HeightRequest="90"/>
-
-                <!--Title-->
-                <Label Text="Wikeasy"
-                TextColor="{DynamicResource ThemeTitleColor}"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                FontSize="20"/>
-            </StackLayout>
-
-        </yummy:PancakeView>
+        
 
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <StackLayout 
                     VerticalOptions="Start"
                     HorizontalOptions="CenterAndExpand"
                     Spacing="5">
+                <!--Header banner -->
+                <yummy:PancakeView Grid.Row="0"
+                                   VerticalOptions="Center"
+                                   WidthRequest="360"
+                                   HorizontalOptions="Center"
+                                   BackgroundGradientStartColor="{DynamicResource ThemeSearchBarColor}"
+                                   BackgroundGradientEndColor="{DynamicResource ThemeBackgroundColor}"
+                                   BorderColor="{DynamicResource ThemeSearchBarColor}"
+                                   BorderThickness="0"
+                                   CornerRadius="18"
+                                   HeightRequest="130"
+                                   BackgroundGradientAngle="180"
+                                   Margin="0,0,2,10"
+                                   Padding="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- App logo -->
+                        <Image Source="WikeasyLogo.png"
+                               WidthRequest="90"
+                               HeightRequest="90"
+                               VerticalOptions="End"
+                               Grid.Row="0"/>
+
+                        <!--Title-->
+                        <Label Text="Wikeasy"
+                               TextColor="{DynamicResource ThemeTitleColor}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               FontSize="20"
+                               VerticalOptions="Start"
+                               Grid.Row="1"/>
+                    </Grid>
+
+                </yummy:PancakeView>
                 <!-- Title -->
                 <Label x:Name="lblSubtitle"
                     Text="{Binding Subtitle}" 
@@ -285,7 +295,8 @@
                                         PlaceholderColor="{DynamicResource ThemeTextColor}"
                                         WidthRequest="250"
                                         ReturnType="Search"
-                                        Focused="txtSearch_Focused"/>
+                                        Focused="txtSearch_Focused"
+                                       Text="Jake Gyllenhaal"/>
 
 
                             </StackLayout>

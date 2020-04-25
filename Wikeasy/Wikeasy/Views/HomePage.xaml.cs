@@ -50,6 +50,8 @@ namespace Wikeasy.Views
             // Seaching process
             await _vm.GenerateSearchResult(((Entry)sender).Text);
 
+            viewHeaderBanner.IsVisible = false;
+
             // Do we get a result?
             if (_vm.IsResultAvailable)
             {
@@ -83,6 +85,8 @@ namespace Wikeasy.Views
 
                 // Change de corner radius
                 frameSearchBar.CornerRadius = SbDefaultCornerRadius;
+
+                viewHeaderBanner.IsVisible = true;
             }
 
         }
@@ -177,5 +181,23 @@ namespace Wikeasy.Views
 
         }
 
+        private void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            var view = (ScrollView)sender;
+            
+
+            //double newHeight = 130 - view.ScrollY;
+
+            //viewHeaderBanner.HeightRequest = newHeight;
+            //view.ScrollToAsync(0,0,false);
+
+            //// update the height of the layout with this callback
+            //Action<double> callbackHeight = input => { viewHeaderBanner.HeightRequest = input; };
+
+            //// Height anniation
+            //viewHeaderBanner.Animate("invisHeight", callbackHeight, startingHeight, newHeight, rate, length, easing);
+
+
+        }
     }
 }

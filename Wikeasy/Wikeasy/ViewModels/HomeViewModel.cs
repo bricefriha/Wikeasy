@@ -59,17 +59,21 @@ namespace Wikeasy.ViewModels
             }
         }
 
-        private Command _goToSource;
+        private readonly Command _goToSource;
         public Command GoToSource
         {
-            //set
-            //{
-            //    _goToSource = value;
-            //    OnPropertyChanged();
-            //}
             get
             {
                 return _goToSource;
+            }
+        }
+
+        private readonly Command _resultScroll;
+        public Command ResultScroll
+        {
+            get
+            {
+                return _resultScroll;
             }
         }
 
@@ -135,6 +139,9 @@ namespace Wikeasy.ViewModels
             _searchResult = new SearchResult();
 
             _goToSource = new Command(url => Launcher.OpenAsync(new Uri(url.ToString())));
+
+            // Set scroll command
+            //_resultScroll = new Command();
 
             // Default values
             //

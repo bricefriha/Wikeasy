@@ -25,6 +25,7 @@
             <x:Double x:Key="descriptionSpacing">2</x:Double>
             <x:Double x:Key="resultSize">700</x:Double>
             <x:Double x:Key="collectionViewHeight">300</x:Double>
+            <x:Double x:Key="resultElementElevation">4</x:Double>
             <!-- Debug Rainbow-->
             <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                 <Setter Property="rainbows:DebugRainbow.ShowColors" Value="False" />
@@ -96,6 +97,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
                             <renderedViews:MaterialFrame
                                                     Elevation="6"
@@ -383,7 +385,7 @@
                                                 </Grid>
                                                 <!-- Quick description -->
                                                 <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                             Elevation="2"
+                                                                             Elevation="{DynamicResource resultElementElevation}"
                                                                              Grid.Row="1" Padding="0" Margin="0">
                                                     <Grid Margin="10">
                                                         <Grid.RowDefinitions>
@@ -505,7 +507,7 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <renderedViews:MaterialFrame
-                                                                Elevation="4"
+                                                                Elevation="{DynamicResource resultElementElevation}"
                                                                 VerticalOptions="Center"
                                                                 HorizontalOptions="Center"
                                                                 Padding="0"
@@ -556,7 +558,7 @@
 
                                             <!-- Quick description -->
                                                 <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                             Elevation="2"
+                                                                             Elevation="{DynamicResource resultElementElevation}"
                                                                              Padding="0" Margin="0">
                                                     <Grid Margin="10">
                                                         <Grid.RowDefinitions>
@@ -660,8 +662,8 @@
                                                 </renderedViews:MaterialFrame>
                                             <!-- TMDB result -->
                                             <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                         Elevation="2"
-                                                                         Padding="0" Margin="0">
+                                                                             Elevation="{DynamicResource resultElementElevation}"
+                                                                         Margin="0,0,0,10" Padding="0">
                                                 <Grid >
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="*"/>
@@ -669,7 +671,7 @@
                                                     </Grid.RowDefinitions>
                                                     <StackLayout  Grid.Row="0"
                                                                 Margin="0">
-                                                        <!--Title of the "KnownFor" sction -->
+                                                        <!--Title of the "KnownFor" sction--> 
                                                         <Label Text="Known for"
                                                                    TextColor="{DynamicResource ThemeTextColor}"
                                                                    HorizontalOptions="Start"
@@ -681,12 +683,12 @@
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource movieListTemplate}"
                                                                         HeightRequest="{StaticResource collectionViewHeight}"
-                                                                        Margin="10,0,0,0">
+                                                                        Margin="10,0,5,0">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                             </CollectionView.ItemsLayout>
                                                         </CollectionView>
-                                                        <!--Title of the "seen on" -->
+                                                        <!--Title of the "seen on"--> 
                                                         <Label Text="Seen on"
                                                                    TextColor="{DynamicResource ThemeTextColor}"
                                                                    HorizontalOptions="Start"
@@ -698,7 +700,7 @@
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource movieListTemplate}"
                                                                         HeightRequest="{StaticResource collectionViewHeight}"
-                                                                        Margin="10,0,0,0">
+                                                                        Margin="10,0,5,0">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                             </CollectionView.ItemsLayout>
@@ -706,27 +708,34 @@
 
                                                     </StackLayout>
                                                     <!-- Mention TMDB sources-->
-                                                    <!--<ContentView Grid.Row="1" Content="{StaticResource TmdbSource}"/>-->
-                                                    <StackLayout Orientation="Horizontal"
+                                                    <ContentView Grid.Row="1"  Content="{StaticResource TmdbSource}"/>
+                                                    <!--<StackLayout Orientation="Horizontal"
                                                                     HorizontalOptions="End"
                                                                  Grid.Row="1">
-                                                        <!-- Tap to get acces to the source -->
+                                                        -->
+                                                    <!-- Tap to get acces to the source -->
+                                                    <!--
                                                         <StackLayout.GestureRecognizers>
                                                             <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.TmdbLink}"/>
                                                         </StackLayout.GestureRecognizers>
 
-                                                        <!-- TMDB label-->
+                                                        -->
+                                                    <!-- TMDB label-->
+                                                    <!--
                                                         <Label Text="From "
                                                                 FontSize="15"
                                                                 VerticalOptions="Center"
                                                                 TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                                        <!-- TMDB logo-->
+                                                        -->
+                                                    <!-- TMDB logo-->
+                                                    <!--
                                                         <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
                                                                 HeightRequest="65" 
                                                                 VerticalOptions="Center"
                                                                 Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
-                                                    </StackLayout>
+                                                    </StackLayout>-->
+                                                   
                                                 </Grid>
                                             </renderedViews:MaterialFrame>
                                         </StackLayout>
@@ -751,7 +760,7 @@
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <renderedViews:MaterialFrame
-                                                                Elevation="4"
+                                                                Elevation="{DynamicResource resultElementElevation}"
                                                                 VerticalOptions="Center"
                                                                 HorizontalOptions="Center"
                                                                 Padding="0"
@@ -803,15 +812,14 @@
 
 
                                             <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                             Elevation="2"
-                                                                         Margin="0" Padding="10">
+                                                                             Elevation="{DynamicResource resultElementElevation}"
+                                                                         Margin="0,0,0,10" Padding="10">
                                                 <Grid>
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="*"/>
                                                         <RowDefinition Height="20"/>
                                                     </Grid.RowDefinitions>
-                                                    <StackLayout Grid.Row="0"
-                                                                     Margin="0">
+                                                    <StackLayout Grid.Row="0" Margin="0">
                                                         <!-- Overview sction -->
                                                         <Label Text="Overview"
                                                                    TextColor="{DynamicResource ThemeTextColor}"
@@ -834,7 +842,8 @@
                                                         <CollectionView ItemsSource="{Binding SearchResult.Casts}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource castListTemplate}"
-                                                                        HeightRequest="{StaticResource collectionViewHeight}">
+                                                                        HeightRequest="{StaticResource collectionViewHeight}"
+                                                                        Margin="10,0,5,0">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
                                                             </CollectionView.ItemsLayout>

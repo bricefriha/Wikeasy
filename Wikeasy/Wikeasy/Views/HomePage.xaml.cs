@@ -50,7 +50,6 @@ namespace Wikeasy.Views
             // Seaching process
             await _vm.GenerateSearchResult(((Entry)sender).Text);
 
-            viewHeaderBanner.IsVisible = false;
 
             // Do we get a result?
             if (_vm.IsResultAvailable)
@@ -60,6 +59,10 @@ namespace Wikeasy.Views
 
                 // Change de corner radius
                 frameSearchBar.CornerRadius = SbActiveCornerRadius;
+
+                // Remove the banner
+                viewHeaderBanner.IsVisible = false;
+
             }
             else
                 AnimateWidthSearchBar(height, width);
@@ -87,6 +90,7 @@ namespace Wikeasy.Views
                 frameSearchBar.CornerRadius = SbDefaultCornerRadius;
 
                 viewHeaderBanner.IsVisible = true;
+
             }
 
         }

@@ -285,7 +285,8 @@
                                         PlaceholderColor="{DynamicResource ThemeTextColor}"
                                         WidthRequest="250"
                                         ReturnType="Search"
-                                        Focused="txtSearch_Focused"/>
+                                        Focused="txtSearch_Focused"
+                                       Text="Max Schrems"/>
 
 
                             </StackLayout>

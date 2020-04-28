@@ -133,7 +133,7 @@ namespace Wikeasy.Objects
                         Title = name,
                         Description = _wikidata.Lead.Description,
                         CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")?[0].InnerText,
-                        Age = (DateTime.Now.Year - birthdateDt.Year).ToString(),
+                        Age = GetAgeFromBirthdate(birthdateDt),
                         Birthdate = birthdayFilled ? DateTime.Parse(birthdate).ToString("MMMM dd, yyyy") : DateTime.Parse(birthdate).ToString("MMMM, yyyy"),
                         Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")?[0].InnerText,
                         Deathplace = documentNode.SelectNodes("//*[@class='deathplace']")?[0].InnerText,
@@ -186,7 +186,7 @@ namespace Wikeasy.Objects
                         Title = displaytitle,
                         Description = _wikidata.Lead.Description,
                         CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")?[0].InnerText,
-                        Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
+                        Age = GetAgeFromBirthdate(birthdateDt),
                         Birthdate = birthdayFilled? DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"): DateTime.Parse(birthdate).ToString("MMMM, yyyy"),
                         Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")?[0].InnerText,
                         Deathplace = documentNode.SelectNodes("//*[@class='deathplace']")?[0].InnerText,
@@ -228,6 +228,20 @@ namespace Wikeasy.Objects
             var fields = birthdate.Split('-');
 
             return fields[2] == "00" ? false : true; 
+        }
+        /// <summary>
+        /// Getting the age of a person from his birthdate
+        /// </summary>
+        /// <param name="birthdate">Birthdate</param>
+        /// <returns>Age</returns>
+        private string GetAgeFromBirthdate (DateTime birthdate)
+        {
+            var today = DateTime.Today;
+            var todayDay = (today.Year * 100 + today.Month) * 100 + today.Day;
+            var birthDay = (birthdate.Year * 100 + birthdate.Month) * 100 + birthdate.Day;
+
+            return ((todayDay - birthDay) / 10000).ToString();
+
         }
     }
 }

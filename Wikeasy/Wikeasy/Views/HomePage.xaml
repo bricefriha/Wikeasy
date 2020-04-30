@@ -231,7 +231,7 @@
 
                         <!--Title-->
                         <Label Text="Wikeasy"
-                               TextColor="{DynamicResource ThemeTitleColor}"
+                               TextColor="{DynamicResource ThemeTextColor}"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
                                FontSize="20"
@@ -246,7 +246,7 @@
                     FontAttributes="Bold" FontSize="Title"
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand"
-                    TextColor="{DynamicResource ThemeTitleColor}"
+                    TextColor="{DynamicResource ThemeTextColor}"
                        Margin="0,10,0,0"
                     />
                 <StackLayout Orientation="Horizontal"
@@ -273,7 +273,7 @@
                                                         HeightRequest="{StaticResource indSize}" 
                                                         IsRunning="{Binding IsLoading}" 
                                                         IsVisible="{Binding IsLoading}" 
-                                                        Color="{DynamicResource ThemeTextColor}" 
+                                                        Color="{DynamicResource ThemeTitleColor}" 
                                                         HorizontalOptions="Center" 
                                                         VerticalOptions="Center"
                                                         Margin="2,0,0,0"
@@ -284,7 +284,7 @@
                                         FontSize="Large"
                                         FontFamily="{StaticResource FA-Solid}"
                                         IsVisible="{Binding IsNotLoading}"
-                                        TextColor="{DynamicResource ThemeTextColor}"
+                                        TextColor="{DynamicResource ThemeTitleColor}"
                                         HorizontalOptions="Start"
                                         VerticalOptions="Center"/>
 

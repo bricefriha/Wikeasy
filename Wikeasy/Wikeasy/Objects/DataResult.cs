@@ -86,25 +86,32 @@ namespace Wikeasy.Objects
 
             // Set result type
             this.SetResultType(birthdate);
-            var birthdayFilled = BirthdayFilled(birthdate);
             DateTime birthdateDt = new DateTime();
+            bool birthdayFilled = false;
 
-            if (birthdayFilled)
-            {
-                // get birthday in date time
-                birthdateDt = DateTime.Parse(birthdate);
-                
-            }
-            else
-            {
-                birthdate = birthdate.Replace("-00", string.Empty);
 
-                // get birthday in date time
-                birthdateDt = DateTime.Parse(birthdate);
+            if (!string.IsNullOrEmpty(birthdate))
+            {
+                birthdayFilled = BirthdayFilled(birthdate);
+
+                if (birthdayFilled)
+                {
+                    // get birthday in date time
+                    birthdateDt = DateTime.Parse(birthdate);
+
+                }
+                else
+                {
+                    birthdate = birthdate.Replace("-00", string.Empty);
+
+                    // get birthday in date time
+                    birthdateDt = DateTime.Parse(birthdate);
+                }
             }
             
+            
 
-            string displaytitle = _wikidata.Lead.Displaytitle;
+            string displaytitle = WkeToolbox.HtmlEscape(_wikidata.Lead.Displaytitle);
             // Set actual result
             switch (_resultType)
             {
@@ -150,7 +157,7 @@ namespace Wikeasy.Objects
                 case ResultType.Movie:
 
                     // Get Tmdb information
-                    string movieTitle = WkeToolbox.HtmlEscape(_wikidata.Lead.Displaytitle);
+                    string movieTitle = displaytitle;
 
                     // Get the client
                     TMDbClient clientMovie = new TMDbClient(App.Current.Resources["TmdbKey"].ToString());
@@ -202,7 +209,7 @@ namespace Wikeasy.Objects
                     _actualResult = new SearchResult()
                     {
                         Img = _wikidata.Lead.Image?.Urls["640"].ToString(),
-                        Title = _wikidata.Lead.Displaytitle,
+                        Title = displaytitle,
                         Description = _wikidata.Lead.Description,
                         Type = _resultType,
                         WikipediaLink = _wikipediaBaseUrl + displaytitle.Replace(' ', '_'),

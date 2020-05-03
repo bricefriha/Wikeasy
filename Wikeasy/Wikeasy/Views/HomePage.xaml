@@ -33,7 +33,14 @@
                     <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                         <Setter Property="rainbows:DebugRainbow.ShowColors" Value="False" />
                     </Style>
-                    
+                    <!-- Style for result's subtitles-->
+                    <Style TargetType="Label" x:Key="ResultSubTitle">
+                        <Setter Property="TextColor" Value="{DynamicResource ThemeTitleColor}"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+
 
                     <!-- Templates -->
                     <DataTemplate x:Key="movieListTemplate">
@@ -122,17 +129,17 @@
                                     <StackLayout Grid.Row="1">
                                         <!-- Title -->
                                         <Label Text="{Binding Name}"
-                                        TextColor="{DynamicResource ThemeTextColor}"
-                                        FontAttributes="Bold"
-                                        FontSize="20"
-                                        HorizontalOptions="Center"
-                                        Grid.Row="1"/>
+                                               TextColor="{DynamicResource ThemeTextColor}"
+                                               FontAttributes="Bold"
+                                               FontSize="20"
+                                               HorizontalOptions="Center"
+                                               Grid.Row="1"/>
                                         <!-- Release date -->
                                         <Label Text="{Binding Character}"
-                                        TextColor="{DynamicResource ThemeTextColor}"
-                                        FontSize="12"
-                                        HorizontalOptions="Center"
-                                        Grid.Row="1"/>
+                                               TextColor="{DynamicResource ThemeTextColor}"
+                                               FontSize="12"
+                                               HorizontalOptions="Center"
+                                               Grid.Row="1"/>
                                     </StackLayout>
                                 </Grid>
                             </renderedViews:MaterialFrame>
@@ -198,11 +205,11 @@
                 </yummy:PancakeView>
                 <!-- Title -->
                 <Label x:Name="lblSubtitle"
-                    Text="{Binding Subtitle}" 
-                    FontAttributes="Bold" FontSize="Title"
-                    VerticalOptions="CenterAndExpand"
-                    HorizontalOptions="CenterAndExpand"
-                    TextColor="{DynamicResource ThemeTextColor}"
+                       Text="{Binding Subtitle}" 
+                       FontAttributes="Bold" FontSize="Title"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       TextColor="{DynamicResource ThemeTextColor}"
                        Margin="0,10,0,0"
                     />
                 <StackLayout Orientation="Horizontal"
@@ -313,16 +320,16 @@
                                                         <StackLayout Margin="10">
                                                             <!-- Name -->
                                                             <Label Text="{Binding SearchResult.Title}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"
-                                                        HorizontalOptions="CenterAndExpand"
-                                                        FontAttributes="Bold"
-                                                        FontSize="Title"/>
+                                                                   TextColor="{DynamicResource ThemeTextColor}"
+                                                                   HorizontalOptions="CenterAndExpand"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Title"/>
                                                             <!-- Age-->
                                                             <StackLayout Orientation="Horizontal"
-                                                                HorizontalOptions="CenterAndExpand"
-                                                                Spacing="{StaticResource descriptionSpacing}"
-                                                                IsVisible="{Binding SearchResult.Deathplace,
-                                                                        Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }">
+                                                                         HorizontalOptions="CenterAndExpand"
+                                                                         Spacing="{StaticResource descriptionSpacing}"
+                                                                         IsVisible="{Binding SearchResult.Deathplace,
+                                                                                 Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }">
                                                                 <Label Text="{Binding SearchResult.Age}"
                                                                 TextColor="{DynamicResource ThemeTextColor}"/>
                                                                 <Label Text="Years old"
@@ -331,8 +338,8 @@
                                                             </StackLayout>
                                                             <!-- Description-->
                                                             <Label Text="{Binding SearchResult.Description}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"
-                                                            Margin="5"/>
+                                                                   TextColor="{DynamicResource ThemeTextColor}"
+                                                                   Margin="5"/>
 
                                                         </StackLayout>
                                                     </Grid>
@@ -631,11 +638,9 @@
                                                                 Margin="0">
                                                         <!--Title of the "KnownFor" sction--> 
                                                         <Label Text="Known for"
-                                                                   TextColor="{DynamicResource ThemeTextColor}"
-                                                                   HorizontalOptions="Start"
-                                                                   FontSize="20"
-                                                                   FontAttributes="Bold"
-                                                                   Margin="10"
+                                                               Style="{DynamicResource ResultSubTitle}"
+                                                               HorizontalOptions="Start"
+                                                               
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.KnownFor}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
@@ -648,11 +653,8 @@
                                                         </CollectionView>
                                                         <!--Title of the "seen on"--> 
                                                         <Label Text="Seen on"
-                                                                   TextColor="{DynamicResource ThemeTextColor}"
-                                                                   HorizontalOptions="Start"
-                                                                   FontSize="20"
-                                                                   FontAttributes="Bold"
-                                                                   Margin="10"
+                                                               Style="{DynamicResource ResultSubTitle}"
+                                                               HorizontalOptions="Start"
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.SeenOn}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"

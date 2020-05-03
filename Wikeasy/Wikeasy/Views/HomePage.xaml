@@ -638,10 +638,8 @@
                                                                 Margin="0">
                                                         <!--Title of the "KnownFor" sction--> 
                                                         <Label Text="Known for"
-                                                               Style="{DynamicResource ResultSubTitle}"
-                                                               HorizontalOptions="Start"
-                                                               
-                                                                   />
+                                                               Style="{DynamicResource ResultSubTitle}"/>
+                                                        
                                                         <CollectionView ItemsSource="{Binding SearchResult.KnownFor}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource movieListTemplate}"

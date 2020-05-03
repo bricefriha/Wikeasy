@@ -93,6 +93,9 @@ namespace Wikeasy.Views
 
                 viewHeaderBanner.IsVisible = true;
 
+                // Reset scroll
+                MainScroll.ScrollToAsync(0, 0, false);
+
             }
 
         }

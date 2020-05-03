@@ -262,8 +262,7 @@
                                         PlaceholderColor="{DynamicResource ThemeTextColor}"
                                         WidthRequest="250"
                                         ReturnType="Search"
-                                        Focused="txtSearch_Focused"
-                                       Text="Jake Gyllenhaal"/>
+                                        Focused="txtSearch_Focused"/>
                             </StackLayout>
 
                             <!-- Result zone-->
@@ -275,7 +274,7 @@
                                                 BorderColor="Black"
                                                 Padding="5"
                                                 >
-                                <ScrollView Scrolled="ScrollView_Scrolled">
+                                <ScrollView Scrolled="ScrollView_Scrolled" x:Name="MainScroll">
                                     <StackLayout>
                                         <!-- A personality -->
                                         <StackLayout IsVisible="False"
@@ -782,22 +781,14 @@
                                                     <StackLayout Grid.Row="0" Margin="0">
                                                         <!-- Overview sction -->
                                                         <Label Text="Overview"
-                                                                   TextColor="{DynamicResource ThemeTextColor}"
-                                                                   HorizontalOptions="Start"
-                                                                   FontSize="20"
-                                                                   FontAttributes="Bold"
-                                                                   Margin="5"
+                                                               Style="{DynamicResource ResultSubTitle}"
                                                                    />
                                                         <Label Text="{Binding SearchResult.Description}"
                                                                HorizontalOptions="Center"
                                                                    />
                                                         <!--Title of the "Cast" -->
                                                         <Label Text="Cast"
-                                                                   TextColor="{DynamicResource ThemeTextColor}"
-                                                                   HorizontalOptions="Start"
-                                                                   FontSize="20"
-                                                                   FontAttributes="Bold"
-                                                                   Margin="5,0,0,0"
+                                                               Style="{DynamicResource ResultSubTitle}"
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.Casts}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"

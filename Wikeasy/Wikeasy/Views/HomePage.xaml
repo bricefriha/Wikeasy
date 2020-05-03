@@ -9,81 +9,43 @@
             xmlns:Helpers="clr-namespace:Wikeasy.Helpers"
              xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
             xmlns:Wikes="clr-namespace:Wikeasy.Models"
-            xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
             x:Class="Wikeasy.Views.HomePage"
             Title="{Binding Title}"
-             
             x:Name="homePage">
 
     <ContentPage.Resources>
         <Helpers:StringNullOrEmptyBoolConverter x:Key="NullToVisibilityConverter"/>
         <Helpers:StringNotNullOrEmptyBoolConverter x:Key="StringNotNullOrEmptyBoolConverter"/>
         <ResourceDictionary>
-            <x:Double x:Key="indSize">40</x:Double>
-            <x:Double x:Key="searchbarHeight">45</x:Double>
-            <x:Double x:Key="searchbarWidth">350</x:Double>
-            <x:Double x:Key="descriptionSpacing">2</x:Double>
-            <x:Double x:Key="resultSize">700</x:Double>
-            <x:Double x:Key="collectionViewHeight">300</x:Double>
-            <!-- Debug Rainbow-->
-            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
-                <Setter Property="rainbows:DebugRainbow.ShowColors" Value="False" />
-            </Style>
-            <!-- Wikipedia sources-->
-            <ContentView x:Key="WikipediaSource">
-                <StackLayout Orientation="Horizontal"
-                            HorizontalOptions="End"
-                             Margin="0">
-                    <!-- Tap to get acces to the source -->
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.WikipediaLink}"/>
-                    </StackLayout.GestureRecognizers>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Import all labels to mention sources-->
+                <!--<ResourceDictionary MergedWith="Ressource:ResourceDictionaries.Mentions"/>-->
+                <ResourceDictionary>
+                    <x:Double x:Key="indSize">40</x:Double>
+                    <x:Double x:Key="searchbarHeight">45</x:Double>
+                    <x:Double x:Key="searchbarWidth">365</x:Double>
+                    <x:Double x:Key="descriptionSpacing">2</x:Double>
+                    <x:Double x:Key="resultSize">700</x:Double>
+                    <x:Double x:Key="collectionViewHeight">300</x:Double>
+                    <x:Double x:Key="resultElementElevation">4</x:Double>
+                    <!-- Debug Rainbow-->
+                    <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                        <Setter Property="rainbows:DebugRainbow.ShowColors" Value="False" />
+                    </Style>
+                    <!-- Style for result's subtitles-->
+                    <Style TargetType="Label" x:Key="ResultSubTitle">
+                        <Setter Property="TextColor" Value="{DynamicResource ThemeTitleColor}"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
 
-                    <!-- Wikipedia label-->
-                    <Label Text="From Wikipedia"
-                            FontSize="Small"
-                            TextColor="{DynamicResource ThemeTextColor}"/>
 
-                    <!-- Wikipedia logo-->
-                    <Label 
-                            Text="&#xf266;"
-                            FontSize="Small"
-                            FontFamily="{StaticResource FA-Brands}"
-                            IsVisible="{Binding IsNotLoading}"
-                            HorizontalOptions="Start"
-                            VerticalOptions="Center"
-                            TextColor="{DynamicResource ThemeTextColor}"/>
-
-                </StackLayout>
-            </ContentView>
-            <!-- TMDB sources-->
-            <ContentView x:Key="TmdbSource">
-                <StackLayout Orientation="Horizontal"
-                            HorizontalOptions="End"
-                            Margin="0">
-                    <!-- Tap to get acces to the source -->
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.TmdbLink}"/>
-                    </StackLayout.GestureRecognizers>
-
-                    <!-- TMDB label-->
-                    <Label Text="From "
-                            FontSize="15"
-                            VerticalOptions="Center"
-                            TextColor="{DynamicResource ThemeTextColor}"/>
-
-                    <!-- TMDB logo-->
-                    <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
-                                                    HeightRequest="65" 
-                                                    VerticalOptions="Center"
-                                                    Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
-                </StackLayout>
-            </ContentView>
-
-            <!-- Templates -->
-            <DataTemplate x:Key="movieListTemplate">
-                <StackLayout>
-                    <renderedViews:MaterialFrame
+                    <!-- Templates -->
+                    <DataTemplate x:Key="movieListTemplate">
+                        <StackLayout>
+                            <renderedViews:MaterialFrame
                                     Elevation="5"
                                     WidthRequest="150"
                                     CornerRadius="8"
@@ -92,12 +54,13 @@
                                     IsVisible="{Binding SearchResult.ReleaseDate,
                                     Converter ={StaticResource NullToVisibilityConverter} }"
                                     HeightRequest="290">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <renderedViews:MaterialFrame
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <renderedViews:MaterialFrame
                                                     Elevation="6"
                                                     VerticalOptions="Center"
                                                     HorizontalOptions="Center"
@@ -108,47 +71,47 @@
                                                     Grid.Row="0"
                                                     IsVisible="{Binding SearchResult.Img,
                                                             Converter ={StaticResource NullToVisibilityConverter} }"  >
-                                <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
+                                        <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
                                     Aspect="AspectFit"
                                     HorizontalOptions="Center"/>
-                                
-                            </renderedViews:MaterialFrame>
-                            
-                            <StackLayout Grid.Row="1">
-                                <!-- Title -->
-                                <Label Text="{Binding Title}"
+
+                                    </renderedViews:MaterialFrame>
+
+                                    <StackLayout Grid.Row="1">
+                                        <!-- Title -->
+                                        <Label Text="{Binding Title}"
                                         TextColor="{DynamicResource ThemeTextColor}"
                                         FontAttributes="Bold"
                                         FontSize="20"
                                         HorizontalOptions="Center"
                                         Grid.Row="1"/>
-                                <!-- Release date -->
-                                <Label Text="{Binding ReleaseDate,StringFormat='{0:dd MMMM yyyy}'}"
+                                        <!-- Release date -->
+                                        <Label Text="{Binding ReleaseDate,StringFormat='{0:dd MMMM yyyy}'}"
                                         TextColor="{DynamicResource ThemeTextColor}"
                                         FontSize="12"
                                         HorizontalOptions="Center"
                                         Grid.Row="1"/>
-                            </StackLayout>
-                        </Grid>
-                    </renderedViews:MaterialFrame>
-                </StackLayout>
-            </DataTemplate>
-            <!-- collection view template of casts -->
-            <DataTemplate x:Key="castListTemplate">
-                <StackLayout>
-                    <renderedViews:MaterialFrame
+                                    </StackLayout>
+                                </Grid>
+                            </renderedViews:MaterialFrame>
+                        </StackLayout>
+                    </DataTemplate>
+                    <!-- collection view template of casts -->
+                    <DataTemplate x:Key="castListTemplate">
+                        <StackLayout>
+                            <renderedViews:MaterialFrame
                                     Elevation="5"
                                     WidthRequest="150"
                                     CornerRadius="8"
                                     Margin="2"
                                     LightThemeBackgroundColor="{DynamicResource ThemeResultBackgroundColour}"
                                     HeightRequest="290">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <renderedViews:MaterialFrame
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <renderedViews:MaterialFrame
                                                     Elevation="6"
                                                     VerticalOptions="Center"
                                                     HorizontalOptions="Center"
@@ -160,80 +123,94 @@
                                                     IsVisible="{Binding SearchResult.Img,
                                                             Converter ={StaticResource NullToVisibilityConverter} }"              
                                                     >
-                                <Image Source="{Binding ProfilePath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
+                                        <Image Source="{Binding ProfilePath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
                                     Aspect="AspectFit"/>
+                                    </renderedViews:MaterialFrame>
+                                    <StackLayout Grid.Row="1">
+                                        <!-- Title -->
+                                        <Label Text="{Binding Name}"
+                                               TextColor="{DynamicResource ThemeTextColor}"
+                                               FontAttributes="Bold"
+                                               FontSize="20"
+                                               HorizontalOptions="Center"
+                                               Grid.Row="1"/>
+                                        <!-- Release date -->
+                                        <Label Text="{Binding Character}"
+                                               TextColor="{DynamicResource ThemeTextColor}"
+                                               FontSize="12"
+                                               HorizontalOptions="Center"
+                                               Grid.Row="1"/>
+                                    </StackLayout>
+                                </Grid>
                             </renderedViews:MaterialFrame>
-                            <StackLayout Grid.Row="1">
-                                <!-- Title -->
-                                <Label Text="{Binding Name}"
-                                        TextColor="{DynamicResource ThemeTextColor}"
-                                        FontAttributes="Bold"
-                                        FontSize="20"
-                                        HorizontalOptions="Center"
-                                        Grid.Row="1"/>
-                                <!-- Release date -->
-                                <Label Text="{Binding Character}"
-                                        TextColor="{DynamicResource ThemeTextColor}"
-                                        FontSize="12"
-                                        HorizontalOptions="Center"
-                                        Grid.Row="1"/>
-                            </StackLayout>
-                        </Grid>
-                    </renderedViews:MaterialFrame>
-                </StackLayout>
-            </DataTemplate>
+                        </StackLayout>
+                    </DataTemplate>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <Grid BackgroundColor="{DynamicResource ThemeBackgroundColor}">
         <Grid.RowDefinitions>
             <!--<RowDefinition Height="10"/>-->
-            <RowDefinition Height="180"/>
+            <!--<RowDefinition Height="150"/>-->
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <!--Header banner -->
-        <yummy:PancakeView Grid.Row="0"
-                        VerticalOptions="Center"
-                        WidthRequest="360"
-                        HorizontalOptions="Center"
-                        BackgroundGradientStartColor="{DynamicResource ThemeSearchBarColor}"
-                        BackgroundGradientEndColor="{DynamicResource ThemeBackgroundColor}"
-                        BorderColor="{DynamicResource ThemeSearchBarColor}"
-                        BorderThickness="0"
-                        CornerRadius="18"
-                        BackgroundGradientAngle="180"
-                        Padding="10"
-                                    >
-            <StackLayout  Spacing="0">
-                <!-- App logo -->
-                <Image Source="WikeasyLogo.png"
-                    WidthRequest="90"
-                    HeightRequest="90"/>
-
-                <!--Title-->
-                <Label Text="Wikeasy"
-                TextColor="{DynamicResource ThemeTitleColor}"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                FontSize="20"/>
-            </StackLayout>
-
-        </yummy:PancakeView>
+        
 
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <StackLayout 
                     VerticalOptions="Start"
                     HorizontalOptions="CenterAndExpand"
                     Spacing="5">
+                <!--Header banner -->
+                <yummy:PancakeView Grid.Row="0"
+                                   x:Name="viewHeaderBanner"
+                                   VerticalOptions="Center"
+                                   WidthRequest="360"
+                                   HorizontalOptions="Center"
+                                   BackgroundGradientStartColor="{DynamicResource ThemeSearchBarColor}"
+                                   BackgroundGradientEndColor="{DynamicResource ThemeBackgroundColor}"
+                                   BorderColor="{DynamicResource ThemeSearchBarColor}"
+                                   BorderThickness="0"
+                                   CornerRadius="18"
+                                   HeightRequest="140"
+                                   BackgroundGradientAngle="180"
+                                   Margin="0,0,2,10"
+                                   Padding="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- App logo -->
+                        <Image Source="WikeasyLogo.png"
+                               WidthRequest="75"
+                               HeightRequest="75"
+                               VerticalOptions="End"
+                               Grid.Row="0"/>
+
+                        <!--Title-->
+                        <Label Text="Wikeasy"
+                               TextColor="{DynamicResource ThemeTextColor}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               FontSize="20"
+                               VerticalOptions="Start"
+                               Grid.Row="1"/>
+                    </Grid>
+
+                </yummy:PancakeView>
                 <!-- Title -->
                 <Label x:Name="lblSubtitle"
-                    Text="{Binding Subtitle}" 
-                    FontAttributes="Bold" FontSize="Title"
-                    VerticalOptions="CenterAndExpand"
-                    HorizontalOptions="CenterAndExpand"
-                    TextColor="{DynamicResource ThemeTitleColor}"
+                       Text="{Binding Subtitle}" 
+                       FontAttributes="Bold" FontSize="Title"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       TextColor="{DynamicResource ThemeTextColor}"
+                       Margin="0,10,0,0"
                     />
                 <StackLayout Orientation="Horizontal"
                                 HorizontalOptions="CenterAndExpand"
@@ -259,7 +236,7 @@
                                                         HeightRequest="{StaticResource indSize}" 
                                                         IsRunning="{Binding IsLoading}" 
                                                         IsVisible="{Binding IsLoading}" 
-                                                        Color="{DynamicResource ThemeTextColor}" 
+                                                        Color="{DynamicResource ThemeTitleColor}" 
                                                         HorizontalOptions="Center" 
                                                         VerticalOptions="Center"
                                                         Margin="2,0,0,0"
@@ -270,7 +247,7 @@
                                         FontSize="Large"
                                         FontFamily="{StaticResource FA-Solid}"
                                         IsVisible="{Binding IsNotLoading}"
-                                        TextColor="{DynamicResource ThemeTextColor}"
+                                        TextColor="{DynamicResource ThemeTitleColor}"
                                         HorizontalOptions="Start"
                                         VerticalOptions="Center"/>
 
@@ -286,8 +263,6 @@
                                         WidthRequest="250"
                                         ReturnType="Search"
                                         Focused="txtSearch_Focused"/>
-
-
                             </StackLayout>
 
                             <!-- Result zone-->
@@ -299,7 +274,7 @@
                                                 BorderColor="Black"
                                                 Padding="5"
                                                 >
-                                <ScrollView>
+                                <ScrollView Scrolled="ScrollView_Scrolled" x:Name="MainScroll">
                                     <StackLayout>
                                         <!-- A personality -->
                                         <StackLayout IsVisible="False"
@@ -344,16 +319,16 @@
                                                         <StackLayout Margin="10">
                                                             <!-- Name -->
                                                             <Label Text="{Binding SearchResult.Title}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"
-                                                        HorizontalOptions="CenterAndExpand"
-                                                        FontAttributes="Bold"
-                                                        FontSize="Title"/>
+                                                                   TextColor="{DynamicResource ThemeTextColor}"
+                                                                   HorizontalOptions="CenterAndExpand"
+                                                                   FontAttributes="Bold"
+                                                                   FontSize="Title"/>
                                                             <!-- Age-->
                                                             <StackLayout Orientation="Horizontal"
-                                                                HorizontalOptions="CenterAndExpand"
-                                                                Spacing="{StaticResource descriptionSpacing}"
-                                                                IsVisible="{Binding SearchResult.Deathplace,
-                                                                        Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }">
+                                                                         HorizontalOptions="CenterAndExpand"
+                                                                         Spacing="{StaticResource descriptionSpacing}"
+                                                                         IsVisible="{Binding SearchResult.Deathplace,
+                                                                                 Converter ={StaticResource StringNotNullOrEmptyBoolConverter} }">
                                                                 <Label Text="{Binding SearchResult.Age}"
                                                                 TextColor="{DynamicResource ThemeTextColor}"/>
                                                                 <Label Text="Years old"
@@ -362,8 +337,8 @@
                                                             </StackLayout>
                                                             <!-- Description-->
                                                             <Label Text="{Binding SearchResult.Description}"
-                                                            TextColor="{DynamicResource ThemeTextColor}"
-                                                            Margin="5"/>
+                                                                   TextColor="{DynamicResource ThemeTextColor}"
+                                                                   Margin="5"/>
 
                                                         </StackLayout>
                                                     </Grid>
@@ -372,7 +347,7 @@
                                                 </Grid>
                                                 <!-- Quick description -->
                                                 <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                             Elevation="2"
+                                                                             Elevation="{DynamicResource resultElementElevation}"
                                                                              Grid.Row="1" Padding="0" Margin="0">
                                                     <Grid Margin="10">
                                                         <Grid.RowDefinitions>
@@ -440,26 +415,27 @@
                                                                 <Label Text="{Binding SearchResult.Deathplace}"
                                                                         TextColor="{DynamicResource ThemeTextColor}"/>
 
+
                                                             </StackLayout>
                                                         </StackLayout>
 
                                                         <!-- Mention source -->
-                                                        <!--<ContentView Grid.Row="1" Content="{StaticResource WikipediaSource}"/>-->
+                                                        <!--<ContentView Grid.Row="1" Content="{DynamicResource WikipediaSource}" AutomationId="0"/>-->
                                                         <StackLayout Orientation="Horizontal"
                                                                             HorizontalOptions="End"
                                                                              Margin="0"
                                                                      Grid.Row="1">
-                                                            <!-- Tap to get acces to the source -->
+                                                             <!--Tap to get acces to the source--> 
                                                             <StackLayout.GestureRecognizers>
                                                                 <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.WikipediaLink}"/>
                                                             </StackLayout.GestureRecognizers>
 
-                                                            <!-- Wikipedia label-->
+                                                             <!--Wikipedia label-->
                                                             <Label Text="From Wikipedia"
                                                                     FontSize="Small"
                                                                     TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                                            <!-- Wikipedia logo-->
+                                                             <!--Wikipedia logo-->
                                                             <Label 
                                                                 Text="&#xf266;"
                                                                 FontSize="Small"
@@ -494,7 +470,7 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
                                                 <renderedViews:MaterialFrame
-                                                                Elevation="4"
+                                                                Elevation="{DynamicResource resultElementElevation}"
                                                                 VerticalOptions="Center"
                                                                 HorizontalOptions="Center"
                                                                 Padding="0"
@@ -545,7 +521,7 @@
 
                                             <!-- Quick description -->
                                                 <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                             Elevation="2"
+                                                                             Elevation="{DynamicResource resultElementElevation}"
                                                                              Padding="0" Margin="0">
                                                     <Grid Margin="10">
                                                         <Grid.RowDefinitions>
@@ -617,22 +593,23 @@
                                                         </StackLayout>
 
                                                         <!-- Mention source -->
-                                                        <!--<ContentView Grid.Row="1" Content="{StaticResource WikipediaSource}"/>-->
+                                                        <!--<ContentView Grid.Row="1" Content="{DynamicResource WikipediaSource}" AutomationId="1"/>-->
+
                                                     <StackLayout Orientation="Horizontal"
                                                                             HorizontalOptions="End"
                                                                              Margin="0"
                                                                      Grid.Row="1">
-                                                        <!-- Tap to get acces to the source -->
+                                                         <!--Tap to get acces to the source--> 
                                                         <StackLayout.GestureRecognizers>
                                                             <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.WikipediaLink}"/>
                                                         </StackLayout.GestureRecognizers>
 
-                                                        <!-- Wikipedia label-->
+                                                         <!--Wikipedia label-->
                                                         <Label Text="From Wikipedia"
                                                                     FontSize="Small"
                                                                     TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                                        <!-- Wikipedia logo-->
+                                                         <!--Wikipedia logo-->
                                                         <Label 
                                                                 Text="&#xf266;"
                                                                 FontSize="Small"
@@ -649,45 +626,38 @@
                                                 </renderedViews:MaterialFrame>
                                             <!-- TMDB result -->
                                             <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                         Elevation="2"
-                                                                         Padding="0" Margin="0">
+                                                                             Elevation="{DynamicResource resultElementElevation}"
+                                                                         Margin="0,0,0,10" Padding="0">
                                                 <Grid >
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="*"/>
-                                                        <RowDefinition Height="20"/>
+                                                        <RowDefinition Height="50"/>
                                                     </Grid.RowDefinitions>
                                                     <StackLayout  Grid.Row="0"
                                                                 Margin="0">
-                                                        <!--Title of the "KnownFor" sction -->
+                                                        <!--Title of the "KnownFor" sction--> 
                                                         <Label Text="Known for"
-                                                                   TextColor="{DynamicResource ThemeTextColor}"
-                                                                   HorizontalOptions="Start"
-                                                                   FontSize="20"
-                                                                   FontAttributes="Bold"
-                                                                   Margin="10"
-                                                                   />
+                                                               Style="{DynamicResource ResultSubTitle}"/>
+                                                        
                                                         <CollectionView ItemsSource="{Binding SearchResult.KnownFor}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource movieListTemplate}"
                                                                         HeightRequest="{StaticResource collectionViewHeight}"
-                                                                        Margin="10,0,0,0">
+                                                                        Margin="10,0,5,0">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                             </CollectionView.ItemsLayout>
                                                         </CollectionView>
-                                                        <!--Title of the "seen on" -->
+                                                        <!--Title of the "seen on"--> 
                                                         <Label Text="Seen on"
-                                                                   TextColor="{DynamicResource ThemeTextColor}"
-                                                                   HorizontalOptions="Start"
-                                                                   FontSize="20"
-                                                                   FontAttributes="Bold"
-                                                                   Margin="10"
+                                                               Style="{DynamicResource ResultSubTitle}"
+                                                               HorizontalOptions="Start"
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.SeenOn}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource movieListTemplate}"
                                                                         HeightRequest="{StaticResource collectionViewHeight}"
-                                                                        Margin="10,0,0,0">
+                                                                        Margin="10,0,5,0">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
                                                             </CollectionView.ItemsLayout>
@@ -695,27 +665,36 @@
 
                                                     </StackLayout>
                                                     <!-- Mention TMDB sources-->
-                                                    <!--<ContentView Grid.Row="1" Content="{StaticResource TmdbSource}"/>-->
+                                                    <!--<ContentView Grid.Row="1" Content="{DynamicResource TmdbSource}" AutomationId="10" />-->
+                                                   
+
                                                     <StackLayout Orientation="Horizontal"
                                                                     HorizontalOptions="End"
                                                                  Grid.Row="1">
-                                                        <!-- Tap to get acces to the source -->
+                                                        
+                                                     <!--Tap to get acces to the source--> 
+                                                    
                                                         <StackLayout.GestureRecognizers>
                                                             <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.TmdbLink}"/>
                                                         </StackLayout.GestureRecognizers>
 
-                                                        <!-- TMDB label-->
+                                                        
+                                                     <!--TMDB label-->
+                                                    
                                                         <Label Text="From "
                                                                 FontSize="15"
                                                                 VerticalOptions="Center"
                                                                 TextColor="{DynamicResource ThemeTextColor}"/>
 
-                                                        <!-- TMDB logo-->
+                                                        
+                                                     <!--TMDB logo-->
+                                                    
                                                         <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
                                                                 HeightRequest="65" 
                                                                 VerticalOptions="Center"
                                                                 Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
                                                     </StackLayout>
+                                                   
                                                 </Grid>
                                             </renderedViews:MaterialFrame>
                                         </StackLayout>
@@ -740,7 +719,7 @@
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <renderedViews:MaterialFrame
-                                                                Elevation="4"
+                                                                Elevation="{DynamicResource resultElementElevation}"
                                                                 VerticalOptions="Center"
                                                                 HorizontalOptions="Center"
                                                                 Padding="0"
@@ -792,38 +771,30 @@
 
 
                                             <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
-                                                                             Elevation="2"
-                                                                         Margin="0" Padding="10">
+                                                                             Elevation="{DynamicResource resultElementElevation}"
+                                                                         Margin="0,0,0,10" Padding="10">
                                                 <Grid>
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="*"/>
                                                         <RowDefinition Height="20"/>
                                                     </Grid.RowDefinitions>
-                                                    <StackLayout Grid.Row="0"
-                                                                     Margin="0">
+                                                    <StackLayout Grid.Row="0" Margin="0">
                                                         <!-- Overview sction -->
                                                         <Label Text="Overview"
-                                                                   TextColor="{DynamicResource ThemeTextColor}"
-                                                                   HorizontalOptions="Start"
-                                                                   FontSize="20"
-                                                                   FontAttributes="Bold"
-                                                                   Margin="5"
+                                                               Style="{DynamicResource ResultSubTitle}"
                                                                    />
                                                         <Label Text="{Binding SearchResult.Description}"
                                                                HorizontalOptions="Center"
                                                                    />
                                                         <!--Title of the "Cast" -->
                                                         <Label Text="Cast"
-                                                                   TextColor="{DynamicResource ThemeTextColor}"
-                                                                   HorizontalOptions="Start"
-                                                                   FontSize="20"
-                                                                   FontAttributes="Bold"
-                                                                   Margin="5,0,0,0"
+                                                               Style="{DynamicResource ResultSubTitle}"
                                                                    />
                                                         <CollectionView ItemsSource="{Binding SearchResult.Casts}"
                                                                             ItemsUpdatingScrollMode="KeepScrollOffset"
                                                                         ItemTemplate="{StaticResource castListTemplate}"
-                                                                        HeightRequest="{StaticResource collectionViewHeight}">
+                                                                        HeightRequest="{StaticResource collectionViewHeight}"
+                                                                        Margin="10,0,5,0">
                                                             <CollectionView.ItemsLayout>
                                                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
                                                             </CollectionView.ItemsLayout>
@@ -831,7 +802,34 @@
                                                     </StackLayout>
 
                                                     <!-- Mention TMDB sources-->
-                                                    <ContentView Grid.Row="1" Content="{StaticResource TmdbSource}"/>
+                                                    <!--<ContentView Grid.Row="1" Content="{DynamicResource TmdbSource}" AutomationId="11" />-->
+                                                    <StackLayout Orientation="Horizontal"
+                                                                    HorizontalOptions="End"
+                                                                 Grid.Row="1">
+
+                                                        <!--Tap to get acces to the source-->
+
+                                                        <StackLayout.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.TmdbLink}"/>
+                                                        </StackLayout.GestureRecognizers>
+
+
+                                                        <!--TMDB label-->
+
+                                                        <Label Text="From "
+                                                                FontSize="15"
+                                                                VerticalOptions="Center"
+                                                                TextColor="{DynamicResource ThemeTextColor}"/>
+
+
+                                                        <!--TMDB logo-->
+
+                                                        <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
+                                                                HeightRequest="65" 
+                                                                VerticalOptions="Center"
+                                                                Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
+                                                    </StackLayout>
+
                                                 </Grid>
                                             </renderedViews:MaterialFrame>
 
@@ -888,7 +886,7 @@
 
                                                         <Label  Text="{Binding SearchResult.ExtendedDescription}"/>
                                                         <!-- Mention source -->
-                                                        <ContentView Content="{StaticResource WikipediaSource}"/>
+                                                        <ContentView Content="{DynamicResource WikipediaSource}" AutomationId="2"/>
                                                     </StackLayout>
 
                                                 </Grid>

@@ -8,13 +8,13 @@
     <Color x:Key="ThemeBackgroundColor">Black</Color>
     <Color x:Key="ThemeResultBackgroundColour">#191919</Color>
     <!--#191919-->
-    <Color x:Key="ThemePrimaryColor">#B68E2B</Color>
+    <Color x:Key="ThemePrimaryColor">#FF5A00</Color>
     <Color x:Key="ThemeSearchBarColor">#4C4C4C</Color>
-    <Color x:Key="ThemeTextColor">WhiteSmoke</Color>
-    <Color x:Key="ThemeTitleColor">#B68E2B</Color>
-    <Color x:Key="ThemeMainTitleColor">WhiteSmoke</Color>
+    <Color x:Key="ThemeTextColor">#F1F1F1</Color>
+    <Color x:Key="ThemeTitleColor">#FF5A00</Color>
+    <Color x:Key="ThemeMainTitleColor">#F1F1F1</Color>
     <Color x:Key="ThemeBarBackgroundColor">#4C4C4C</Color>
-    <Color x:Key="ThemeBarTextColor">#B68E2B</Color> 
+    <Color x:Key="ThemeBarTextColor">#F1F1F1</Color> 
     <Style x:Key="Title" TargetType="Label">
         <!--<Setter Property="TextColor" 
                     Value="{StaticResource TextPrimaryColor}"/>-->

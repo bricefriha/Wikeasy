@@ -7,12 +7,12 @@
                      x:Class="Wikeasy.Themes.LightTheme">
     <Color x:Key="ThemeBackgroundColor">#E6E6E6</Color>
     <Color x:Key="ThemeResultBackgroundColour">#E6E6E6</Color>
-    <Color x:Key="ThemePrimaryColor">#B68E2B</Color>
+    <Color x:Key="ThemePrimaryColor">#CC4800</Color>
     <Color x:Key="ThemeSearchBarColor">#F1F1F1</Color>
     <Color x:Key="ThemeTextColor">#1a1a1a</Color>
-    <Color x:Key="ThemeTitleColor">#1a1a1a</Color>
+    <Color x:Key="ThemeTitleColor">#CC4800</Color>
     <Color x:Key="ThemeMainTitleColor">#F1F1F1</Color>
-    <Color x:Key="ThemeBarBackgroundColor">#B68E2B</Color>
+    <Color x:Key="ThemeBarBackgroundColor">#FF5A00</Color>
     <Color x:Key="ThemeBarTextColor">#F1F1F1</Color>
     <Style x:Key="Title" TargetType="Label">
                 <!--<Setter Property="TextColor" 

@@ -59,17 +59,21 @@ namespace Wikeasy.ViewModels
             }
         }
 
-        private Command _goToSource;
+        private readonly Command _goToSource;
         public Command GoToSource
         {
-            //set
-            //{
-            //    _goToSource = value;
-            //    OnPropertyChanged();
-            //}
             get
             {
                 return _goToSource;
+            }
+        }
+
+        private readonly Command _resultScroll;
+        public Command ResultScroll
+        {
+            get
+            {
+                return _resultScroll;
             }
         }
 
@@ -136,6 +140,9 @@ namespace Wikeasy.ViewModels
 
             _goToSource = new Command(url => Launcher.OpenAsync(new Uri(url.ToString())));
 
+            // Set scroll command
+            //_resultScroll = new Command();
+
             // Default values
             //
             // Set the title
@@ -159,27 +166,33 @@ namespace Wikeasy.ViewModels
             // Set the loading status as true
             IsLoading = true;
 
-            // Define a new Data result
-            DataResult dataResult = new DataResult(await _service.GetWikiData(WkeToolbox.FiltringInputSearch(searchInput)));
-
-
-            if (dataResult.Wikidata is null)
-                Subtitle = subtitleDataNotFound;
-            else
+            // Verify if the input is not null
+            if (!string.IsNullOrEmpty(searchInput))
             {
-                // Get the search result after building it
-                SearchResult = dataResult.BuildResult();
+                // Define a new Data result
+                DataResult dataResult = new DataResult(await _service.GetWikiData(WkeToolbox.FiltringInputSearch(searchInput)));
 
-                // Set the Default subtitle
-                Subtitle = subtitleResult;
 
-                // Set the result as available
-                IsResultAvailable = true;
+                if (dataResult.Wikidata is null)
+                    Subtitle = subtitleDataNotFound;
+                else
+                {
+                    // Get the search result after building it
+                    SearchResult = dataResult.BuildResult();
 
-                // 
-                IsResultSomebody = true;
+                    // Set the Default subtitle
+                    Subtitle = subtitleResult;
+
+                    // Set the result as available
+                    IsResultAvailable = true;
+
+                    // 
+                    IsResultSomebody = true;
+                }
             }
-            
+
+            // Set the subtitle
+            Subtitle = subtitleDefault;
 
             // Set the loading status as false
             IsLoading = false;

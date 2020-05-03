@@ -86,8 +86,32 @@ namespace Wikeasy.Objects
 
             // Set result type
             this.SetResultType(birthdate);
+            DateTime birthdateDt = new DateTime();
+            bool birthdayFilled = false;
 
-            string displaytitle = _wikidata.Lead.Displaytitle;
+
+            if (!string.IsNullOrEmpty(birthdate))
+            {
+                birthdayFilled = BirthdayFilled(birthdate);
+
+                if (birthdayFilled)
+                {
+                    // get birthday in date time
+                    birthdateDt = DateTime.Parse(birthdate);
+
+                }
+                else
+                {
+                    birthdate = birthdate.Replace("-00", string.Empty);
+
+                    // get birthday in date time
+                    birthdateDt = DateTime.Parse(birthdate);
+                }
+            }
+            
+            
+
+            string displaytitle = WkeToolbox.HtmlEscape(_wikidata.Lead.Displaytitle);
             // Set actual result
             switch (_resultType)
             {
@@ -107,14 +131,17 @@ namespace Wikeasy.Objects
                     var movieStar = collectons.Results.First();
                     MovieCredits movieStarCredit = client.GetPersonMovieCreditsAsync(movieStar.Id).Result;
                     string name = movieStar.Name;
+
+                    
+
                     _actualResult = new MovieStarResult()
                     {
                         Img = _wikidata.Lead.Image.Urls["640"].ToString(),
                         Title = name,
                         Description = _wikidata.Lead.Description,
                         CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")?[0].InnerText,
-                        Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
-                        Birthdate = DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"),
+                        Age = GetAgeFromBirthdate(birthdateDt),
+                        Birthdate = birthdayFilled ? DateTime.Parse(birthdate).ToString("MMMM dd, yyyy") : DateTime.Parse(birthdate).ToString("MMMM, yyyy"),
                         Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")?[0].InnerText,
                         Deathplace = documentNode.SelectNodes("//*[@class='deathplace']")?[0].InnerText,
                         Residence = documentNode.SelectNodes("//*[@class='label']")?[0].InnerText,
@@ -130,7 +157,7 @@ namespace Wikeasy.Objects
                 case ResultType.Movie:
 
                     // Get Tmdb information
-                    string movieTitle = WkeToolbox.HtmlEscape(_wikidata.Lead.Displaytitle);
+                    string movieTitle = displaytitle;
 
                     // Get the client
                     TMDbClient clientMovie = new TMDbClient(App.Current.Resources["TmdbKey"].ToString());
@@ -166,8 +193,8 @@ namespace Wikeasy.Objects
                         Title = displaytitle,
                         Description = _wikidata.Lead.Description,
                         CurrentActivity = documentNode.SelectNodes("//*[@class='shortdescription nomobile noexcerpt noprint searchaux']")?[0].InnerText,
-                        Age = (DateTime.Now.Year - DateTime.Parse(birthdate).Year).ToString(),
-                        Birthdate = DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"),
+                        Age = GetAgeFromBirthdate(birthdateDt),
+                        Birthdate = birthdayFilled? DateTime.Parse(birthdate).ToString("MMMM dd, yyyy"): DateTime.Parse(birthdate).ToString("MMMM, yyyy"),
                         Birthplace = documentNode.SelectNodes("//*[@class='birthplace']")?[0].InnerText,
                         Deathplace = documentNode.SelectNodes("//*[@class='deathplace']")?[0].InnerText,
                         Residence = documentNode.SelectNodes("//*[@class='label']")?[0].InnerText,
@@ -182,7 +209,7 @@ namespace Wikeasy.Objects
                     _actualResult = new SearchResult()
                     {
                         Img = _wikidata.Lead.Image?.Urls["640"].ToString(),
-                        Title = _wikidata.Lead.Displaytitle,
+                        Title = displaytitle,
                         Description = _wikidata.Lead.Description,
                         Type = _resultType,
                         WikipediaLink = _wikipediaBaseUrl + displaytitle.Replace(' ', '_'),
@@ -196,6 +223,32 @@ namespace Wikeasy.Objects
                     break;
             }
             return _actualResult;
+        }
+        /// <summary>
+        /// Verifying is the birthday is filled in the birthdate
+        /// </summary>
+        /// <param name="birthdate">birtdate</param>
+        /// <returns>yes or no</returns>
+        private bool BirthdayFilled ( string birthdate)
+        {
+            // Split the date
+            var fields = birthdate.Split('-');
+
+            return fields[2] == "00" ? false : true; 
+        }
+        /// <summary>
+        /// Getting the age of a person from his birthdate
+        /// </summary>
+        /// <param name="birthdate">Birthdate</param>
+        /// <returns>Age</returns>
+        private string GetAgeFromBirthdate (DateTime birthdate)
+        {
+            var today = DateTime.Today;
+            var todayDay = (today.Year * 100 + today.Month) * 100 + today.Day;
+            var birthDay = (birthdate.Year * 100 + birthdate.Month) * 100 + birthdate.Day;
+
+            return ((todayDay - birthDay) / 10000).ToString();
+
         }
     }
 }

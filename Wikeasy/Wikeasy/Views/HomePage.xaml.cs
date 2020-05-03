@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using Wikeasy.Models;
 using Wikeasy.Views;
 using Wikeasy.ViewModels;
+using Wikeasy.Ressources.ResourceDictionaries;
 
 namespace Wikeasy.Views
 {
@@ -32,6 +33,7 @@ namespace Wikeasy.Views
             InitializeComponent() ;
 
             BindingContext = this._vm = new HomeViewModel();
+
         }
 
         async void txtSearch_Completed(object sender, EventArgs e)
@@ -50,6 +52,7 @@ namespace Wikeasy.Views
             // Seaching process
             await _vm.GenerateSearchResult(((Entry)sender).Text);
 
+
             // Do we get a result?
             if (_vm.IsResultAvailable)
             {
@@ -58,6 +61,10 @@ namespace Wikeasy.Views
 
                 // Change de corner radius
                 frameSearchBar.CornerRadius = SbActiveCornerRadius;
+
+                // Remove the banner
+                viewHeaderBanner.IsVisible = false;
+
             }
             else
                 AnimateWidthSearchBar(height, width);
@@ -83,6 +90,12 @@ namespace Wikeasy.Views
 
                 // Change de corner radius
                 frameSearchBar.CornerRadius = SbDefaultCornerRadius;
+
+                viewHeaderBanner.IsVisible = true;
+
+                // Reset scroll
+                MainScroll.ScrollToAsync(0, 0, false);
+
             }
 
         }
@@ -177,5 +190,23 @@ namespace Wikeasy.Views
 
         }
 
+        private void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            var view = (ScrollView)sender;
+            
+
+            //double newHeight = 130 - view.ScrollY;
+
+            //viewHeaderBanner.HeightRequest = newHeight;
+            //view.ScrollToAsync(0,0,false);
+
+            //// update the height of the layout with this callback
+            //Action<double> callbackHeight = input => { viewHeaderBanner.HeightRequest = input; };
+
+            //// Height anniation
+            //viewHeaderBanner.Animate("invisHeight", callbackHeight, startingHeight, newHeight, rate, length, easing);
+
+
+        }
     }
 }

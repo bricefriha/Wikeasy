@@ -45,4 +45,8 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Ressources\ResourceDictionaries\" />
+  </ItemGroup>
 </Project>

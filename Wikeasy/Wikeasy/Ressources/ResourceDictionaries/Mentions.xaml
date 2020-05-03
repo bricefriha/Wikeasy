@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             x:Class="Wikeasy.Ressources.ResourceDictionaries.Mentions">
+    <!-- Wikipedia sources-->
+    <StackLayout Orientation="Horizontal"
+                 HorizontalOptions="End"
+                 Margin="0" x:Key="WikipediaSource" >
+        <!-- Tap to get acces to the source -->
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.WikipediaLink}"/>
+        </StackLayout.GestureRecognizers>
+
+        <!-- Wikipedia label-->
+        <Label Text="From Wikipedia"
+               FontSize="Small"
+               TextColor="{DynamicResource ThemeTextColor}"/>
+
+        <!-- Wikipedia logo-->
+        <Label Text="&#xf266;"
+               FontSize="Small"
+               FontFamily="{StaticResource FA-Brands}"
+               IsVisible="{Binding IsNotLoading}"
+               HorizontalOptions="Start"
+               VerticalOptions="Center"
+               TextColor="{DynamicResource ThemeTextColor}"/>
+
+    </StackLayout>
+    <!-- TMDB sources-->
+    <StackLayout Orientation="Horizontal"
+                 HorizontalOptions="End"
+                 Margin="0" x:Key="TmdbSource" >
+        <!-- Tap to get acces to the source -->
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding GoToSource}" CommandParameter="{Binding SearchResult.TmdbLink}"/>
+        </StackLayout.GestureRecognizers>
+
+        <!-- TMDB label-->
+        <Label Text="From "
+               FontSize="15"
+               VerticalOptions="Center"
+               TextColor="{DynamicResource ThemeTextColor}"/>
+
+        <!-- TMDB logo-->
+        <ffimageloadingsvg:SvgCachedImage WidthRequest="65" 
+                                          HeightRequest="65" 
+                                          VerticalOptions="Center"
+                                          Source="resource://Wikeasy.Ressources.blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"/>
+    </StackLayout>
+</ResourceDictionary>

@@ -9,6 +9,7 @@ using Xamarin.Essentials;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Wikeasy.Ressources.ResourceDictionaries;
 
 namespace Wikeasy
 {
@@ -20,6 +21,9 @@ namespace Wikeasy
 
             //DependencyService.Register<MockDataStore>();
             MainPage = new MainPage();
+            
+            // Add the mentions to resources
+            App.Current.Resources.MergedDictionaries.Add(new Mentions());
         }
         /// <summary>
         /// Handle when your app starts

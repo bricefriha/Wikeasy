@@ -11,7 +11,7 @@
     <Color x:Key="ThemePrimaryColor">#FF5A00</Color>
     <Color x:Key="ThemeSearchBarColor">#4C4C4C</Color>
     <Color x:Key="ThemeTextColor">#F1F1F1</Color>
-    <Color x:Key="ThemeTitleColor">#CC4800</Color>
+    <Color x:Key="ThemeTitleColor">#FF5A00</Color>
     <Color x:Key="ThemeMainTitleColor">#F1F1F1</Color>
     <Color x:Key="ThemeBarBackgroundColor">#4C4C4C</Color>
     <Color x:Key="ThemeBarTextColor">#F1F1F1</Color> 

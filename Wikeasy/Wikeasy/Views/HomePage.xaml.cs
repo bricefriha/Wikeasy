@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using Wikeasy.Models;
 using Wikeasy.Views;
 using Wikeasy.ViewModels;
+using Wikeasy.Ressources.ResourceDictionaries;
 
 namespace Wikeasy.Views
 {
@@ -32,6 +33,7 @@ namespace Wikeasy.Views
             InitializeComponent() ;
 
             BindingContext = this._vm = new HomeViewModel();
+
         }
 
         async void txtSearch_Completed(object sender, EventArgs e)

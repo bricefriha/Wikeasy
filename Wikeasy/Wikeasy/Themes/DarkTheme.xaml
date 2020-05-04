@@ -4,21 +4,21 @@
                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      mc:Ignorable="d"
+                    xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
                      x:Class="Wikeasy.Themes.DarkTheme">
     <Color x:Key="ThemeBackgroundColor">Black</Color>
     <Color x:Key="ThemeResultBackgroundColour">#191919</Color>
-    <!--#191919-->
     <Color x:Key="ThemePrimaryColor">#FF5A00</Color>
     <Color x:Key="ThemeSearchBarColor">#4C4C4C</Color>
     <Color x:Key="ThemeTextColor">#F1F1F1</Color>
     <Color x:Key="ThemeTitleColor">#FF5A00</Color>
     <Color x:Key="ThemeMainTitleColor">#F1F1F1</Color>
     <Color x:Key="ThemeBarBackgroundColor">#4C4C4C</Color>
-    <Color x:Key="ThemeBarTextColor">#F1F1F1</Color> 
-    <Style x:Key="Title" TargetType="Label">
-        <!--<Setter Property="TextColor" 
-                    Value="{StaticResource TextPrimaryColor}"/>-->
-        <Setter Property="FontSize" Value="Large"/>
+    <Color x:Key="ThemeBarTextColor">#F1F1F1</Color>
+    <!-- Acrylic material frame-->
+    <Style x:Key="AcrylicFrame" TargetType="renderedViews:MaterialFrame">
+        <Setter Property="MaterialTheme" Value="Dark"/>
+        <Setter Property="Elevation" Value="4"/>
     </Style>
-    
+
 </ResourceDictionary>

@@ -41,7 +41,6 @@
                         <Setter Property="Margin" Value="10"/>
                     </Style>
 
-
                     <!-- Templates -->
                     <DataTemplate x:Key="movieListTemplate">
                         <StackLayout>
@@ -218,13 +217,13 @@
                     <!-- Search bar-->
                     <renderedViews:MaterialFrame
                                         Margin="0"
-                                        Elevation="8" 
                                         x:Name="frameSearchBar"
                                         VerticalOptions="CenterAndExpand"
-                                        CornerRadius="20"
+                                        CornerRadius="50"
                                         HeightRequest="{StaticResource searchbarHeight}"
                                         WidthRequest="{StaticResource searchbarWidth}"
                                         LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                        Style="{DynamicResource AcrylicFrame}"
                                         Padding="0">
                         <StackLayout Orientation="Vertical">
                             <StackLayout Orientation="Horizontal"

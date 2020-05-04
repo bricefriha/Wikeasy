@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:steven="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
+             xmlns:renderedViews="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
              mc:Ignorable="d"
              x:Class="Wikeasy.Views.SettingsPage"
              BackgroundColor="{DynamicResource ThemeBackgroundColor}"

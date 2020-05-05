@@ -57,7 +57,7 @@ namespace Wikeasy.Views
             if (_vm.IsResultAvailable)
             {
                 // Annimation backward
-                AnimateSearchBar(height, width, height, height + 500);
+                AnimateSearchBar(height, width, height, height + this.Height);
 
                 // Change de corner radius
                 frameSearchBar.CornerRadius = SbActiveCornerRadius;
@@ -113,7 +113,6 @@ namespace Wikeasy.Views
                 // Disappearance
                 await ((Entry)sender).FadeTo(0, Length, Easing.Linear);
                 await icoSearch.FadeTo(0, Length, Easing.Linear);
-
                 
             }
             else

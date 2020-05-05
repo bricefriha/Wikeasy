@@ -190,9 +190,11 @@ namespace Wikeasy.ViewModels
                     IsResultSomebody = true;
                 }
             }
-
-            // Set the subtitle
-            Subtitle = subtitleDefault;
+            else
+            {
+                // Set the subtitle
+                Subtitle = subtitleDefault;
+            }
 
             // Set the loading status as false
             IsLoading = false;

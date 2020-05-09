@@ -55,6 +55,9 @@ namespace Wikeasy.Views
 
             // Remove the banner
             viewHeaderBanner.IsVisible = false;
+            
+            // Reset the txt of the search bar with the new result title
+            txtSearch.Text = _vm.SearchResult.Title;
         }
 
         /// <summary>
@@ -76,9 +79,6 @@ namespace Wikeasy.Views
                 frameSearchBar.CornerRadius = SbDefaultCornerRadius;
 
                 viewHeaderBanner.IsVisible = true;
-
-                
-
             }
 
         }

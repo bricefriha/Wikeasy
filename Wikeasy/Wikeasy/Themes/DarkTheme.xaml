@@ -4,7 +4,7 @@
                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      mc:Ignorable="d"
-                    xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
+                    xmlns:renderedViews="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
                      x:Class="Wikeasy.Themes.DarkTheme">
     <Color x:Key="ThemeBackgroundColor">Black</Color>
     <Color x:Key="ThemeResultBackgroundColour">#191919</Color>

@@ -60,7 +60,7 @@
                                     <!--Tap to get acces to the movie-->
                                     <Grid.GestureRecognizers >
                                         <TapGestureRecognizer Command="{Binding BindingContext.SearchTappedItem, Source={x:Reference homePage}}" CommandParameter="{Binding Title}"/>
-                                        </Grid.GestureRecognizers>
+                                    </Grid.GestureRecognizers>
 
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="2*"/>
@@ -83,7 +83,7 @@
 
                                     </renderedViews:MaterialFrame>
 
-                                    <StackLayout Grid.Row="1" InputTransparent="True">
+                                    <StackLayout Grid.Row="1">
                                         <!--Tap to get acces to the movie-->
                                         <!--<StackLayout.GestureRecognizers >
                                             <TapGestureRecognizer Command="{Binding SearchTappedItem}" CommandParameter="{Binding Title}"/>
@@ -123,6 +123,9 @@
                                     LightThemeBackgroundColor="{DynamicResource ThemeResultBackgroundColour}"
                                     HeightRequest="290">
                                 <Grid>
+                                    <Grid.GestureRecognizers >
+                                        <TapGestureRecognizer Command="{Binding BindingContext.SearchTappedItem, Source={x:Reference homePage}}" CommandParameter="{Binding Name}"/>
+                                    </Grid.GestureRecognizers>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="2*"/>
                                         <RowDefinition Height="*"/>

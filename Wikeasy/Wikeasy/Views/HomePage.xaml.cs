@@ -77,8 +77,7 @@ namespace Wikeasy.Views
 
                 viewHeaderBanner.IsVisible = true;
 
-                // Reset scroll
-                MainScroll.ScrollToAsync(0, 0, false);
+                
 
             }
 
@@ -113,6 +112,9 @@ namespace Wikeasy.Views
                 // Appearance
                 await txtSearch.FadeTo(1, Length, Easing.Linear);
                 await icoSearch.FadeTo(1, Length, Easing.Linear);
+
+                // Reset scroll
+                await MainScroll.ScrollToAsync(0, 0, false);
             }
             
         }

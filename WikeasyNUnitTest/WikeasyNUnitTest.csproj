@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Wikeasy\Wikeasy\Wikeasy.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

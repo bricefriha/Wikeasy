@@ -159,7 +159,18 @@ namespace Wikeasy.ViewModels
                 return _page;
             }
         }
-        
+        /// <summary>
+        /// Constructor for UnitTest
+        /// </summary>
+        public HomeViewModel()
+        {
+
+        }
+
+        /// <summary>
+        /// Actual constructor
+        /// </summary>
+        /// <param name="page"></param>
         public HomeViewModel(HomePage page)
         {
             _isResultAvailable = false;
@@ -279,6 +290,33 @@ namespace Wikeasy.ViewModels
             // Switch subtitle
             Subtitle = subtitleDefault;
         }
-        
+        /// <summary>
+        /// Get all possible solution from an amguity
+        /// </summary>
+        /// <param name="description">Disambiguation page description</param>
+        /// <returns></returns>
+        public ObservableCollection<string> GetAmguitySolutions(string description)
+        {
+            ObservableCollection<string> result = new ObservableCollection<string>();
+            // Instanciate the HTML doc
+            HtmlDocument doc = new HtmlDocument();
+
+            // Loading the doc
+            doc.LoadHtml(description);
+
+            HtmlNode baseNode = doc.DocumentNode.SelectSingleNode("//ul");
+
+            // Moving through solutions
+            foreach (HtmlNode solution in baseNode.SelectNodes("//li //a"))
+            {
+                // Add the solution
+                result.Add(solution.InnerText);
+            }
+
+            // return the all list
+            return result;
+        }
+
+
     }
 }

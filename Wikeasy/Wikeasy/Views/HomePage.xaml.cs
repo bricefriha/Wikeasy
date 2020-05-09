@@ -32,46 +32,31 @@ namespace Wikeasy.Views
         {
             InitializeComponent() ;
 
-            BindingContext = this._vm = new HomeViewModel();
+            BindingContext = this._vm = new HomeViewModel(this);
 
         }
 
         async void txtSearch_Completed(object sender, EventArgs e)
         {
-            // Animation
-            //
-            // search bar disappearance
-            await FadeSearchBar(sender, true);
-            //
-            width = frameSearchBar.Width;
+            
+            // To remind the height of the Searchbar height
             height = frameSearchBar.Height;
-
-            // Annimation forward
-            AnimateWidthSearchBar(width, height);
 
             // Seaching process
             await _vm.GenerateSearchResult(((Entry)sender).Text);
-
-
-            // Do we get a result?
-            if (_vm.IsResultAvailable)
-            {
-                // Annimation backward
-                AnimateSearchBar(height, width, height, height + this.Height);
-
-                // Change de corner radius
-                frameSearchBar.CornerRadius = SbActiveCornerRadius;
-
-                // Remove the banner
-                viewHeaderBanner.IsVisible = false;
-
-            }
-            else
-                AnimateWidthSearchBar(height, width);
-
-            // Search bar disappearance
-            await FadeSearchBar(sender, false);
         }
+        /// <summary>
+        /// Show the result on the home page
+        /// </summary>
+        public void RevealingResult()
+        {
+            // Change de corner radius
+            frameSearchBar.CornerRadius = SbActiveCornerRadius;
+
+            // Remove the banner
+            viewHeaderBanner.IsVisible = false;
+        }
+
         /// <summary>
         /// Entry focus event 
         /// </summary>
@@ -84,7 +69,6 @@ namespace Wikeasy.Views
             {
                 // Reset the SearchBar Height 
                 AnimateHeightSearchBar(frameSearchBar.Height, height, 60, 150);
-
                 
                 _vm.ResetSearch();
 
@@ -102,23 +86,32 @@ namespace Wikeasy.Views
         /// <summary>
         /// Method allowing the searchBar disappearance/appearance
         /// </summary>
-        /// <param name="sender">Search bar</param>
         /// <param name="ToZero">true = disappearance // false = appearance </param>
         /// <returns></returns>
-        private async Task FadeSearchBar(object sender, bool ToZero)
+        public async Task FadeSearchBar(bool ToZero)
         {
             const int Length = 100;
             if (ToZero)
             {
+
+                // Reset the SearchBar Height 
+                AnimateHeightSearchBar(frameSearchBar.Height, height, 60, 150);
+
+                // Shw the banner
+                viewHeaderBanner.IsVisible = true;
+
                 // Disappearance
-                await ((Entry)sender).FadeTo(0, Length, Easing.Linear);
+                await txtSearch.FadeTo(0, Length, Easing.Linear);
                 await icoSearch.FadeTo(0, Length, Easing.Linear);
-                
+
             }
             else
             {
+                // Hide the banner
+                viewHeaderBanner.IsVisible = false;
+
                 // Appearance
-                await ((Entry)sender).FadeTo(1, Length, Easing.Linear);
+                await txtSearch.FadeTo(1, Length, Easing.Linear);
                 await icoSearch.FadeTo(1, Length, Easing.Linear);
             }
             
@@ -128,7 +121,7 @@ namespace Wikeasy.Views
         /// </summary>
         /// <param name="startingHeight">Start size</param>
         /// <param name="endingHeight">End size</param>
-        private void AnimateWidthSearchBar(double startingWidth, double endingWidth)
+        public void AnimateWidthSearchBar(double startingWidth, double endingWidth)
         {
             // update the height of the layout with this callback
             Action<double> callback = input => { frameSearchBar.WidthRequest = input; };
@@ -149,7 +142,7 @@ namespace Wikeasy.Views
         /// <param name="endingHeight">End size</param>
         /// <param name="rate">pace at which aniation proceeds</param>
         /// <param name="length">The number of milliseconds over which to interpolate the animation</param>
-        private void AnimateHeightSearchBar(double startingHeight, double endingHeight, uint rate, uint length)
+        public void AnimateHeightSearchBar(double startingHeight, double endingHeight, uint rate, uint length)
         {
             // update the height of the layout with this callback
             Action<double> callback = input => { frameSearchBar.HeightRequest = input; };
@@ -167,7 +160,7 @@ namespace Wikeasy.Views
         /// </summary>
         /// <param name="startingHeight">Start size</param>
         /// <param name="endingHeight">End size</param>
-        private void AnimateSearchBar( double startingWidth, double endingWidth, double startingHeight, double endingHeight)
+        public void AnimateSearchBar( double startingWidth, double endingWidth, double startingHeight, double endingHeight)
         {
             // pace at which aniation proceeds
             uint rate = 16; 
@@ -186,25 +179,6 @@ namespace Wikeasy.Views
             frameSearchBar.Animate("invisHeight", callbackHeight, startingHeight, endingHeight, rate, length, easing);
 
             
-
-        }
-
-        private void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
-        {
-            var view = (ScrollView)sender;
-            
-
-            //double newHeight = 130 - view.ScrollY;
-
-            //viewHeaderBanner.HeightRequest = newHeight;
-            //view.ScrollToAsync(0,0,false);
-
-            //// update the height of the layout with this callback
-            //Action<double> callbackHeight = input => { viewHeaderBanner.HeightRequest = input; };
-
-            //// Height anniation
-            //viewHeaderBanner.Animate("invisHeight", callbackHeight, startingHeight, newHeight, rate, length, easing);
-
 
         }
     }

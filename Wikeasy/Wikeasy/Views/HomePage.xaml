@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-            xmlns:rainbows="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows" 
-            mc:Ignorable="d"
-            xmlns:Helpers="clr-namespace:Wikeasy.Helpers"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:rainbows="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows" 
+             mc:Ignorable="d"
+             xmlns:Helpers="clr-namespace:Wikeasy.Helpers"
              xmlns:renderedViews="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
-            xmlns:Wikes="clr-namespace:Wikeasy.Models"
+             xmlns:Wikes="clr-namespace:Wikeasy.Models"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-            x:Class="Wikeasy.Views.HomePage"
-            Title="{Binding Title}"
-            x:Name="homePage">
+             x:Class="Wikeasy.Views.HomePage"
+             Title="{Binding Title}"
+             x:Name="homePage">
 
     <ContentPage.Resources>
         <Helpers:StringNullOrEmptyBoolConverter x:Key="NullToVisibilityConverter"/>
@@ -54,7 +54,14 @@
                                     IsVisible="{Binding SearchResult.ReleaseDate,
                                     Converter ={StaticResource NullToVisibilityConverter} }"
                                     HeightRequest="290">
-                                <Grid>
+                                
+
+                                <Grid >
+                                    <!--Tap to get acces to the movie-->
+                                    <Grid.GestureRecognizers >
+                                        <TapGestureRecognizer Command="{Binding BindingContext.SearchTappedItem, Source={x:Reference homePage}}" CommandParameter="{Binding Title}"/>
+                                        </Grid.GestureRecognizers>
+
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="2*"/>
                                         <RowDefinition Height="*"/>
@@ -66,31 +73,40 @@
                                                     HorizontalOptions="Center"
                                                     Padding="0"
                                                     CornerRadius="8"
-                                                    IsClippedToBounds="True"
                                                     Margin="0"
                                                     Grid.Row="0"
                                                     IsVisible="{Binding SearchResult.Img,
-                                                            Converter ={StaticResource NullToVisibilityConverter} }"  >
+                                                            Converter ={StaticResource NullToVisibilityConverter} }">
                                         <Image Source="{Binding PosterPath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
-                                    Aspect="AspectFit"
-                                    HorizontalOptions="Center"/>
+                                               Aspect="AspectFit"
+                                               HorizontalOptions="Center"/>
 
                                     </renderedViews:MaterialFrame>
 
-                                    <StackLayout Grid.Row="1">
+                                    <StackLayout Grid.Row="1" InputTransparent="True">
+                                        <!--Tap to get acces to the movie-->
+                                        <!--<StackLayout.GestureRecognizers >
+                                            <TapGestureRecognizer Command="{Binding SearchTappedItem}" CommandParameter="{Binding Title}"/>
+                                        </StackLayout.GestureRecognizers>-->
+                                        
+
                                         <!-- Title -->
                                         <Label Text="{Binding Title}"
-                                        TextColor="{DynamicResource ThemeTextColor}"
-                                        FontAttributes="Bold"
-                                        FontSize="20"
-                                        HorizontalOptions="Center"
-                                        Grid.Row="1"/>
+                                                TextColor="{DynamicResource ThemeTextColor}"
+                                                FontAttributes="Bold"
+                                                FontSize="20"
+                                                HorizontalOptions="Center"
+                                                Grid.Row="1"/>
                                         <!-- Release date -->
                                         <Label Text="{Binding ReleaseDate,StringFormat='{0:dd MMMM yyyy}'}"
                                         TextColor="{DynamicResource ThemeTextColor}"
                                         FontSize="12"
                                         HorizontalOptions="Center"
                                         Grid.Row="1"/>
+                                        <!-- Button to search informations about the movie-->
+                                        <!--<Button Text="More"
+                                                Clicked="{Binding SearchTappedItem}"
+                                                CommandParameter="{Binding Title}"/>-->
                                     </StackLayout>
                                 </Grid>
                             </renderedViews:MaterialFrame>
@@ -124,7 +140,7 @@
                                                             Converter ={StaticResource NullToVisibilityConverter} }"              
                                                     >
                                         <Image Source="{Binding ProfilePath,StringFormat= 'https://image.tmdb.org/t/p/w600_and_h900_bestv2\{0\}'}"
-                                    Aspect="AspectFit"/>
+                                                Aspect="AspectFit"/>
                                     </renderedViews:MaterialFrame>
                                     <StackLayout Grid.Row="1">
                                         <!-- Title -->
@@ -274,7 +290,7 @@
                                                 BorderColor="Black"
                                                 Padding="5"
                                                 >
-                                <ScrollView Scrolled="ScrollView_Scrolled" x:Name="MainScroll">
+                                <ScrollView  x:Name="MainScroll">
                                     <StackLayout>
                                         <!-- A personality -->
                                         <StackLayout IsVisible="False"

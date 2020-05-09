@@ -14,7 +14,7 @@
             <!-- Section Body -->
             <x:Int16 x:Key="sectionBodyCornerRadius">17</x:Int16>
             <x:Int16 x:Key="sectionBodyElevation">8</x:Int16>
-            <x:Int16 x:Key="sectionBodyMargin">1</x:Int16>
+            <x:Int16 x:Key="sectionBodyMargin">5</x:Int16>
             <x:Int16 x:Key="sectionBodyPadding">20</x:Int16>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -32,9 +32,9 @@
                 <!-- Display settings-->
                 <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
                                              CornerRadius="{DynamicResource sectionBodyCornerRadius}"
-                                             Elevation="{DynamicResource sectionBodyElevation}"
                                              Margin="{DynamicResource sectionBodyMargin}"
-                                             Padding="{DynamicResource sectionBodyPadding}">
+                                             Padding="{DynamicResource sectionBodyPadding}"
+                                             Style="{DynamicResource AcrylicFrame}">
                     <!-- Themes-->
                     <StackLayout Orientation="Vertical"
                                  HorizontalOptions="StartAndExpand"

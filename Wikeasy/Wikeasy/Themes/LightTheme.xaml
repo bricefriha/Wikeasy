@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                     mc:Ignorable="d"
-                     x:Class="Wikeasy.Themes.LightTheme">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:renderedViews="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
+                    mc:Ignorable="d"
+                    x:Class="Wikeasy.Themes.LightTheme">
     <Color x:Key="ThemeBackgroundColor">#E6E6E6</Color>
     <Color x:Key="ThemeResultBackgroundColour">#E6E6E6</Color>
     <Color x:Key="ThemePrimaryColor">#CC4800</Color>
@@ -14,10 +15,9 @@
     <Color x:Key="ThemeMainTitleColor">#F1F1F1</Color>
     <Color x:Key="ThemeBarBackgroundColor">#FF5A00</Color>
     <Color x:Key="ThemeBarTextColor">#F1F1F1</Color>
-    <Style x:Key="Title" TargetType="Label">
-                <!--<Setter Property="TextColor" 
-                        Value="{StaticResource TextPrimaryColor}"/>-->
-                <Setter Property="FontSize" Value="Large"/>
-            </Style>
+    <!-- Acrylic material frame-->
+    <Style x:Key="AcrylicFrame" TargetType="renderedViews:MaterialFrame">
+        <Setter Property="MaterialTheme" Value="Acrylic"/>
+    </Style>
     
 </ResourceDictionary>

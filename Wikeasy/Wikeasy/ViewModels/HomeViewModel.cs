@@ -29,6 +29,11 @@ namespace Wikeasy.ViewModels
 
         // Not found
         private const string dataNotFound = "Not found.";
+
+        // Search bar size
+        private const double _height = 45;
+        private const double _width = 365;
+
         #endregion
         static IWikipediaApiDataService _service;
         private SearchResult _searchResult;
@@ -74,6 +79,15 @@ namespace Wikeasy.ViewModels
             get
             {
                 return _resultScroll;
+            }
+        }
+
+        private readonly Command _searchTappedItem;
+        public Command SearchTappedItem
+        {
+            get
+            {
+                return _searchTappedItem;
             }
         }
 
@@ -131,14 +145,46 @@ namespace Wikeasy.ViewModels
                 return _subtitle;
             }
         }
-        
+
+        private HomePage _page;
+        public HomePage Page
+        {
+            //set
+            //{
+            //    _page = value;
+            //    OnPropertyChanged();
+            //}
+            get
+            {
+                return _page;
+            }
+        }
+        /// <summary>
+        /// Constructor for UnitTest
+        /// </summary>
         public HomeViewModel()
         {
+
+        }
+
+        /// <summary>
+        /// Actual constructor
+        /// </summary>
+        /// <param name="page"></param>
+        public HomeViewModel(HomePage page)
+        {
+            _isResultAvailable = false;
+            // Get the page
+            _page = page;
+
             _service = new WikipediaApiDataService();
 
             _searchResult = new SearchResult();
 
             _goToSource = new Command(url => Launcher.OpenAsync(new Uri(url.ToString())));
+
+            // Command to search an item that we tapped
+            _searchTappedItem = new Command(async title => await GenerateSearchResult(title.ToString())); 
 
             // Set scroll command
             //_resultScroll = new Command();
@@ -151,7 +197,7 @@ namespace Wikeasy.ViewModels
             _subtitle = subtitleDefault;
             _isLoading = false;
             _isResultSomebody = false;
-            _isResultAvailable = false;
+            
         }
 
 
@@ -160,6 +206,21 @@ namespace Wikeasy.ViewModels
         /// </summary>
         public async Task GenerateSearchResult(string searchInput)
         {
+            // Clear the result
+            this.IsResultAvailable = false;
+            //HomePage page = (HomePage)App.Current.MainPage;
+
+            // Animation
+            //
+            // search bar disappearance
+            await Page.FadeSearchBar(true);
+            //
+            //double width = Convert.ToDouble(Page.Resources["searchbarWidth"]);
+            //double height = Convert.ToDouble(Page.Resources["searchbarHeight"]);
+
+            // Annimation forward
+            Page.AnimateWidthSearchBar(_width, _height);
+
             // Set the subtitle
             Subtitle = subtitleLoading;
             
@@ -200,6 +261,23 @@ namespace Wikeasy.ViewModels
             IsLoading = false;
 
 
+            // Do we get a result?
+            if (IsResultAvailable)
+            {
+                // Annimation backward
+                Page.AnimateSearchBar(_height, _width, _height, /*height +*/ Page.Height);
+
+                // Show result on the page
+                Page.RevealingResult();
+
+            }
+            else
+                Page.AnimateWidthSearchBar(_height, _width);
+
+            // Search bar disappearance
+            await Page.FadeSearchBar(false);
+
+
         }
         /// <summary>
         /// Reset the search
@@ -212,6 +290,33 @@ namespace Wikeasy.ViewModels
             // Switch subtitle
             Subtitle = subtitleDefault;
         }
-        
+        /// <summary>
+        /// Get all possible solution from an amguity
+        /// </summary>
+        /// <param name="description">Disambiguation page description</param>
+        /// <returns></returns>
+        private ObservableCollection<string> GetAmguitySolutions(string description)
+        {
+            ObservableCollection<string> result = new ObservableCollection<string>();
+            // Instanciate the HTML doc
+            HtmlDocument doc = new HtmlDocument();
+
+            // Loading the doc
+            doc.LoadHtml(description);
+
+            HtmlNode baseNode = doc.DocumentNode.SelectSingleNode("//ul");
+
+            // Moving through solutions
+            foreach (HtmlNode solution in baseNode.SelectNodes("//li //a"))
+            {
+                // Add the solution
+                result.Add(solution.InnerText);
+            }
+
+            // return the all list
+            return result;
+        }
+
+
     }
 }

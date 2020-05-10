@@ -46,7 +46,7 @@ namespace Wikeasy.Objects
             if (birthdate != null)
             {
                 // it's a movie star
-                if (descriptionExist && (_wikidata.Lead.Description.Contains("filmaker") || _wikidata.Lead.Description.Contains("actor")|| _wikidata.Lead.Description.Contains("actress")))
+                if (descriptionExist && (_wikidata.Lead.Description.Contains("filmmaker") || _wikidata.Lead.Description.Contains("actor")|| _wikidata.Lead.Description.Contains("actress")))
                     _resultType = ResultType.MovieStar;
 
                 // other wise

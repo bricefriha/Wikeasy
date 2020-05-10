@@ -297,7 +297,7 @@
                                         WidthRequest="250"
                                         ReturnType="Search"
                                         Focused="txtSearch_Focused"
-                                       Text="Tom Holland"/>
+                                       Text="Christopher nolan"/>
                             </StackLayout>
 
                             <!-- Result zone-->

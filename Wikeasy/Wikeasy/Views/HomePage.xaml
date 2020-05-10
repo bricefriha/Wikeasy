@@ -296,8 +296,7 @@
                                         PlaceholderColor="{DynamicResource ThemeTextColor}"
                                         WidthRequest="250"
                                         ReturnType="Search"
-                                        Focused="txtSearch_Focused"
-                                       Text="Christopher nolan"/>
+                                        Focused="txtSearch_Focused"/>
                             </StackLayout>
 
                             <!-- Result zone-->

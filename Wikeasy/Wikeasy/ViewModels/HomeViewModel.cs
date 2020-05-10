@@ -295,7 +295,7 @@ namespace Wikeasy.ViewModels
         /// </summary>
         /// <param name="description">Disambiguation page description</param>
         /// <returns></returns>
-        public ObservableCollection<string> GetAmguitySolutions(string description)
+        private ObservableCollection<string> GetAmguitySolutions(string description)
         {
             ObservableCollection<string> result = new ObservableCollection<string>();
             // Instanciate the HTML doc

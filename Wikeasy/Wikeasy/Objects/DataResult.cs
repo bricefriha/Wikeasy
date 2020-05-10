@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -57,7 +58,9 @@ namespace Wikeasy.Objects
                 // is a movie
                 if (descriptionExist && (_wikidata.Lead.Description.Contains("film") || _wikidata.Lead.Description.Contains("movie")))
                     _resultType = ResultType.Movie;
-                
+                else if (descriptionExist && _wikidata.Lead.Description == "Disambiguation page providing links to topics that could be referred to by the same search term")
+                    _resultType = ResultType.Ambiguity;
+
                 // Otherwise
                 else
                     _resultType = ResultType.Other;
@@ -119,7 +122,7 @@ namespace Wikeasy.Objects
                 case ResultType.MovieStar:
 
                     // Get Tmdb information
-                    string movieStarName = _wikidata.Lead.Displaytitle;
+                    string movieStarName = _wikidata.Lead.Displaytitle.Split('(',')')[0];
 
                     // Get the client
                     TMDbClient client = new TMDbClient(App.Current.Resources["TmdbKey"].ToString());
@@ -216,6 +219,17 @@ namespace Wikeasy.Objects
                         ExtendedDescription = htmlDoc.DocumentNode.InnerText,
 
                     };
+                    
+                    break;
+                case ResultType.Ambiguity:
+                    _actualResult = new SearchResult()
+                    {
+                        Title = displaytitle,
+                        AmbiguitySolutions = this.GetAmguitySolutions(html),
+                        Type = _resultType,
+
+                    };
+                    
                     break;
                 // Otherwise... to avoid crashes...
                 default:
@@ -249,6 +263,32 @@ namespace Wikeasy.Objects
 
             return ((todayDay - birthDay) / 10000).ToString();
 
+        }
+        /// <summary>
+        /// Get all possible solution from an amguity
+        /// </summary>
+        /// <param name="description">Disambiguation page description</param>
+        /// <returns></returns>
+        private ObservableCollection<string> GetAmguitySolutions(string description)
+        {
+            ObservableCollection<string> result = new ObservableCollection<string>();
+            // Instanciate the HTML doc
+            HtmlDocument doc = new HtmlDocument();
+
+            // Loading the doc
+            doc.LoadHtml(description);
+
+            HtmlNode baseNode = doc.DocumentNode.SelectSingleNode("//ul");
+
+            // Moving through solutions
+            foreach (HtmlNode solution in baseNode.SelectNodes("//li //a"))
+            {
+                // Add the solution
+                result.Add(solution.InnerText);
+            }
+
+            // return the all list
+            return result;
         }
     }
 }

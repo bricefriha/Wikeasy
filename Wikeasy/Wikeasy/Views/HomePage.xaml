@@ -42,6 +42,22 @@
                     </Style>
 
                     <!-- Templates -->
+                    <!--<DataTemplate x:Key="ambiguitySolutionListTemplate">
+                        <StackLayout>
+                            <renderedViews:MaterialFrame
+                                    Elevation="5"
+                                    CornerRadius="8"
+                                    Margin="2"
+                                    LightThemeBackgroundColor="{DynamicResource ThemeResultBackgroundColour}"
+                                    IsVisible="{Binding SearchResult.ReleaseDate,
+                                    Converter ={StaticResource NullToVisibilityConverter} }"
+                                    HeightRequest="290">
+                                <Label HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Text="{Binding SearchResult.}"/>
+                            </renderedViews:MaterialFrame>
+                        </StackLayout>
+                    </DataTemplate>-->
                     <DataTemplate x:Key="movieListTemplate">
                         <StackLayout>
                             <renderedViews:MaterialFrame
@@ -280,7 +296,8 @@
                                         PlaceholderColor="{DynamicResource ThemeTextColor}"
                                         WidthRequest="250"
                                         ReturnType="Search"
-                                        Focused="txtSearch_Focused"/>
+                                        Focused="txtSearch_Focused"
+                                       Text="Tom Holland"/>
                             </StackLayout>
 
                             <!-- Result zone-->
@@ -912,6 +929,51 @@
                                             </StackLayout>
 
                                         </StackLayout>
+                                        <!-- Ambiguity -->
+                                        <Grid IsVisible="False">
+                                            <Grid.Triggers>
+                                                <DataTrigger TargetType="VisualElement" Binding="{Binding SearchResult.Type}" Value="{x:Static Wikes:ResultType.Ambiguity}">
+                                                    <Setter Property="IsVisible" Value="true" />
+                                                </DataTrigger>
+                                            </Grid.Triggers>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="50"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <!-- Label -->
+                                            <Label Grid.Row="0"
+                                                   HorizontalTextAlignment="Center"
+                                                   Text="{Binding SearchResult.Title, StringFormat= 'We have multiple result for \{0\}. Which one do you want?'}"
+                                                   TextColor="{DynamicResource ThemeTextColor}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="20"/>
+                                            <!-- list of solutions -->
+                                            <StackLayout Grid.Row="1" 
+                                                         BindableLayout.ItemsSource="{Binding SearchResult.AmbiguitySolutions}"
+                                                         Spacing="13"
+                                                         Margin="0,10,0,0">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <renderedViews:MaterialFrame LightThemeBackgroundColor="{DynamicResource ThemeSearchBarColor}"
+                                                                                         HorizontalOptions="Center"
+                                                                                         Elevation="5"
+                                                                                         CornerRadius="50"
+                                                                                     Padding="15">
+                                                            <!-- Tapp gesture -->
+                                                            <renderedViews:MaterialFrame.GestureRecognizers >
+                                                                <TapGestureRecognizer Command="{Binding BindingContext.SearchTappedItem, Source={x:Reference homePage}}" CommandParameter="{Binding}"/>
+                                                            </renderedViews:MaterialFrame.GestureRecognizers>
+                                                            <Label Text="{Binding}"
+                                                                       HorizontalOptions="Center"
+                                                                       FontAttributes="Bold"
+                                                                       TextColor="{DynamicResource ThemeTitleColor}"/>
+                                                        </renderedViews:MaterialFrame>
+
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+
+                                        </Grid>
                                     </StackLayout>
                                 </ScrollView>
                             </yummy:PancakeView>

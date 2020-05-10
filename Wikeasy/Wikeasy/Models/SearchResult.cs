@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Wikeasy.Models
@@ -20,8 +21,7 @@ namespace Wikeasy.Models
         public ResultType Type { get; set; }
         public string ExtendedDescription { get; set; }
         public string WikipediaLink { get; set; }
-
-
+        public Collection<string> AmbiguitySolutions { get; set; }
     }
 
 

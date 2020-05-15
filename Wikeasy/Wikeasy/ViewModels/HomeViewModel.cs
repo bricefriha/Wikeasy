@@ -270,6 +270,8 @@ namespace Wikeasy.ViewModels
                 // Show result on the page
                 Page.RevealingResult();
 
+               // Page.SwitchBannerVisibility();
+
             }
             else
                 Page.AnimateWidthSearchBar(_height, _width);

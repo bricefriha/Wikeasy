@@ -54,8 +54,8 @@ namespace Wikeasy.Views
             frameSearchBar.CornerRadius = SbActiveCornerRadius;
 
             // Remove the banner
-            viewHeaderBanner.IsVisible = false;
-            
+            this.SwitchBannerVisibility();
+
             // Reset the txt of the search bar with the new result title
             txtSearch.Text = _vm.SearchResult.Title;
         }
@@ -78,7 +78,8 @@ namespace Wikeasy.Views
                 // Change de corner radius
                 frameSearchBar.CornerRadius = SbDefaultCornerRadius;
 
-                viewHeaderBanner.IsVisible = true;
+                // Show the banner
+                this.SwitchBannerVisibility();
             }
 
         }
@@ -96,9 +97,6 @@ namespace Wikeasy.Views
                 // Reset the SearchBar Height 
                 AnimateHeightSearchBar(frameSearchBar.Height, height, 60, 150);
 
-                // Shw the banner
-                viewHeaderBanner.IsVisible = true;
-
                 // Disappearance
                 await txtSearch.FadeTo(0, Length, Easing.Linear);
                 await icoSearch.FadeTo(0, Length, Easing.Linear);
@@ -106,8 +104,6 @@ namespace Wikeasy.Views
             }
             else
             {
-                // Hide the banner
-                viewHeaderBanner.IsVisible = false;
 
                 // Appearance
                 await txtSearch.FadeTo(1, Length, Easing.Linear);
@@ -182,6 +178,14 @@ namespace Wikeasy.Views
 
             
 
+        }
+        /// <summary>
+        /// Switch banner's visibility
+        /// </summary>
+        private void SwitchBannerVisibility()
+        {
+            // Set the banner visibility at his oposite value
+            viewHeaderBanner.IsVisible = !viewHeaderBanner.IsVisible;
         }
     }
 }

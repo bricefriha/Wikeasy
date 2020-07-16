@@ -18,7 +18,7 @@ Wikeasy is a smartphone app to get quick information from a research
 - HTML Agility pack
 - Xamarin.Essential
 - Xamarin.FFImageLoading.Svg.Forms
-- Xamarin.Forms.DebugRainbows#
+- Xamarin.Forms.DebugRainbows
 - Xamarin.Forms.PancakeView
 - TMDbLib
 - Sharpnado.Presentation.Forms
